@@ -29,6 +29,7 @@ float DISS_Voltage;//负载电压
 float DISS_POW_Voltage;//稳压电源电压
 float DISS_Current;//负载电流
 float DISS_POW_Current;//稳压电源电流
+float DISS_Leak_Current;
 
 struct bitDefine
 {
@@ -56,6 +57,7 @@ int main(void)
 	ADC1_DMA_Init();
 	USART_Configuration();
     USART3_Configuration();
+    USART5_Configuration();
 	i2c_CfgGpio();//24C01引脚初始化
 	TM1650_GPIO_INT();		/*TM1650引脚初始化 */
     EEPROM_READ_Coeff();//读取校准参数

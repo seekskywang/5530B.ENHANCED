@@ -34745,6 +34745,8 @@ Nvoid CDC_OP_LEFT(void);
 Nvoid CDC_OP_RIGHT(void);
 Nvoid CDC_SET(void);
 Nvoid INPUT_CDC(char* num); 
+Nuint16_t CRC16(uint8_t *puchMsg, uint8_t Len);
+Nvoid Req_R(void);
 N//=============================================================================
 N#define NOP   __nop();	  //???
 N
@@ -34858,11 +34860,13 @@ Nextern vu32 Imon1_value;
 Nextern vu16 Vmon_value;
 Nextern vu32 Vmon1_value;
 Nextern vu16 Rmon_value;
+Nextern vu16 LowImon_value;//漏电流
 N
 Nextern float DISS_Voltage;
 Nextern  float DISS_POW_Voltage;
 Nextern float DISS_Current;
 Nextern float DISS_POW_Current;
+Nextern float DISS_Leak_Current;
 Nextern float DISS_R;
 Nextern vu16 steptime;
 Nextern vu8 r_stable;
@@ -34903,7 +34907,7 @@ Nextern float clear_lv;
 Nextern float temp;
 Nextern vu8 set_loop_count;
 N
-Nextern vu32 Run_Control[41];	
+Nextern vu32 Run_Control[42];	
 N#define onoff_ch                    Run_Control[0]  //ON/OFF
 N#define SET_Voltage 	    	        Run_Control[1]  //??????
 N#define SET_Current	    	    		  Run_Control[2]  //?????·
@@ -34912,7 +34916,6 @@ N#define SET_Current_Laod					  Run_Control[4]  //?????·
 N#define LOCK_KEY								    Run_Control[5]  //
 N#define BEEP_KEY								    Run_Control[6]  //
 N#define STRONG_KEY							    Run_Control[7]  //
-N
 N#define MODE_Woke							   	  Run_Control[8]  //
 N#define POW_Voltage	    	            Run_Control[9]  //?????
 N#define Voltage	    	                Run_Control[10]  //?????
@@ -34946,6 +34949,7 @@ N#define load_c    					    Run_Control[37]
 N#define pow_v    					    Run_Control[38]
 N#define cdc_dc    					    Run_Control[39]
 N#define pow_c    					    Run_Control[40]
+N#define Leak_I                          Run_Control[41]
 N
 N
 Nextern vu16 coff[6];
@@ -35089,7 +35093,7 @@ N
 Nextern vu16 Contr_Voltage;//
 Nextern vu16 Contr_Current;//
 Nextern vu16 Contr_Laod;//
-Nextern vu32 Correct_Parametet[12];
+Nextern vu32 Correct_Parametet[13];
 N#define  REG_CorrectionV   Correct_Parametet[0]//???????
 N#define  REG_Load_A			   Correct_Parametet[1]//??CC???·???
 N#define  SET_LoadA			   Correct_Parametet[2]//??CC?????·??
@@ -35104,7 +35108,7 @@ N#define  REG_POWERV			   Correct_Parametet[8]//??CV???????
 N#define  SET_POWERV				 Correct_Parametet[9]//??CV????????
 N#define  CON_POWERA				 Correct_Parametet[10]//??CV???·???
 N#define  REG_CorrectionRL    Correct_Parametet[11]//?????
-N
+N#define  REG_LEAKI           Correct_Parametet[12]
 N
 N
 Nextern vu8  correct_por[6];
@@ -35115,7 +35119,7 @@ N#define  Polar3						 correct_por[3]//??????CV???·?
 N#define  Polar4						 correct_por[4]//??CC???·????
 N#define  Polar5						 correct_por[5]//??CV????????
 N
-Nextern vu32 Correct_Strong[12];//У???
+Nextern vu32 Correct_Strong[13];//У???
 N#define  REG_ReadV_Offset   Correct_Strong[0]//???????
 N#define  REG_LoadA_Offset   Correct_Strong[1]//??CC???·???
 N#define  SET_LoadA_Offset   Correct_Strong[2]//??CC?????·??
@@ -35130,6 +35134,7 @@ N#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 N#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 N#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???·???
 N#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
+N#define  REG_LEAKI_Offset    Correct_Parametet[12]
 N
 N//---------------------------
 Nextern vu16 ADC_NTC_Filt[50];
@@ -35166,6 +35171,7 @@ N
 Nvoid USART_Configuration(void);//串口初始化函数
 Nvoid UART1_Send(void);
 Nstatic void USART1_NVIC_Config(void);
+Nvoid USART5_Configuration(void);
 N
 N#endif
 L 15 "..\drive\usart.c" 2
@@ -35201,6 +35207,21 @@ X	NVIC_PriorityGroupConfig(((uint32_t)0x700));
 N    
 N    /* Enable the USARTy Interrupt */
 N	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;	 
+N	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+N	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+N	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+N	NVIC_Init(&NVIC_InitStructure);
+N}
+N
+Nstatic void USART5_NVIC_Config(void)//????????
+N{
+N	NVIC_InitTypeDef NVIC_InitStructure; 
+N	/* Configure the NVIC Preemption Priority Bits */  
+N	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+X	NVIC_PriorityGroupConfig(((uint32_t)0x700));
+N    
+N    /* Enable the USARTy Interrupt */
+N	NVIC_InitStructure.NVIC_IRQChannel = UART5_IRQn;	 
 N	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
 N	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 N	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
@@ -35344,6 +35365,73 @@ N
 N    USART3_NVIC_Config();//??????
 N}
 N
+Nvoid USART5_Configuration(void)//???????
+N{  
+N    GPIO_InitTypeDef GPIO_InitStructure;
+N	USART_InitTypeDef USART_InitStructure;
+N	
+N	/* config USART1 clock */
+N	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);
+X	RCC_APB1PeriphClockCmd(((uint32_t)0x00100000), ENABLE);
+N//    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE); //?? GPIOA ??
+N    
+N	GPIO_PinAFConfig(GPIOD,GPIO_PinSource2,GPIO_AF_UART5);
+X	GPIO_PinAFConfig(((GPIO_TypeDef *) ((((uint32_t)0x40000000) + 0x00020000) + 0x0C00)),((uint8_t)0x02),((uint8_t)0x08));
+N	GPIO_PinAFConfig(GPIOC,GPIO_PinSource12,GPIO_AF_UART5);
+X	GPIO_PinAFConfig(((GPIO_TypeDef *) ((((uint32_t)0x40000000) + 0x00020000) + 0x0800)),((uint8_t)0x0C),((uint8_t)0x08));
+N    
+N
+N    
+N    
+N	/* USART1 GPIO config */
+N	/* Configure USART1 Tx (PA.09) as alternate function push-pull */
+N	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
+X	GPIO_InitStructure.GPIO_Pin = ((uint16_t)0x1000);
+N	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+N     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //??????
+N	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+X	GPIO_InitStructure.GPIO_Speed = GPIO_Fast_Speed;
+N	GPIO_Init(GPIOC, &GPIO_InitStructure);    
+X	GPIO_Init(((GPIO_TypeDef *) ((((uint32_t)0x40000000) + 0x00020000) + 0x0800)), &GPIO_InitStructure);    
+N	/* Configure USART1 Rx (PA.10) as input floating */
+N	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+X	GPIO_InitStructure.GPIO_Pin = ((uint16_t)0x0004);
+N    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+N	GPIO_Init(GPIOD, &GPIO_InitStructure);
+X	GPIO_Init(((GPIO_TypeDef *) ((((uint32_t)0x40000000) + 0x00020000) + 0x0C00)), &GPIO_InitStructure);
+N    
+N
+N	
+N	/* USART1 mode config */
+N	USART_InitStructure.USART_BaudRate = 9600;
+N	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+X	USART_InitStructure.USART_WordLength = ((uint16_t)0x0000);
+N	USART_InitStructure.USART_StopBits = USART_StopBits_2;
+X	USART_InitStructure.USART_StopBits = ((uint16_t)0x2000);
+N	USART_InitStructure.USART_Parity = USART_Parity_No ;
+X	USART_InitStructure.USART_Parity = ((uint16_t)0x0000) ;
+N	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+X	USART_InitStructure.USART_HardwareFlowControl = ((uint16_t)0x0000);
+N	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+X	USART_InitStructure.USART_Mode = ((uint16_t)0x0004) | ((uint16_t)0x0008);
+N	USART_Init(UART5, &USART_InitStructure);
+X	USART_Init(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x5000)), &USART_InitStructure);
+N    
+N
+N	
+N	/******????????******************/
+N	USART_ITConfig(UART5, USART_IT_RXNE, ENABLE);	
+X	USART_ITConfig(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x5000)), ((uint16_t)0x0525), ENABLE);	
+N	USART_Cmd(UART5, ENABLE);//????1
+X	USART_Cmd(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x5000)), ENABLE);
+N    USART_ClearFlag(UART5, USART_FLAG_TC);
+X    USART_ClearFlag(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x5000)), ((uint16_t)0x0040));
+N    
+N
+N  
+N    USART5_NVIC_Config();//??????
+N}
+N
 Nvoid UART1_Send(void)
 N{
 N	static vu8 UART_Buffer_Send_pointer=0;
@@ -35389,3 +35477,43 @@ X			(flagA . bit4)=0;
 N		}
 N}
 N
+Nuint16_t CRC16(uint8_t *puchMsg, uint8_t Len)
+N{
+N	uint8_t t, m,n,p;
+N	uint8_t uchCRCHi=0xFF; /* 高CRC字节初始化*/ 
+N	uint8_t uchCRCLo =0xFF; /* 低CRC 字节初始化*/ 
+N	for(t=0;t<Len;t++)
+N	{	
+N		uchCRCLo=uchCRCLo^puchMsg[t];
+N		for(n=0;n<8;n++)
+N		{
+N			m=uchCRCLo&1;p=uchCRCHi&1;uchCRCHi>>=1;
+N			uchCRCLo>>=1;
+N
+N			if(p)
+N			{
+N				uchCRCLo|=0x80;
+N			}
+N			if(m)	
+N			{
+N				uchCRCHi=uchCRCHi^0xa0;
+N				uchCRCLo=uchCRCLo^1;
+N			}
+N		}
+N	}
+N	return (uchCRCHi<<8|uchCRCLo);
+N}
+N
+Nvoid Req_R(void)
+N{
+N    u8 i;
+N    vu8 send[6] = {0x03,0x04,0x01,0x33,0x00,0x24};
+N    for(i=0;i<6;i++)
+N    {
+N        USART_SendData(UART5,send[i]);
+X        USART_SendData(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x5000)),send[i]);
+N        while (USART_GetFlagStatus(UART5,USART_FLAG_TXE) == RESET);
+X        while (USART_GetFlagStatus(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x5000)),((uint16_t)0x0080)) == RESET);
+N    }    
+W "..\drive\usart.c" 293 2 last line of file ends without a newline
+N}

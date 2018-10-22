@@ -49,7 +49,7 @@ extern struct bitDefine
   * @{
   */
 float temp;
-
+vu8 Rec_buff[9];
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -271,6 +271,22 @@ void USART3_IRQHandler(void)
      }
 }
 
+void UART5_IRQHandler(void)
+{
+    static vu8 count;
+    u8 res;
+    if(USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
+    {
+        res = USART_ReceiveData(UART5);
+        Rec_buff[count] = res;
+        count ++;
+        if(count > 8)
+        {
+            count = 0;
+        }
+        USART_ClearITPendingBit(UART5, USART_IT_RXNE);
+    }
+}
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */

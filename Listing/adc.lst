@@ -34766,6 +34766,8 @@ Nvoid CDC_OP_LEFT(void);
 Nvoid CDC_OP_RIGHT(void);
 Nvoid CDC_SET(void);
 Nvoid INPUT_CDC(char* num); 
+Nuint16_t CRC16(uint8_t *puchMsg, uint8_t Len);
+Nvoid Req_R(void);
 N//=============================================================================
 N#define NOP   __nop();	  //???
 N
@@ -34879,11 +34881,13 @@ Nextern vu32 Imon1_value;
 Nextern vu16 Vmon_value;
 Nextern vu32 Vmon1_value;
 Nextern vu16 Rmon_value;
+Nextern vu16 LowImon_value;//漏电流
 N
 Nextern float DISS_Voltage;
 Nextern  float DISS_POW_Voltage;
 Nextern float DISS_Current;
 Nextern float DISS_POW_Current;
+Nextern float DISS_Leak_Current;
 Nextern float DISS_R;
 Nextern vu16 steptime;
 Nextern vu8 r_stable;
@@ -34924,7 +34928,7 @@ Nextern float clear_lv;
 Nextern float temp;
 Nextern vu8 set_loop_count;
 N
-Nextern vu32 Run_Control[41];	
+Nextern vu32 Run_Control[42];	
 N#define onoff_ch                    Run_Control[0]  //ON/OFF
 N#define SET_Voltage 	    	        Run_Control[1]  //??????
 N#define SET_Current	    	    		  Run_Control[2]  //?????·
@@ -34933,7 +34937,6 @@ N#define SET_Current_Laod					  Run_Control[4]  //?????·
 N#define LOCK_KEY								    Run_Control[5]  //
 N#define BEEP_KEY								    Run_Control[6]  //
 N#define STRONG_KEY							    Run_Control[7]  //
-N
 N#define MODE_Woke							   	  Run_Control[8]  //
 N#define POW_Voltage	    	            Run_Control[9]  //?????
 N#define Voltage	    	                Run_Control[10]  //?????
@@ -34967,6 +34970,7 @@ N#define load_c    					    Run_Control[37]
 N#define pow_v    					    Run_Control[38]
 N#define cdc_dc    					    Run_Control[39]
 N#define pow_c    					    Run_Control[40]
+N#define Leak_I                          Run_Control[41]
 N
 N
 Nextern vu16 coff[6];
@@ -35110,7 +35114,7 @@ N
 Nextern vu16 Contr_Voltage;//
 Nextern vu16 Contr_Current;//
 Nextern vu16 Contr_Laod;//
-Nextern vu32 Correct_Parametet[12];
+Nextern vu32 Correct_Parametet[13];
 N#define  REG_CorrectionV   Correct_Parametet[0]//???????
 N#define  REG_Load_A			   Correct_Parametet[1]//??CC???·???
 N#define  SET_LoadA			   Correct_Parametet[2]//??CC?????·??
@@ -35125,7 +35129,7 @@ N#define  REG_POWERV			   Correct_Parametet[8]//??CV???????
 N#define  SET_POWERV				 Correct_Parametet[9]//??CV????????
 N#define  CON_POWERA				 Correct_Parametet[10]//??CV???·???
 N#define  REG_CorrectionRL    Correct_Parametet[11]//?????
-N
+N#define  REG_LEAKI           Correct_Parametet[12]
 N
 N
 Nextern vu8  correct_por[6];
@@ -35136,7 +35140,7 @@ N#define  Polar3						 correct_por[3]//??????CV???·?
 N#define  Polar4						 correct_por[4]//??CC???·????
 N#define  Polar5						 correct_por[5]//??CV????????
 N
-Nextern vu32 Correct_Strong[12];//У???
+Nextern vu32 Correct_Strong[13];//У???
 N#define  REG_ReadV_Offset   Correct_Strong[0]//???????
 N#define  REG_LoadA_Offset   Correct_Strong[1]//??CC???·???
 N#define  SET_LoadA_Offset   Correct_Strong[2]//??CC?????·??
@@ -35151,6 +35155,7 @@ N#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 N#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 N#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???·???
 N#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
+N#define  REG_LEAKI_Offset    Correct_Parametet[12]
 N
 N//---------------------------
 Nextern vu16 ADC_NTC_Filt[50];
@@ -35174,15 +35179,18 @@ Nvu32 Imon1_value;//负载电流
 Nvu16 Vmon_value;//电源电压
 Nvu32 Vmon1_value;//负载电压
 Nvu16 Rmon_value;//内阻
+Nvu16 LowImon_value;//漏电流
 Nvu16 Contr_Voltage;//稳压电源电压控制DAC
 Nvu16 Contr_Current;//电源电流控制DAC
 Nvu16 Contr_Laod;//负载DAC
-Nvu16 ADC1_Buffer[150];
+Nvu16 ADC1_Buffer[200];
 Nvu16 ADC_Vmon_Filt[50];//稳压电源输出电压
 Nvu16 ADC_Rmon_Filt[50];//内阻测量
 Nvu16 ADC_NTC_Filt[50];//NTC
+Nvu16 ADC_LowImon_Filt[50];//漏电流
 Nvu16 Vmon_Filt_Doul[20];
 Nvu16 Rmon_Filt_Doul[20];
+Nvu16 LowImon_Filt_Doul[20];
 N/*****************************************************************/
 Nvoid ADC1_DMA_Init(void)
 N{
@@ -35219,6 +35227,13 @@ N	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
 N  GPIO_Init(GPIOA, &GPIO_InitStructure);	
 X  GPIO_Init(((GPIO_TypeDef *) ((((uint32_t)0x40000000) + 0x00020000) + 0x0000)), &GPIO_InitStructure);	
 N  
+N  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+X  GPIO_InitStructure.GPIO_Pin = ((uint16_t)0x0004);
+N  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+N	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL  ;
+N  GPIO_Init(GPIOC, &GPIO_InitStructure);
+X  GPIO_Init(((GPIO_TypeDef *) ((((uint32_t)0x40000000) + 0x00020000) + 0x0800)), &GPIO_InitStructure);
+N  
 N  
 N  /* Configure the ADC1 in continous mode withe a resolutuion equal to 12 bits  */
 N	ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;
@@ -35239,7 +35254,7 @@ N	ADC_InitStructure.ADC_ExternalTrigConv =ADC_ExternalTrigConvEdge_None;	//
 X	ADC_InitStructure.ADC_ExternalTrigConv =((uint32_t)0x00000000);	
 N	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right; 	//
 X	ADC_InitStructure.ADC_DataAlign = ((uint32_t)0x00000000); 	
-N	ADC_InitStructure.ADC_NbrOfConversion = 3;	 								//
+N	ADC_InitStructure.ADC_NbrOfConversion = 4;	 								//
 N	ADC_Init(ADC1, &ADC_InitStructure);
 X	ADC_Init(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), &ADC_InitStructure);
 N	
@@ -35250,6 +35265,8 @@ N	ADC_RegularChannelConfig(ADC1, ADC_Channel_3, 2, ADC_SampleTime_3Cycles);
 X	ADC_RegularChannelConfig(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ((uint8_t)0x03), 2, ((uint8_t)0x00));
 N	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 3, ADC_SampleTime_3Cycles);
 X	ADC_RegularChannelConfig(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ((uint8_t)0x06), 3, ((uint8_t)0x00));
+N    ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 4, ADC_SampleTime_84Cycles);
+X    ADC_RegularChannelConfig(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ((uint8_t)0x0C), 4, ((uint8_t)0x04));
 N  /* ADC Calibration */
 N  ADC_Cmd(ADC1, ENABLE);//使能ADC
 X  ADC_Cmd(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ENABLE);
@@ -35269,7 +35286,7 @@ X  DMA_InitStructure.DMA_PeripheralBaseAddr = (vu32)0x4001204C;
 N  DMA_InitStructure.DMA_Memory0BaseAddr = (vu32)&ADC1_Buffer;
 N  DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
 X  DMA_InitStructure.DMA_DIR = ((uint32_t)0x00000000);
-N  DMA_InitStructure.DMA_BufferSize =150;//连续转换150次
+N  DMA_InitStructure.DMA_BufferSize =200;//连续转换150次
 N  DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 X  DMA_InitStructure.DMA_PeripheralInc = ((uint32_t)0x00000000);
 N  DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
@@ -35347,20 +35364,23 @@ N	vu8 count;
 N	static vu8 t_Filt;
 N	static vu8 t_dsoI,t_dsoV,t_dsoR,t_dsoI1,t_dsoV1;
 N	vu32 sum;
-N	for(i=0;i<150;i++)
+N	for(i=0;i<200;i++)
 N	{
-N		if ((i % 3) == 0)
+N		if ((i % 4) == 0)
 N		{
 N			ADC_Vmon_Filt[a++]=ADC1_Buffer[i];
 N		}
-N		else if((i % 3) ==2 )
+N		else if((i % 4) ==2 )
 N		{
 N			ADC_NTC_Filt[b++]=ADC1_Buffer[i];
 N		}
-N		else if((i % 3) ==1)
+N		else if((i % 4) ==1)
 N		{
 N			ADC_Rmon_Filt[d++]=ADC1_Buffer[i];
-N		}	
+N		}else if((i % 4) == 3)
+N		{
+N			ADC_LowImon_Filt[c++]=ADC1_Buffer[i];
+N		}
 N	}
 N	a=0;
 N	b=0;
@@ -35411,6 +35431,28 @@ N		sum=0;//
 N		t_dsoR=0;
 N	}
 N	t_dsoR++;
+N/************LowImon*********************/
+N	for(count=0;count<50;count++)
+N	{
+N		sum +=ADC_LowImon_Filt[count];
+N	}
+N	if(t_dsoI1<20)
+N	{
+N		LowImon_Filt_Doul[t_dsoI1]=sum/50;
+N		sum=0;//
+N	}
+N	else
+N	{
+N		sum=0;
+N		for(count=1;count<19;count++)
+N		{
+N			sum +=LowImon_Filt_Doul[count];
+N		}
+N		LowImon_value=sum/19;
+N		sum=0;//
+N		t_dsoI1=0;
+N	}
+N	t_dsoI1++;
 N/**********NTC**********************/
 N	for(count=0;count<50;count++)
 N	{
@@ -35418,3 +35460,7 @@ N		sum +=ADC_NTC_Filt[count];
 N	}
 N	NTC_value=sum/50;
 N}
+N
+N
+N
+N

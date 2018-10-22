@@ -43,6 +43,8 @@ void CDC_OP_LEFT(void);
 void CDC_OP_RIGHT(void);
 void CDC_SET(void);
 void INPUT_CDC(char* num); 
+uint16_t CRC16(uint8_t *puchMsg, uint8_t Len);
+void Req_R(void);
 //=============================================================================
 #define NOP   __nop();	  //???
 
@@ -156,11 +158,13 @@ extern vu32 Imon1_value;
 extern vu16 Vmon_value;
 extern vu32 Vmon1_value;
 extern vu16 Rmon_value;
+extern vu16 LowImon_value;//Â©µçÁ÷
 
 extern float DISS_Voltage;
 extern  float DISS_POW_Voltage;
 extern float DISS_Current;
 extern float DISS_POW_Current;
+extern float DISS_Leak_Current;
 extern float DISS_R;
 extern vu16 steptime;
 extern vu8 r_stable;
@@ -201,7 +205,7 @@ extern float clear_lv;
 extern float temp;
 extern vu8 set_loop_count;
 
-extern vu32 Run_Control[41];	
+extern vu32 Run_Control[42];	
 #define onoff_ch                    Run_Control[0]  //ON/OFF
 #define SET_Voltage 	    	        Run_Control[1]  //??????
 #define SET_Current	    	    		  Run_Control[2]  //?????¡¤
@@ -210,7 +214,6 @@ extern vu32 Run_Control[41];
 #define LOCK_KEY								    Run_Control[5]  //
 #define BEEP_KEY								    Run_Control[6]  //
 #define STRONG_KEY							    Run_Control[7]  //
-
 #define MODE_Woke							   	  Run_Control[8]  //
 #define POW_Voltage	    	            Run_Control[9]  //?????
 #define Voltage	    	                Run_Control[10]  //?????
@@ -244,6 +247,7 @@ extern vu32 Run_Control[41];
 #define pow_v    					    Run_Control[38]
 #define cdc_dc    					    Run_Control[39]
 #define pow_c    					    Run_Control[40]
+#define Leak_I                          Run_Control[41]
 
 
 extern vu16 coff[6];
@@ -387,7 +391,7 @@ extern vu16 coff[6];
 extern vu16 Contr_Voltage;//
 extern vu16 Contr_Current;//
 extern vu16 Contr_Laod;//
-extern vu32 Correct_Parametet[12];
+extern vu32 Correct_Parametet[13];
 #define  REG_CorrectionV   Correct_Parametet[0]//???????
 #define  REG_Load_A			   Correct_Parametet[1]//??CC???¡¤???
 #define  SET_LoadA			   Correct_Parametet[2]//??CC?????¡¤??
@@ -402,7 +406,7 @@ extern vu32 Correct_Parametet[12];
 #define  SET_POWERV				 Correct_Parametet[9]//??CV????????
 #define  CON_POWERA				 Correct_Parametet[10]//??CV???¡¤???
 #define  REG_CorrectionRL    Correct_Parametet[11]//?????
-
+#define  REG_LEAKI           Correct_Parametet[12]
 
 
 extern vu8  correct_por[6];
@@ -413,7 +417,7 @@ extern vu8  correct_por[6];
 #define  Polar4						 correct_por[4]//??CC???¡¤????
 #define  Polar5						 correct_por[5]//??CV????????
 
-extern vu32 Correct_Strong[12];//§µ???
+extern vu32 Correct_Strong[13];//§µ???
 #define  REG_ReadV_Offset   Correct_Strong[0]//???????
 #define  REG_LoadA_Offset   Correct_Strong[1]//??CC???¡¤???
 #define  SET_LoadA_Offset   Correct_Strong[2]//??CC?????¡¤??
@@ -428,6 +432,7 @@ extern vu32 Correct_Strong[12];//§µ???
 #define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 #define  CON_POWERA_Offset	Correct_Strong[10]//??CV???¡¤???
 #define  REG_ReadRL_Offset   Correct_Strong[11]//?????
+#define  REG_LEAKI_Offset    Correct_Parametet[12]
 
 //---------------------------
 extern vu16 ADC_NTC_Filt[50];

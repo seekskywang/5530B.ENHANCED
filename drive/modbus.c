@@ -33,11 +33,11 @@ vu32 Modify_A_ACT;
 vu32 Modify_B_READ;
 vu32 Modify_D_READ;
 vu32 Modify_B_ACT;
-vu32 Correct_Parametet[12];//校准参数
-vu32 Correct_Strong[12];//校准系数
+vu32 Correct_Parametet[13];//校准参数
+vu32 Correct_Strong[13];//校准系数
 vu8  correct_por[6];
 /*************************变量定义***********************************/
-vu32 Run_Control[41];
+vu32 Run_Control[42];
 vu8 ADDR;
 //============================函数声明===============================//
 vu16 Hardware_CRC(vu8 *p_buffer,vu8 count);
@@ -585,6 +585,50 @@ void UART_Action(void)
 			Flash_Write_all ();	
 			Flag_DAC_OFF=0;
 		}
+/****************漏电流校准**********************************/
+		if (UART_Buffer_Rece[1] == 0x22)			  
+		{ 
+			Modify_A_READ = LowImon_value;
+			Modify_A_ACT = (UART_Buffer_Rece[3] << 8) + UART_Buffer_Rece[4];
+		}
+
+		if (UART_Buffer_Rece[1] == 0x23)			   
+		{
+			vu16 var16;
+			vu32 var32a;
+			vu32 var32b;
+			
+			vu16 var16a;
+			vu32 var32c;
+			vu32 var32d;
+			
+			Modify_B_READ = LowImon_value;
+			Modify_B_ACT = (UART_Buffer_Rece[3] << 8) + UART_Buffer_Rece[4];
+			var32a = Modify_B_ACT;
+			var32a = var32a - Modify_A_ACT;
+			var32a = var32a << 14;
+			var16 = Modify_B_READ - Modify_A_READ;
+			var32a = var32a / var16;
+			REG_LEAKI = var32a;
+			var32a = Modify_B_ACT;
+			var32a = var32a << 14;
+			var32b = Modify_B_READ;
+			var32b = var32b * REG_LEAKI;
+			if (var32a < var32b)
+			{
+				var32b = var32b - var32a;
+				REG_LEAKI_Offset = var32b;
+				Polar3 |= 0x04;
+			}
+			else 
+			{
+				var32a = var32a - var32b;
+				REG_LEAKI_Offset = var32a;
+				Polar3 &= ~0x04;					
+			}
+			Flash_Write_all ();	
+			Flag_DAC_OFF=0;
+		}
 /***********??DAC*******************************************/
 		if (UART_Buffer_Rece[1] == 0x0F)			   
 		{
@@ -818,6 +862,23 @@ void Transformation_ADC(void)
 	}
 	
 	var32 = 0;
+/*******************测量漏电流转换**************************************/
+	var32 = LowImon_value;
+	var32 = var32 * REG_LEAKI;  
+	if ((Polar1 & 0x01) == 0x01)		  
+	{
+		if (var32 < REG_LEAKI_Offset) 
+		{
+			var32 = 0;
+		}
+		else var32 = var32 - REG_LEAKI_Offset;
+	}
+	else var32 = var32 + REG_LEAKI_Offset;
+	var32 = var32 >> 12;
+	Leak_I = var32;
+	DISS_Current=Leak_I;
+	DISS_Leak_Current=DISS_Leak_Current/1000;//计算显示电流
+	var32 = 0;	
 }
 /********************************************************************************
   * 名称 :   MODBUS_Conrtl

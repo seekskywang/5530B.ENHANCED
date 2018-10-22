@@ -17,15 +17,18 @@ vu32 Imon1_value;//负载电流
 vu16 Vmon_value;//电源电压
 vu32 Vmon1_value;//负载电压
 vu16 Rmon_value;//内阻
+vu16 LowImon_value;//漏电流
 vu16 Contr_Voltage;//稳压电源电压控制DAC
 vu16 Contr_Current;//电源电流控制DAC
 vu16 Contr_Laod;//负载DAC
-vu16 ADC1_Buffer[150];
+vu16 ADC1_Buffer[200];
 vu16 ADC_Vmon_Filt[50];//稳压电源输出电压
 vu16 ADC_Rmon_Filt[50];//内阻测量
 vu16 ADC_NTC_Filt[50];//NTC
+vu16 ADC_LowImon_Filt[50];//漏电流
 vu16 Vmon_Filt_Doul[20];
 vu16 Rmon_Filt_Doul[20];
+vu16 LowImon_Filt_Doul[20];
 /*****************************************************************/
 void ADC1_DMA_Init(void)
 {
@@ -54,6 +57,11 @@ void ADC1_DMA_Init(void)
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
   GPIO_Init(GPIOA, &GPIO_InitStructure);	
   
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL  ;
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
+  
   
   /* Configure the ADC1 in continous mode withe a resolutuion equal to 12 bits  */
 	ADC_CommonInitStructure.ADC_Mode = ADC_Mode_Independent;
@@ -67,13 +75,14 @@ void ADC1_DMA_Init(void)
 	ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;			//
 	ADC_InitStructure.ADC_ExternalTrigConv =ADC_ExternalTrigConvEdge_None;	//
 	ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right; 	//
-	ADC_InitStructure.ADC_NbrOfConversion = 3;	 								//
+	ADC_InitStructure.ADC_NbrOfConversion = 4;	 								//
 	ADC_Init(ADC1, &ADC_InitStructure);
 	
 	/*配置ADC时钟*/
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_2, 1, ADC_SampleTime_84Cycles);
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_3, 2, ADC_SampleTime_3Cycles);
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 3, ADC_SampleTime_3Cycles);
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 4, ADC_SampleTime_84Cycles);
   /* ADC Calibration */
   ADC_Cmd(ADC1, ENABLE);//使能ADC
 	ADC_SoftwareStartConv(ADC1);   //开始转换
@@ -87,7 +96,7 @@ void ADC1_DMA_Init(void)
   DMA_InitStructure.DMA_PeripheralBaseAddr = (vu32)ADC1_DR_Address;
   DMA_InitStructure.DMA_Memory0BaseAddr = (vu32)&ADC1_Buffer;
   DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
-  DMA_InitStructure.DMA_BufferSize =150;//连续转换150次
+  DMA_InitStructure.DMA_BufferSize =200;//连续转换150次
   DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
   DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
   DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
@@ -151,20 +160,23 @@ void ADC_CH_Scan(void)//婊ゆ尝
 	static vu8 t_Filt;
 	static vu8 t_dsoI,t_dsoV,t_dsoR,t_dsoI1,t_dsoV1;
 	vu32 sum;
-	for(i=0;i<150;i++)
+	for(i=0;i<200;i++)
 	{
-		if ((i % 3) == 0)
+		if ((i % 4) == 0)
 		{
 			ADC_Vmon_Filt[a++]=ADC1_Buffer[i];
 		}
-		else if((i % 3) ==2 )
+		else if((i % 4) ==2 )
 		{
 			ADC_NTC_Filt[b++]=ADC1_Buffer[i];
 		}
-		else if((i % 3) ==1)
+		else if((i % 4) ==1)
 		{
 			ADC_Rmon_Filt[d++]=ADC1_Buffer[i];
-		}	
+		}else if((i % 4) == 3)
+		{
+			ADC_LowImon_Filt[c++]=ADC1_Buffer[i];
+		}
 	}
 	a=0;
 	b=0;
@@ -215,6 +227,28 @@ void ADC_CH_Scan(void)//婊ゆ尝
 		t_dsoR=0;
 	}
 	t_dsoR++;
+/************LowImon*********************/
+	for(count=0;count<50;count++)
+	{
+		sum +=ADC_LowImon_Filt[count];
+	}
+	if(t_dsoI1<20)
+	{
+		LowImon_Filt_Doul[t_dsoI1]=sum/50;
+		sum=0;//
+	}
+	else
+	{
+		sum=0;
+		for(count=1;count<19;count++)
+		{
+			sum +=LowImon_Filt_Doul[count];
+		}
+		LowImon_value=sum/19;
+		sum=0;//
+		t_dsoI1=0;
+	}
+	t_dsoI1++;
 /**********NTC**********************/
 	for(count=0;count<50;count++)
 	{
@@ -222,3 +256,7 @@ void ADC_CH_Scan(void)//婊ゆ尝
 	}
 	NTC_value=sum/50;
 }
+
+
+
+

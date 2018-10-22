@@ -49,6 +49,20 @@ static void USART3_NVIC_Config(void)//????????
 	NVIC_Init(&NVIC_InitStructure);
 }
 
+static void USART5_NVIC_Config(void)//????????
+{
+	NVIC_InitTypeDef NVIC_InitStructure; 
+	/* Configure the NVIC Preemption Priority Bits */  
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+    
+    /* Enable the USARTy Interrupt */
+	NVIC_InitStructure.NVIC_IRQChannel = UART5_IRQn;	 
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+}
+
 static void USART1_NVIC_Config(void)//????????
 {
 	NVIC_InitTypeDef NVIC_InitStructure; 
@@ -151,6 +165,56 @@ void USART3_Configuration()//???????
     USART3_NVIC_Config();//??????
 }
 
+void USART5_Configuration(void)//???????
+{  
+    GPIO_InitTypeDef GPIO_InitStructure;
+	USART_InitTypeDef USART_InitStructure;
+	
+	/* config USART1 clock */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);
+//    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE); //?? GPIOA ??
+    
+	GPIO_PinAFConfig(GPIOD,GPIO_PinSource2,GPIO_AF_UART5);
+	GPIO_PinAFConfig(GPIOC,GPIO_PinSource12,GPIO_AF_UART5);
+    
+
+    
+    
+	/* USART1 GPIO config */
+	/* Configure USART1 Tx (PA.09) as alternate function push-pull */
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP; //??????
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);    
+	/* Configure USART1 Rx (PA.10) as input floating */
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_Init(GPIOD, &GPIO_InitStructure);
+    
+
+	
+	/* USART1 mode config */
+	USART_InitStructure.USART_BaudRate = 9600;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_2;
+	USART_InitStructure.USART_Parity = USART_Parity_No ;
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART_Init(UART5, &USART_InitStructure);
+    
+
+	
+	/******????????******************/
+	USART_ITConfig(UART5, USART_IT_RXNE, ENABLE);	
+	USART_Cmd(UART5, ENABLE);//????1
+    USART_ClearFlag(UART5, USART_FLAG_TC);
+    
+
+  
+    USART5_NVIC_Config();//??????
+}
+
 void UART1_Send(void)
 {
 	static vu8 UART_Buffer_Send_pointer=0;
@@ -190,3 +254,40 @@ void UART3_Send(void)
 		}
 }
 
+uint16_t CRC16(uint8_t *puchMsg, uint8_t Len)
+{
+	uint8_t t, m,n,p;
+	uint8_t uchCRCHi=0xFF; /* 高CRC字节初始化*/ 
+	uint8_t uchCRCLo =0xFF; /* 低CRC 字节初始化*/ 
+	for(t=0;t<Len;t++)
+	{	
+		uchCRCLo=uchCRCLo^puchMsg[t];
+		for(n=0;n<8;n++)
+		{
+			m=uchCRCLo&1;p=uchCRCHi&1;uchCRCHi>>=1;
+			uchCRCLo>>=1;
+
+			if(p)
+			{
+				uchCRCLo|=0x80;
+			}
+			if(m)	
+			{
+				uchCRCHi=uchCRCHi^0xa0;
+				uchCRCLo=uchCRCLo^1;
+			}
+		}
+	}
+	return (uchCRCHi<<8|uchCRCLo);
+}
+
+void Req_R(void)
+{
+    u8 i;
+    vu8 send[6] = {0x03,0x04,0x01,0x33,0x00,0x24};
+    for(i=0;i<6;i++)
+    {
+        USART_SendData(UART5,send[i]);
+        while (USART_GetFlagStatus(UART5,USART_FLAG_TXE) == RESET);
+    }    
+}

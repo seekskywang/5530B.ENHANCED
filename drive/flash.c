@@ -243,6 +243,22 @@ void Flash_Write_all (void)
 	data_8bit = CON_POWERA_Offset >> 8;
 	EEPROM_WriteByte(0x57, data_8bit);
 	EEPROM_WriteByte(0x58, CON_POWERA_Offset);//??CV?¡¤?
+    
+    data_8bit = REG_LEAKI >> 24;
+	EEPROM_WriteByte(0xB4, data_8bit);
+	data_8bit = REG_LEAKI >> 16;
+	EEPROM_WriteByte(0xB5, data_8bit);
+	data_8bit = REG_LEAKI >> 8;
+	EEPROM_WriteByte(0xB6, data_8bit);
+	EEPROM_WriteByte(0xB7, REG_LEAKI);//??CV?¡¤?
+	
+	data_8bit = REG_LEAKI_Offset >> 24;
+	EEPROM_WriteByte(0xB8, data_8bit);
+	data_8bit = REG_LEAKI_Offset >> 16;
+	EEPROM_WriteByte(0xB9, data_8bit);
+	data_8bit = REG_LEAKI_Offset >> 8;
+	EEPROM_WriteByte(0xBA, data_8bit);
+	EEPROM_WriteByte(0xBB, REG_LEAKI_Offset);//??CV?¡¤?
 	
 	
 	EEPROM_WriteByte(0x59,Polar);
@@ -453,6 +469,22 @@ void EEPROM_READ_Coeff(void)
 	CON_POWERA_Offset=CON_POWERA_Offset+EEPROM_READ_Byte(0x57);
 	CON_POWERA_Offset=CON_POWERA_Offset<<8;
 	CON_POWERA_Offset=CON_POWERA_Offset+EEPROM_READ_Byte(0x58);
+    
+    REG_LEAKI=EEPROM_READ_Byte(0xB4);
+	REG_LEAKI=REG_LEAKI<<8;
+	REG_LEAKI=REG_LEAKI+EEPROM_READ_Byte(0xB5);
+	REG_LEAKI=REG_LEAKI<<8;
+	REG_LEAKI=REG_LEAKI+EEPROM_READ_Byte(0xB6);
+	REG_LEAKI=REG_LEAKI<<8;
+	REG_LEAKI=REG_LEAKI+EEPROM_READ_Byte(0xB7);
+
+	REG_LEAKI_Offset=EEPROM_READ_Byte(0xB8);
+	REG_LEAKI_Offset=REG_LEAKI_Offset<<8;
+	REG_LEAKI_Offset=REG_LEAKI_Offset+EEPROM_READ_Byte(0xB9);
+	REG_LEAKI_Offset=REG_LEAKI_Offset<<8;
+	REG_LEAKI_Offset=REG_LEAKI_Offset+EEPROM_READ_Byte(0xBA);
+	REG_LEAKI_Offset=REG_LEAKI_Offset<<8;
+	REG_LEAKI_Offset=REG_LEAKI_Offset+EEPROM_READ_Byte(0xBB);
 	
 	Polar=EEPROM_READ_Byte(0x59);
 	Polar1=EEPROM_READ_Byte(0x5A);

@@ -34893,6 +34893,8 @@ Nvoid CDC_OP_LEFT(void);
 Nvoid CDC_OP_RIGHT(void);
 Nvoid CDC_SET(void);
 Nvoid INPUT_CDC(char* num); 
+Nuint16_t CRC16(uint8_t *puchMsg, uint8_t Len);
+Nvoid Req_R(void);
 N//=============================================================================
 N#define NOP   __nop();	  //???
 N
@@ -35006,11 +35008,13 @@ Nextern vu32 Imon1_value;
 Nextern vu16 Vmon_value;
 Nextern vu32 Vmon1_value;
 Nextern vu16 Rmon_value;
+Nextern vu16 LowImon_value;//息窮送
 N
 Nextern float DISS_Voltage;
 Nextern  float DISS_POW_Voltage;
 Nextern float DISS_Current;
 Nextern float DISS_POW_Current;
+Nextern float DISS_Leak_Current;
 Nextern float DISS_R;
 Nextern vu16 steptime;
 Nextern vu8 r_stable;
@@ -35051,7 +35055,7 @@ Nextern float clear_lv;
 Nextern float temp;
 Nextern vu8 set_loop_count;
 N
-Nextern vu32 Run_Control[41];	
+Nextern vu32 Run_Control[42];	
 N#define onoff_ch                    Run_Control[0]  //ON/OFF
 N#define SET_Voltage 	    	        Run_Control[1]  //??????
 N#define SET_Current	    	    		  Run_Control[2]  //?????，
@@ -35060,7 +35064,6 @@ N#define SET_Current_Laod					  Run_Control[4]  //?????，
 N#define LOCK_KEY								    Run_Control[5]  //
 N#define BEEP_KEY								    Run_Control[6]  //
 N#define STRONG_KEY							    Run_Control[7]  //
-N
 N#define MODE_Woke							   	  Run_Control[8]  //
 N#define POW_Voltage	    	            Run_Control[9]  //?????
 N#define Voltage	    	                Run_Control[10]  //?????
@@ -35094,6 +35097,7 @@ N#define load_c    					    Run_Control[37]
 N#define pow_v    					    Run_Control[38]
 N#define cdc_dc    					    Run_Control[39]
 N#define pow_c    					    Run_Control[40]
+N#define Leak_I                          Run_Control[41]
 N
 N
 Nextern vu16 coff[6];
@@ -35237,7 +35241,7 @@ N
 Nextern vu16 Contr_Voltage;//
 Nextern vu16 Contr_Current;//
 Nextern vu16 Contr_Laod;//
-Nextern vu32 Correct_Parametet[12];
+Nextern vu32 Correct_Parametet[13];
 N#define  REG_CorrectionV   Correct_Parametet[0]//???????
 N#define  REG_Load_A			   Correct_Parametet[1]//??CC???，???
 N#define  SET_LoadA			   Correct_Parametet[2]//??CC?????，??
@@ -35252,7 +35256,7 @@ N#define  REG_POWERV			   Correct_Parametet[8]//??CV???????
 N#define  SET_POWERV				 Correct_Parametet[9]//??CV????????
 N#define  CON_POWERA				 Correct_Parametet[10]//??CV???，???
 N#define  REG_CorrectionRL    Correct_Parametet[11]//?????
-N
+N#define  REG_LEAKI           Correct_Parametet[12]
 N
 N
 Nextern vu8  correct_por[6];
@@ -35263,7 +35267,7 @@ N#define  Polar3						 correct_por[3]//??????CV???，?
 N#define  Polar4						 correct_por[4]//??CC???，????
 N#define  Polar5						 correct_por[5]//??CV????????
 N
-Nextern vu32 Correct_Strong[12];//У???
+Nextern vu32 Correct_Strong[13];//У???
 N#define  REG_ReadV_Offset   Correct_Strong[0]//???????
 N#define  REG_LoadA_Offset   Correct_Strong[1]//??CC???，???
 N#define  SET_LoadA_Offset   Correct_Strong[2]//??CC?????，??
@@ -35278,6 +35282,7 @@ N#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 N#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 N#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???，???
 N#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
+N#define  REG_LEAKI_Offset    Correct_Parametet[12]
 N
 N//---------------------------
 Nextern vu16 ADC_NTC_Filt[50];

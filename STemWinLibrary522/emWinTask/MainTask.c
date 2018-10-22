@@ -52,6 +52,8 @@ void MainTask(void)
 //	unsigned char  ucKeyCode;
     static int read1963;
     static int scancount;
+    static u16 crc;
+    u8 send[4] = {0x03,0x04,0x01,0x33};
 	GUI_Init();
 	WM_SetDesktopColor(GUI_BLUE);  
 	GUI_Clear();//清屏
@@ -78,6 +80,7 @@ void MainTask(void)
 		TIM_SetCompare1(TIM2,Contr_Current);//稳压电源电流DAC
 		TIM_SetCompare2(TIM2,Contr_Voltage);//稳压电源电压DAC
 		DAC8531_Send(Contr_Laod);//加载DAC值
+        Req_R();//读取低阻
         if(page_sw != face_starter)
         {
             if(scancount == 9)
