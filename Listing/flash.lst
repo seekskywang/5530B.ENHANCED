@@ -35119,6 +35119,7 @@ N#define  Polar2						 correct_por[2]//??CV????????
 N#define  Polar3						 correct_por[3]//??????CV???，?
 N#define  Polar4						 correct_por[4]//??CC???，????
 N#define  Polar5						 correct_por[5]//??CV????????
+N#define  Polar6						 correct_por[6]
 N
 Nextern vu32 Correct_Strong[13];//У???
 N#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -35135,7 +35136,7 @@ N#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 N#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 N#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???，???
 N#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-N#define  REG_LEAKI_Offset    Correct_Parametet[12]
+N#define  REG_LEAKI_Offset    Correct_Strong[12]
 N
 N//---------------------------
 Nextern vu16 ADC_NTC_Filt[50];
@@ -35573,6 +35574,7 @@ S#define  Polar2						 correct_por[2]//??CV????????
 S#define  Polar3						 correct_por[3]//??????CV???，?
 S#define  Polar4						 correct_por[4]//??CC???，????
 S#define  Polar5						 correct_por[5]//??CV????????
+S#define  Polar6						 correct_por[6]
 S
 Sextern vu32 Correct_Strong[13];//У???
 S#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -35589,7 +35591,7 @@ S#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 S#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 S#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???，???
 S#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-S#define  REG_LEAKI_Offset    Correct_Parametet[12]
+S#define  REG_LEAKI_Offset    Correct_Strong[12]
 S
 S//---------------------------
 Sextern vu16 ADC_NTC_Filt[50];
@@ -35977,16 +35979,16 @@ N	EEPROM_WriteByte(0xB7, REG_LEAKI);//??CV?，?
 X	EEPROM_WriteByte(0xB7, Correct_Parametet[12]);
 N	
 N	data_8bit = REG_LEAKI_Offset >> 24;
-X	data_8bit = Correct_Parametet[12] >> 24;
+X	data_8bit = Correct_Strong[12] >> 24;
 N	EEPROM_WriteByte(0xB8, data_8bit);
 N	data_8bit = REG_LEAKI_Offset >> 16;
-X	data_8bit = Correct_Parametet[12] >> 16;
+X	data_8bit = Correct_Strong[12] >> 16;
 N	EEPROM_WriteByte(0xB9, data_8bit);
 N	data_8bit = REG_LEAKI_Offset >> 8;
-X	data_8bit = Correct_Parametet[12] >> 8;
+X	data_8bit = Correct_Strong[12] >> 8;
 N	EEPROM_WriteByte(0xBA, data_8bit);
 N	EEPROM_WriteByte(0xBB, REG_LEAKI_Offset);//??CV?，?
-X	EEPROM_WriteByte(0xBB, Correct_Parametet[12]);
+X	EEPROM_WriteByte(0xBB, Correct_Strong[12]);
 N	
 N	
 N	EEPROM_WriteByte(0x59,Polar);
@@ -36001,6 +36003,9 @@ N	EEPROM_WriteByte(0x5D,Polar4);
 X	EEPROM_WriteByte(0x5D,correct_por[4]);
 N	EEPROM_WriteByte(0x5E,Polar5);
 X	EEPROM_WriteByte(0x5E,correct_por[5]);
+W "..\drive\flash.c" 270 27 subscript out of range
+N    EEPROM_WriteByte(0xBC,Polar6);
+X    EEPROM_WriteByte(0xBC,correct_por[6]);
 N}
 N//===========================================================================//
 Nvoid EEPROM_READ_Coeff(void)
@@ -36389,19 +36394,19 @@ N	REG_LEAKI=REG_LEAKI+EEPROM_READ_Byte(0xB7);
 X	Correct_Parametet[12]=Correct_Parametet[12]+EEPROM_READ_Byte(0xB7);
 N
 N	REG_LEAKI_Offset=EEPROM_READ_Byte(0xB8);
-X	Correct_Parametet[12]=EEPROM_READ_Byte(0xB8);
+X	Correct_Strong[12]=EEPROM_READ_Byte(0xB8);
 N	REG_LEAKI_Offset=REG_LEAKI_Offset<<8;
-X	Correct_Parametet[12]=Correct_Parametet[12]<<8;
+X	Correct_Strong[12]=Correct_Strong[12]<<8;
 N	REG_LEAKI_Offset=REG_LEAKI_Offset+EEPROM_READ_Byte(0xB9);
-X	Correct_Parametet[12]=Correct_Parametet[12]+EEPROM_READ_Byte(0xB9);
+X	Correct_Strong[12]=Correct_Strong[12]+EEPROM_READ_Byte(0xB9);
 N	REG_LEAKI_Offset=REG_LEAKI_Offset<<8;
-X	Correct_Parametet[12]=Correct_Parametet[12]<<8;
+X	Correct_Strong[12]=Correct_Strong[12]<<8;
 N	REG_LEAKI_Offset=REG_LEAKI_Offset+EEPROM_READ_Byte(0xBA);
-X	Correct_Parametet[12]=Correct_Parametet[12]+EEPROM_READ_Byte(0xBA);
+X	Correct_Strong[12]=Correct_Strong[12]+EEPROM_READ_Byte(0xBA);
 N	REG_LEAKI_Offset=REG_LEAKI_Offset<<8;
-X	Correct_Parametet[12]=Correct_Parametet[12]<<8;
+X	Correct_Strong[12]=Correct_Strong[12]<<8;
 N	REG_LEAKI_Offset=REG_LEAKI_Offset+EEPROM_READ_Byte(0xBB);
-X	Correct_Parametet[12]=Correct_Parametet[12]+EEPROM_READ_Byte(0xBB);
+X	Correct_Strong[12]=Correct_Strong[12]+EEPROM_READ_Byte(0xBB);
 N	
 N	Polar=EEPROM_READ_Byte(0x59);
 X	correct_por[0]=EEPROM_READ_Byte(0x59);

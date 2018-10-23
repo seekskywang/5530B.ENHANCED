@@ -35119,6 +35119,7 @@ N#define  Polar2						 correct_por[2]//??CV????????
 N#define  Polar3						 correct_por[3]//??????CV???·?
 N#define  Polar4						 correct_por[4]//??CC???·????
 N#define  Polar5						 correct_por[5]//??CV????????
+N#define  Polar6						 correct_por[6]
 N
 Nextern vu32 Correct_Strong[13];//У???
 N#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -35135,7 +35136,7 @@ N#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 N#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 N#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???·???
 N#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-N#define  REG_LEAKI_Offset    Correct_Parametet[12]
+N#define  REG_LEAKI_Offset    Correct_Strong[12]
 N
 N//---------------------------
 Nextern vu16 ADC_NTC_Filt[50];
@@ -35620,6 +35621,7 @@ S#define  Polar2						 correct_por[2]//??CV????????
 S#define  Polar3						 correct_por[3]//??????CV???·?
 S#define  Polar4						 correct_por[4]//??CC???·????
 S#define  Polar5						 correct_por[5]//??CV????????
+S#define  Polar6						 correct_por[6]
 S
 Sextern vu32 Correct_Strong[13];//У???
 S#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -35636,7 +35638,7 @@ S#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 S#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 S#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???·???
 S#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-S#define  REG_LEAKI_Offset    Correct_Parametet[12]
+S#define  REG_LEAKI_Offset    Correct_Strong[12]
 S
 S//---------------------------
 Sextern vu16 ADC_NTC_Filt[50];
@@ -36354,22 +36356,21 @@ N		}
 N/****************漏电流校准**********************************/
 N		if (UART_Buffer_Rece[1] == 0x22)			  
 N		{ 
-N			Modify_A_READ = LowImon_value;
+N			Modify_A_READ = LowImon_value - 203;
 N			Modify_A_ACT = (UART_Buffer_Rece[3] << 8) + UART_Buffer_Rece[4];
 N		}
 N
 N		if (UART_Buffer_Rece[1] == 0x23)			   
 N		{
-N			vu16 var16;
+N			vu32 var16;
 N			vu32 var32a;
 N			vu32 var32b;
 N			
-N			vu16 var16a;
+N			vu32 var16a;
 N			vu32 var32c;
 N			vu32 var32d;
-N			
-N			Modify_B_READ = LowImon_value;
-N			Modify_B_ACT = (UART_Buffer_Rece[3] << 8) + UART_Buffer_Rece[4];
+N			Modify_B_READ =LowImon_value - 203;//????
+N			Modify_B_ACT = (UART_Buffer_Rece[3] << 8) + UART_Buffer_Rece[4];//????
 N			var32a = Modify_B_ACT;
 N			var32a = var32a - Modify_A_ACT;
 N			var32a = var32a << 14;
@@ -36377,6 +36378,7 @@ N			var16 = Modify_B_READ - Modify_A_READ;
 N			var32a = var32a / var16;
 N			REG_LEAKI = var32a;
 X			Correct_Parametet[12] = var32a;
+N			var32a=0;
 N			var32a = Modify_B_ACT;
 N			var32a = var32a << 14;
 N			var32b = Modify_B_READ;
@@ -36386,19 +36388,21 @@ N			if (var32a < var32b)
 N			{
 N				var32b = var32b - var32a;
 N				REG_LEAKI_Offset = var32b;
-X				Correct_Parametet[12] = var32b;
-N				Polar3 |= 0x04;
-X				correct_por[3] |= 0x04;
+X				Correct_Strong[12] = var32b;
+W "..\drive\modbus.c" 621 5 subscript out of range
+N				Polar6 |= 0x01;
+X				correct_por[6] |= 0x01;
 N			}
 N			else 
 N			{
 N				var32a = var32a - var32b;
 N				REG_LEAKI_Offset = var32a;
-X				Correct_Parametet[12] = var32a;
-N				Polar3 &= ~0x04;					
-X				correct_por[3] &= ~0x04;					
-N			}
-N			Flash_Write_all ();	
+X				Correct_Strong[12] = var32a;
+W "..\drive\modbus.c" 627 5 subscript out of range
+N				Polar6 &= ~0x01;
+X				correct_por[6] &= ~0x01;
+N			}			
+N			Flash_Write_all();	//??д?FLASH
 N			Flag_DAC_OFF=0;
 X			(flagB . bit3)=0;
 N		}
@@ -36718,29 +36722,30 @@ N	}
 N	
 N	var32 = 0;
 N/*******************测量漏电流转换**************************************/
-N	var32 = LowImon_value;
-N	var32 = var32 * REG_LEAKI;  
-X	var32 = var32 * Correct_Parametet[12];  
-N	if ((Polar1 & 0x01) == 0x01)		  
-X	if ((correct_por[1] & 0x01) == 0x01)		  
+N	var32 = LowImon_value-203;
+N	var32 = var32 * REG_LEAKI/*REG_LEAKI*/;  
+X	var32 = var32 * Correct_Parametet[12] ;  
+W "..\drive\modbus.c" 868 7 subscript out of range
+N	if ((Polar6 & 0x01) == 0x01)		  
+X	if ((correct_por[6] & 0x01) == 0x01)		  
 N	{
 N		if (var32 < REG_LEAKI_Offset) 
-X		if (var32 < Correct_Parametet[12]) 
+X		if (var32 < Correct_Strong[12]) 
 N		{
 N			var32 = 0;
 N		}
-N		else var32 = var32 - REG_LEAKI_Offset;
-X		else var32 = var32 - Correct_Parametet[12];
+N		else var32 = var32 - REG_LEAKI_Offset/*REG_LEAKI_Offset*/;
+X		else var32 = var32 - Correct_Strong[12] ;
 N	}
-N	else var32 = var32 + REG_LEAKI_Offset;
-X	else var32 = var32 + Correct_Parametet[12];
-N	var32 = var32 >> 12;
+N	else var32 = var32 + REG_LEAKI_Offset/*REG_LEAKI_Offset*/;
+X	else var32 = var32 + Correct_Strong[12] ;
+N	var32 = var32 >> 14;
 N	Leak_I = var32;
 X	Run_Control[41] = var32;
-N	DISS_Current=Leak_I;
-X	DISS_Current=Run_Control[41];
-N	DISS_Leak_Current=DISS_Leak_Current/1000;//计算显示电流
-N	var32 = 0;	
+N	DISS_Leak_Current=Leak_I;
+X	DISS_Leak_Current=Run_Control[41];
+N	DISS_Leak_Current=DISS_Leak_Current/100;//计算显示电流
+N	var32 = 0;
 N}
 N/********************************************************************************
 N  * 名称 :   MODBUS_Conrtl

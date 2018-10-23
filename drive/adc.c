@@ -82,7 +82,7 @@ void ADC1_DMA_Init(void)
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_2, 1, ADC_SampleTime_84Cycles);
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_3, 2, ADC_SampleTime_3Cycles);
 	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 3, ADC_SampleTime_3Cycles);
-    ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 4, ADC_SampleTime_84Cycles);
+    ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 4, ADC_SampleTime_112Cycles);
   /* ADC Calibration */
   ADC_Cmd(ADC1, ENABLE);//使能ADC
 	ADC_SoftwareStartConv(ADC1);   //开始转换

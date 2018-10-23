@@ -129,9 +129,9 @@
 0000b6  2106              MOVS     r1,#6
 0000b8  4630              MOV      r0,r6
 0000ba  f7fffffe          BL       ADC_RegularChannelConfig
-;;;85         ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 4, ADC_SampleTime_84Cycles);
-0000be  2304              MOVS     r3,#4
-0000c0  461a              MOV      r2,r3
+;;;85         ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 4, ADC_SampleTime_112Cycles);
+0000be  2305              MOVS     r3,#5
+0000c0  2204              MOVS     r2,#4
 0000c2  210c              MOVS     r1,#0xc
 0000c4  4630              MOV      r0,r6
 0000c6  f7fffffe          BL       ADC_RegularChannelConfig

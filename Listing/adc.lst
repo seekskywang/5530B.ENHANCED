@@ -35139,6 +35139,7 @@ N#define  Polar2						 correct_por[2]//??CV????????
 N#define  Polar3						 correct_por[3]//??????CV???¡¤?
 N#define  Polar4						 correct_por[4]//??CC???¡¤????
 N#define  Polar5						 correct_por[5]//??CV????????
+N#define  Polar6						 correct_por[6]
 N
 Nextern vu32 Correct_Strong[13];//§µ???
 N#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -35155,7 +35156,7 @@ N#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 N#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 N#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???¡¤???
 N#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-N#define  REG_LEAKI_Offset    Correct_Parametet[12]
+N#define  REG_LEAKI_Offset    Correct_Strong[12]
 N
 N//---------------------------
 Nextern vu16 ADC_NTC_Filt[50];
@@ -35265,8 +35266,8 @@ N	ADC_RegularChannelConfig(ADC1, ADC_Channel_3, 2, ADC_SampleTime_3Cycles);
 X	ADC_RegularChannelConfig(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ((uint8_t)0x03), 2, ((uint8_t)0x00));
 N	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 3, ADC_SampleTime_3Cycles);
 X	ADC_RegularChannelConfig(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ((uint8_t)0x06), 3, ((uint8_t)0x00));
-N    ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 4, ADC_SampleTime_84Cycles);
-X    ADC_RegularChannelConfig(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ((uint8_t)0x0C), 4, ((uint8_t)0x04));
+N    ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 4, ADC_SampleTime_112Cycles);
+X    ADC_RegularChannelConfig(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ((uint8_t)0x0C), 4, ((uint8_t)0x05));
 N  /* ADC Calibration */
 N  ADC_Cmd(ADC1, ENABLE);//Ê¹ÄÜADC
 X  ADC_Cmd(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ENABLE);

@@ -416,6 +416,7 @@ extern vu8  correct_por[6];
 #define  Polar3						 correct_por[3]//??????CV???¡¤?
 #define  Polar4						 correct_por[4]//??CC???¡¤????
 #define  Polar5						 correct_por[5]//??CV????????
+#define  Polar6						 correct_por[6]
 
 extern vu32 Correct_Strong[13];//§µ???
 #define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -432,7 +433,7 @@ extern vu32 Correct_Strong[13];//§µ???
 #define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 #define  CON_POWERA_Offset	Correct_Strong[10]//??CV???¡¤???
 #define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-#define  REG_LEAKI_Offset    Correct_Parametet[12]
+#define  REG_LEAKI_Offset    Correct_Strong[12]
 
 //---------------------------
 extern vu16 ADC_NTC_Filt[50];

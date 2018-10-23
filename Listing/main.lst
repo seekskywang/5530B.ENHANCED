@@ -35118,6 +35118,7 @@ N#define  Polar2						 correct_por[2]//??CV????????
 N#define  Polar3						 correct_por[3]//??????CV???，?
 N#define  Polar4						 correct_por[4]//??CC???，????
 N#define  Polar5						 correct_por[5]//??CV????????
+N#define  Polar6						 correct_por[6]
 N
 Nextern vu32 Correct_Strong[13];//У???
 N#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -35134,7 +35135,7 @@ N#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 N#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 N#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???，???
 N#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-N#define  REG_LEAKI_Offset    Correct_Parametet[12]
+N#define  REG_LEAKI_Offset    Correct_Strong[12]
 N
 N//---------------------------
 Nextern vu16 ADC_NTC_Filt[50];
@@ -35684,6 +35685,7 @@ S#define  Polar2						 correct_por[2]//??CV????????
 S#define  Polar3						 correct_por[3]//??????CV???，?
 S#define  Polar4						 correct_por[4]//??CC???，????
 S#define  Polar5						 correct_por[5]//??CV????????
+S#define  Polar6						 correct_por[6]
 S
 Sextern vu32 Correct_Strong[13];//У???
 S#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -35700,7 +35702,7 @@ S#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 S#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 S#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???，???
 S#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-S#define  REG_LEAKI_Offset    Correct_Parametet[12]
+S#define  REG_LEAKI_Offset    Correct_Strong[12]
 S
 S//---------------------------
 Sextern vu16 ADC_NTC_Filt[50];
@@ -36164,6 +36166,7 @@ S#define  Polar2						 correct_por[2]//??CV????????
 S#define  Polar3						 correct_por[3]//??????CV???，?
 S#define  Polar4						 correct_por[4]//??CC???，????
 S#define  Polar5						 correct_por[5]//??CV????????
+S#define  Polar6						 correct_por[6]
 S
 Sextern vu32 Correct_Strong[13];//У???
 S#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -36180,7 +36183,7 @@ S#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 S#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 S#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???，???
 S#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-S#define  REG_LEAKI_Offset    Correct_Parametet[12]
+S#define  REG_LEAKI_Offset    Correct_Strong[12]
 S
 S//---------------------------
 Sextern vu16 ADC_NTC_Filt[50];
@@ -50496,6 +50499,7 @@ S#define  Polar2						 correct_por[2]//??CV????????
 S#define  Polar3						 correct_por[3]//??????CV???，?
 S#define  Polar4						 correct_por[4]//??CC???，????
 S#define  Polar5						 correct_por[5]//??CV????????
+S#define  Polar6						 correct_por[6]
 S
 Sextern vu32 Correct_Strong[13];//У???
 S#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -50512,7 +50516,7 @@ S#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 S#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 S#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???，???
 S#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-S#define  REG_LEAKI_Offset    Correct_Parametet[12]
+S#define  REG_LEAKI_Offset    Correct_Strong[12]
 S
 S//---------------------------
 Sextern vu16 ADC_NTC_Filt[50];
@@ -50970,6 +50974,7 @@ S#define  Polar2						 correct_por[2]//??CV????????
 S#define  Polar3						 correct_por[3]//??????CV???，?
 S#define  Polar4						 correct_por[4]//??CC???，????
 S#define  Polar5						 correct_por[5]//??CV????????
+S#define  Polar6						 correct_por[6]
 S
 Sextern vu32 Correct_Strong[13];//У???
 S#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -50986,7 +50991,7 @@ S#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 S#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 S#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???，???
 S#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-S#define  REG_LEAKI_Offset    Correct_Parametet[12]
+S#define  REG_LEAKI_Offset    Correct_Strong[12]
 S
 S//---------------------------
 Sextern vu16 ADC_NTC_Filt[50];
@@ -51456,6 +51461,7 @@ S#define  Polar2						 correct_por[2]//??CV????????
 S#define  Polar3						 correct_por[3]//??????CV???，?
 S#define  Polar4						 correct_por[4]//??CC???，????
 S#define  Polar5						 correct_por[5]//??CV????????
+S#define  Polar6						 correct_por[6]
 S
 Sextern vu32 Correct_Strong[13];//У???
 S#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -51472,7 +51478,7 @@ S#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 S#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 S#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???，???
 S#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-S#define  REG_LEAKI_Offset    Correct_Parametet[12]
+S#define  REG_LEAKI_Offset    Correct_Strong[12]
 S
 S//---------------------------
 Sextern vu16 ADC_NTC_Filt[50];
@@ -51932,6 +51938,7 @@ S#define  Polar2						 correct_por[2]//??CV????????
 S#define  Polar3						 correct_por[3]//??????CV???，?
 S#define  Polar4						 correct_por[4]//??CC???，????
 S#define  Polar5						 correct_por[5]//??CV????????
+S#define  Polar6						 correct_por[6]
 S
 Sextern vu32 Correct_Strong[13];//У???
 S#define  REG_ReadV_Offset   Correct_Strong[0]//???????
@@ -51948,7 +51955,7 @@ S#define  REG_POWERV_Offset  Correct_Strong[8]//??CV???????
 S#define  SET_POWERV_Offset	Correct_Strong[9]//??CV????????
 S#define  CON_POWERA_Offset	Correct_Strong[10]//??CV???，???
 S#define  REG_ReadRL_Offset   Correct_Strong[11]//?????
-S#define  REG_LEAKI_Offset    Correct_Parametet[12]
+S#define  REG_LEAKI_Offset    Correct_Strong[12]
 S
 S//---------------------------
 Sextern vu16 ADC_NTC_Filt[50];

@@ -124,6 +124,8 @@ extern struct bitDefine
 #define ID_TEXT_128     (GUI_ID_USER + 0x010D)
 #define ID_TEXT_130     (GUI_ID_USER + 0x010E)
 #define ID_TEXT_132     (GUI_ID_USER + 0x0121)
+#define ID_TEXT_133     (GUI_ID_USER + 0x0122)
+#define ID_TEXT_134     (GUI_ID_USER + 0x0123)
 #define ID_BUTTON_12    (GUI_ID_USER + 0x18)
 #define ID_BUTTON_13    (GUI_ID_USER + 0x19)
 #define ID_BUTTON_14    (GUI_ID_USER + 0x1A)
@@ -156,16 +158,16 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { TEXT_CreateIndirect, "Text", ID_TEXT_0, 28, 50, 64, 32, 0, 0x64, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_1, 300, 50, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_3, 240, 50, 32, 30, 0, 0x0, 0 },
-  { TEXT_CreateIndirect, "Text", ID_TEXT_4, 239, 121, 32, 32, 0, 0x0, 0 },
-  { TEXT_CreateIndirect, "Text", ID_TEXT_6, 217, 128, 32, 20, 0, 0x0, 0 },
+  { TEXT_CreateIndirect, "Text", ID_TEXT_4, 239, 121-20, 32, 32, 0, 0x0, 0 },
+  { TEXT_CreateIndirect, "Text", ID_TEXT_6, 217, 128-20, 32, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_43, 300, 150, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_44, 300, 75, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_45, 300, 100, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_46, 400, 75, 57, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_47, 400, 100, 57, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_80, 95, 48, 150, 40, 0, 0x0, 0 },
-  { TEXT_CreateIndirect, "Text", ID_TEXT_81, 95, 116, 150, 40, 0, 0x0, 0 },
-  { TEXT_CreateIndirect, "Text", ID_TEXT_82, 95, 184, 150, 40, 0, 0x0, 0 },
+  { TEXT_CreateIndirect, "Text", ID_TEXT_81, 95, 116-20, 150, 40, 0, 0x0, 0 },
+  { TEXT_CreateIndirect, "Text", ID_TEXT_82, 95, 184-40, 150, 40, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_83, 400, 175, 57, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_96, 240, 5, 120, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_97, 400, 125, 60, 20, 0, 0x0, 0 },
@@ -180,6 +182,8 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { TEXT_CreateIndirect, "Text", ID_TEXT_127, 54, 255, 20, 20, 20, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_128, 68, 254, 20, 20, 20, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_132, 400, 50, 40, 20, 20, 0x0, 0 },
+  { TEXT_CreateIndirect, "Text", ID_TEXT_133, 50, 205, 80, 20, 0, 0x0, 0 },
+  { TEXT_CreateIndirect, "Text", ID_TEXT_134, 160, 205, 80, 20, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "Button", ID_BUTTON_13, 83, 226, 77, 45, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "Button", ID_BUTTON_14, 163, 226, 77, 45, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "Button", ID_BUTTON_15, 243, 226, 77, 45, 0, 0x0, 0 },
@@ -235,11 +239,18 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 	GUI_SetTextMode(GUI_TM_TRANS);//设置文本模式为底色透明
 	GUI_DispStringAt("测量显示", 130, 3);//SET
     
-    GUI_SetColor(GUI_GREEN);
+     GUI_SetColor(GUI_GREEN);
     GUI_SetFont(&GUI_Fontunit);
     GUI_DispStringAt("°",342, 2);
     GUI_SetFont(&GUI_Font24_1);
     GUI_DispStringAt("C",350, 2);
+    
+    GUI_SetColor(GUI_LIGHTGRAY);  
+    GUI_SetFont(&GUI_Font24_1);
+    GUI_DispStringAt("NTC-R:",50, 180);
+    GUI_DispStringAt("LEAK-I:",170, 180);
+
+    GUI_DispStringAt("uA",200, 235);
 //    GUI_DispDecAt(R_VLUE,50,140,4);//显示内阻值
 //      GUI_GotoXY(220,4);
 //      GUI_DispDec(short_time,6);
@@ -270,10 +281,10 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 //                 GUI_DispFloatFix(DISS_Current,5,2);
                 GUI_SetFont(&GUI_FontEN40);
                 GUI_SetColor(GUI_LIGHTGRAY);
-                GUI_DispStringAt("I:", 28, 190);
-                GUI_DispStringAt("R:", 28, 120);
+                GUI_DispStringAt("I:", 28, 150);  
+                GUI_DispStringAt("R:", 28, 100);                
                 GUI_SetColor(GUI_LIGHTGRAY);
-                GUI_DispStringAt("A", 240, 187);
+                GUI_DispStringAt("A", 240, 147);
                 GUI_SetFont(&GUI_Font24_1);
                 GUI_SetColor(GUI_WHITE);
                 GUI_DispStringAt("A",460,75);
@@ -300,6 +311,9 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
             }
             case set_2_off:
             {
+                GUI_SetFont(&GUI_FontEN40);
+                GUI_SetColor(GUI_LIGHTGRAY);
+                GUI_DispStringAt("R:", 28, 120);
                 break;
             }
     }
@@ -833,6 +847,10 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
         hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_124);       
         sprintf(buf,"%.1f",temp);
         TEXT_SetText(hItem,buf);
+        
+        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_134);
+        sprintf(buf,"%.2f",DISS_Leak_Current);   
+        TEXT_SetText(hItem,buf);
 //         
 //        WM_InvalidateWindow(hWinR);
 		WM_RestartTimer(pMsg->Data.v, 50);//复位定时器数值越大刷新时间越短
@@ -943,6 +961,19 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
         TEXT_SetTextColor(hItem, GUI_GREEN);//设置字体颜色
         TEXT_SetFont(hItem,&GUI_Font24_1);//设定文本字体       
         sprintf(buf,"%.1f",temp);
+        TEXT_SetText(hItem,buf);
+        
+        hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_133);
+        TEXT_SetTextColor(hItem, GUI_GREEN);//设置字体颜色
+        TEXT_SetFont(hItem,&GUI_Font24_1);//设定文本字体       
+        sprintf(buf,"%.1f",temp);
+        TEXT_SetText(hItem,buf);
+        
+        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_134);
+        sprintf(buf,"%.2f",DISS_Leak_Current);
+        TEXT_SetTextColor(hItem, GUI_GREEN);//设置字体颜色
+        TEXT_SetFont(hItem,&GUI_Font24_1);//设定文本字体
+        GUI_UC_SetEncodeUTF8();        
         TEXT_SetText(hItem,buf);
         
         if(manual == 0)
@@ -1103,6 +1134,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
                 TEXT_SetFont(hItem,&GUI_Font24_1);//设定文本字体
                 GUI_UC_SetEncodeUTF8();        
                 TEXT_SetText(hItem,buf);
+
                 
                 if(oc_mode == 0)
                 {

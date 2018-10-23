@@ -45,9 +45,9 @@ compiling stm32f4xx_tim.c...
 compiling stm32f4xx_usart.c...
 compiling stm32f4xx_wwdg.c...
 compiling main.c...
-..\User\main.c(53): warning:  #223-D: function "TIM4_Int_Init" declared implicitly
-..\User\main.c(54): warning:  #223-D: function "TIM3_Int_Init" declared implicitly
-..\User\main.c(58): warning:  #223-D: function "USART3_Configuration" declared implicitly
+..\User\main.c(54): warning:  #223-D: function "TIM4_Int_Init" declared implicitly
+..\User\main.c(55): warning:  #223-D: function "TIM3_Int_Init" declared implicitly
+..\User\main.c(59): warning:  #223-D: function "USART3_Configuration" declared implicitly
 compiling stm32f4xx_it.c...
 ..\User\stm32f4xx_it.c(263): warning:  #1035-D: single-precision operand implicitly converted to double-precision
 compiling adc.c...
@@ -175,24 +175,14 @@ compiling usb_bsp.c...
 compiling usbh_usr.c...
 ..\USB\USB_APP\usbh_usr.c(19): warning:  #177-D: variable "AppState" was declared but never referenced
 linking...
-Program Size: Code=158160 RO-data=117400 RW-data=2272 ZI-data=34104  
+Program Size: Code=158704 RO-data=117400 RW-data=2280 ZI-data=34256  
 FromELF: creating hex file...
 "..\Output\JK_BTSET.axf" - 0 Error(s), 76 Warning(s).
 Build target 'JK_BTSET'
-compiling adc.c...
-linking...
-Program Size: Code=158160 RO-data=117400 RW-data=2272 ZI-data=34104  
-FromELF: creating hex file...
-"..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
-Build target 'JK_BTSET'
 assembling startup_stm32f40_41xxx.s...
-compiling adc.c...
-..\drive\adc.c(246): error:  #137: expression must be a modifiable lvalue
-Target not created
-Build target 'JK_BTSET'
-compiling adc.c...
+compiling modbus.c...
 linking...
-Program Size: Code=158240 RO-data=117400 RW-data=2276 ZI-data=34244  
+Program Size: Code=158704 RO-data=117400 RW-data=2280 ZI-data=34256  
 FromELF: creating hex file...
 "..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
 Load "..\\Output\\JK_BTSET.AXF" 
@@ -222,7 +212,7 @@ ROMTableAddr = 0xE00FF003
 Target info:
 ------------
 Device: STM32F407VE
-VTarget = 3.311V
+VTarget = 3.312V
 State of Pins: 
 TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
 Hardware-Breakpoints: 6
@@ -234,9 +224,9 @@ Erase Done.
 Programming Done.
 Verify OK.
 Build target 'JK_BTSET'
-compiling adc.c...
+compiling modbus.c...
 linking...
-Program Size: Code=158240 RO-data=117400 RW-data=2276 ZI-data=34244  
+Program Size: Code=158688 RO-data=117400 RW-data=2280 ZI-data=34256  
 FromELF: creating hex file...
 "..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
 Load "..\\Output\\JK_BTSET.AXF" 
@@ -266,7 +256,7 @@ ROMTableAddr = 0xE00FF003
 Target info:
 ------------
 Device: STM32F407VE
-VTarget = 3.303V
+VTarget = 3.309V
 State of Pins: 
 TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
 Hardware-Breakpoints: 6
@@ -278,13 +268,17 @@ Erase Done.
 Programming Done.
 Verify OK.
 Build target 'JK_BTSET'
-compiling adc.c...
-compiling usart.c...
-..\drive\usart.c(293): warning:  #1-D: last line of file ends without a newline
+compiling modbus.c...
 linking...
-Program Size: Code=158248 RO-data=117400 RW-data=2276 ZI-data=34244  
+Program Size: Code=158680 RO-data=117400 RW-data=2280 ZI-data=34256  
 FromELF: creating hex file...
-"..\Output\JK_BTSET.axf" - 0 Error(s), 1 Warning(s).
+"..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
+Build target 'JK_BTSET'
+compiling modbus.c...
+linking...
+Program Size: Code=158680 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
 Load "..\\Output\\JK_BTSET.AXF" 
 * JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
 Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
@@ -312,7 +306,7 @@ ROMTableAddr = 0xE00FF003
 Target info:
 ------------
 Device: STM32F407VE
-VTarget = 3.301V
+VTarget = 3.312V
 State of Pins: 
 TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
 Hardware-Breakpoints: 6
@@ -324,9 +318,9 @@ Erase Done.
 Programming Done.
 Verify OK.
 Build target 'JK_BTSET'
-compiling adc.c...
+compiling modbus.c...
 linking...
-Program Size: Code=158256 RO-data=117400 RW-data=2276 ZI-data=34244  
+Program Size: Code=158680 RO-data=117400 RW-data=2280 ZI-data=34256  
 FromELF: creating hex file...
 "..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
 Load "..\\Output\\JK_BTSET.AXF" 
@@ -356,48 +350,9 @@ ROMTableAddr = 0xE00FF003
 Target info:
 ------------
 Device: STM32F407VE
-VTarget = 3.308V
+VTarget = 3.306V
 State of Pins: 
-TCK: 0, TDI: 0, TDO: 1, TMS: 1, TRES: 1, TRST: 1
-Hardware-Breakpoints: 6
-Software-Breakpoints: 8192
-Watchpoints:          4
-JTAG speed: 200 kHz
- 
-***JLink Error: Can not read register 15 (R15) while CPU is running
-***JLink Error: Can not read register 20 (CFBP) while CPU is running
-***JLink Error: CPU is not halted
-Erase Failed!
-Load "..\\Output\\JK_BTSET.AXF" 
-* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
-Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
- 
-JLink info:
-------------
-DLL: V4.40c, compiled Jan 24 2012 09:30:33
-Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
-Hardware: V9.40
-S/N : 59401576 
-Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
- 
-* JLink Info: Found SWD-DP with ID 0x2BA01477
-* JLink Info: TPIU fitted.
-* JLink Info: ETM fitted.
-* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
-* JLink Info: Found Cortex-M4 r0p1, Little endian.
-ROMTableAddr = 0xE00FF003
-* JLink Info: Found SWD-DP with ID 0x2BA01477
-* JLink Info: TPIU fitted.
-* JLink Info: ETM fitted.
-* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
-* JLink Info: Found Cortex-M4 r0p1, Little endian.
- 
-Target info:
-------------
-Device: STM32F407VE
-VTarget = 3.291V
-State of Pins: 
-TCK: 0, TDI: 0, TDO: 1, TMS: 1, TRES: 1, TRST: 1
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
 Hardware-Breakpoints: 6
 Software-Breakpoints: 8192
 Watchpoints:          4
@@ -407,14 +362,9 @@ Erase Done.
 Programming Done.
 Verify OK.
 Build target 'JK_BTSET'
-compiling adc.c...
+compiling modbus.c...
 linking...
-Program Size: Code=158248 RO-data=117400 RW-data=2276 ZI-data=34244  
-FromELF: creating hex file...
-"..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
-Build target 'JK_BTSET'
-linking...
-Program Size: Code=158248 RO-data=117400 RW-data=2276 ZI-data=34244  
+Program Size: Code=158688 RO-data=117400 RW-data=2280 ZI-data=34256  
 FromELF: creating hex file...
 "..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
 Load "..\\Output\\JK_BTSET.AXF" 
@@ -444,7 +394,51 @@ ROMTableAddr = 0xE00FF003
 Target info:
 ------------
 Device: STM32F407VE
-VTarget = 3.311V
+VTarget = 3.312V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling modbus.c...
+linking...
+Program Size: Code=158680 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.322V
 State of Pins: 
 TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
 Hardware-Breakpoints: 6
@@ -457,9 +451,9 @@ Programming Done.
 Verify OK.
 Build target 'JK_BTSET'
 compiling main.c...
-..\User\main.c(53): warning:  #223-D: function "TIM4_Int_Init" declared implicitly
-..\User\main.c(54): warning:  #223-D: function "TIM3_Int_Init" declared implicitly
-..\User\main.c(58): warning:  #223-D: function "USART3_Configuration" declared implicitly
+..\User\main.c(54): warning:  #223-D: function "TIM4_Int_Init" declared implicitly
+..\User\main.c(55): warning:  #223-D: function "TIM3_Int_Init" declared implicitly
+..\User\main.c(59): warning:  #223-D: function "USART3_Configuration" declared implicitly
 compiling stm32f4xx_it.c...
 ..\User\stm32f4xx_it.c(263): warning:  #1035-D: single-precision operand implicitly converted to double-precision
 compiling adc.c...
@@ -563,7 +557,7 @@ compiling STARTER.c...
 compiling sysinfo.c...
 ..\APP\sysinfo.c(1376): warning:  #1-D: last line of file ends without a newline
 linking...
-Program Size: Code=158248 RO-data=117400 RW-data=2276 ZI-data=34252  
+Program Size: Code=158680 RO-data=117400 RW-data=2280 ZI-data=34256  
 FromELF: creating hex file...
 "..\Output\JK_BTSET.axf" - 0 Error(s), 75 Warning(s).
 Build target 'JK_BTSET'
@@ -674,22 +668,199 @@ compiling STARTER.c...
 compiling sysinfo.c...
 ..\APP\sysinfo.c(1376): warning:  #1-D: last line of file ends without a newline
 linking...
-Program Size: Code=158344 RO-data=117400 RW-data=2280 ZI-data=34256  
+Program Size: Code=158680 RO-data=117400 RW-data=2280 ZI-data=34256  
 FromELF: creating hex file...
 "..\Output\JK_BTSET.axf" - 0 Error(s), 75 Warning(s).
 Build target 'JK_BTSET'
 compiling flash.c...
+..\drive\flash.c(270): warning:  #175-D: subscript out of range
 compiling modbus.c...
+..\drive\modbus.c(621): warning:  #175-D: subscript out of range
+..\drive\modbus.c(627): warning:  #175-D: subscript out of range
+..\drive\modbus.c(868): warning:  #175-D: subscript out of range
 linking...
-Program Size: Code=158704 RO-data=117400 RW-data=2280 ZI-data=34256  
+Program Size: Code=158688 RO-data=117400 RW-data=2280 ZI-data=34256  
 FromELF: creating hex file...
-"..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
+"..\Output\JK_BTSET.axf" - 0 Error(s), 4 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.306V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
 Build target 'JK_BTSET'
-compiling flash.c...
+compiling R_Face.c...
+..\APP\R_Face.c(385): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(389): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(393): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(410): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(416): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(434): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(439): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(451): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(455): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(543): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(717): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(762): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(762): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1209): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1580): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1926): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1965): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158692 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Build target 'JK_BTSET'
+compiling main.c...
+..\User\main.c(54): warning:  #223-D: function "TIM4_Int_Init" declared implicitly
+..\User\main.c(55): warning:  #223-D: function "TIM3_Int_Init" declared implicitly
+..\User\main.c(59): warning:  #223-D: function "USART3_Configuration" declared implicitly
+compiling key.c...
+..\drive\key.c(916): warning:  #223-D: function "MENU_OP_UP" declared implicitly
+..\drive\key.c(923): warning:  #223-D: function "LOAD_OP_UP" declared implicitly
+..\drive\key.c(937): warning:  #223-D: function "OC_OP_UP" declared implicitly
+..\drive\key.c(972): warning:  #223-D: function "MENU_OP_DOWN" declared implicitly
+..\drive\key.c(979): warning:  #223-D: function "LOAD_OP_DOWN" declared implicitly
+..\drive\key.c(993): warning:  #223-D: function "OC_OP_DOWN" declared implicitly
+..\drive\key.c(1026): warning:  #223-D: function "MENU_SET" declared implicitly
+..\drive\key.c(1042): warning:  #223-D: function "OC_SET" declared implicitly
+..\drive\key.c(1050): warning:  #223-D: function "LOAD_SET" declared implicitly
+..\drive\key.c(1064): warning:  #223-D: function "CFM_PASS" declared implicitly
+..\drive\key.c(1141): warning:  #223-D: function "CreateCDC" declared implicitly
+..\drive\key.c(1400): warning:  #223-D: function "CreateCDC" declared implicitly
+..\drive\key.c(1428): warning:  #223-D: function "Createsysinfo" declared implicitly
+compiling ssd1963.c...
+..\drive\ssd1963.c(168): warning:  #550-D: variable "FSMC_NORSRAMTimingInitStructure" was set but never used
+compiling TIM6.c...
+..\drive\TIM6.c(78): warning:  #223-D: function "ResetPow" declared implicitly
+..\drive\TIM6.c(80): warning:  #223-D: function "ResetCDC" declared implicitly
+..\drive\TIM6.c(82): warning:  #223-D: function "ResetR" declared implicitly
+..\drive\TIM6.c(84): warning:  #223-D: function "ResetLoad" declared implicitly
+..\drive\TIM6.c(86): warning:  #223-D: function "ResetG" declared implicitly
+..\drive\TIM6.c(88): warning:  #223-D: function "ResetSET" declared implicitly
+compiling GUIDRV_Template.c...
+..\STemWinLibrary522\Config\GUIDRV_Template.c(264): warning:  #177-D: variable "xPhys" was declared but never referenced
+..\STemWinLibrary522\Config\GUIDRV_Template.c(264): warning:  #177-D: variable "yPhys" was declared but never referenced
+..\STemWinLibrary522\Config\GUIDRV_Template.c(264): warning:  #177-D: variable "lphys" was declared but never referenced
+compiling LCDConf_FlexColor_Template.c...
+compiling MainTask.c...
+..\STemWinLibrary522\emWinTask\MainTask.c(71): warning:  #223-D: function "CreateSTARTER" declared implicitly
+..\STemWinLibrary522\emWinTask\MainTask.c(55): warning:  #177-D: variable "crc" was declared but never referenced
+..\STemWinLibrary522\emWinTask\MainTask.c(56): warning:  #177-D: variable "send" was declared but never referenced
+linking...
+Program Size: Code=158692 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 29 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.309V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(387): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(391): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(395): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(412): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(418): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(436): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(441): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(453): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(457): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(545): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(719): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(764): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(764): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(778): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(778): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(792): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(792): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(806): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(806): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(820): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(820): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1211): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1582): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1928): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1967): warning:  #1035-D: single-precision operand implicitly converted to double-precision
 linking...
 Program Size: Code=158704 RO-data=117400 RW-data=2280 ZI-data=34256  
 FromELF: creating hex file...
-"..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
 Build target 'JK_BTSET'
 linking...
 Program Size: Code=158704 RO-data=117400 RW-data=2280 ZI-data=34256  
@@ -722,7 +893,1321 @@ ROMTableAddr = 0xE00FF003
 Target info:
 ------------
 Device: STM32F407VE
-VTarget = 3.296V
+VTarget = 3.309V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(388): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(392): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(396): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(413): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(419): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(437): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(442): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(454): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(458): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(546): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(720): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1212): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1583): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1929): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1968): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158708 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Build target 'JK_BTSET'
+linking...
+Program Size: Code=158708 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.312V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(388): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(392): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(396): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(413): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(419): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(437): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(442): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(454): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(458): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(546): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(720): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1212): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1583): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1929): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1968): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158708 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.308V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling main.c...
+..\User\main.c(54): warning:  #223-D: function "TIM4_Int_Init" declared implicitly
+..\User\main.c(55): warning:  #223-D: function "TIM3_Int_Init" declared implicitly
+..\User\main.c(59): warning:  #223-D: function "USART3_Configuration" declared implicitly
+compiling R_Face.c...
+..\APP\R_Face.c(388): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(392): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(396): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(413): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(419): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(437): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(442): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(454): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(458): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(546): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(720): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1212): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1583): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1929): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1968): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158708 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 28 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.312V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(388): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(392): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(396): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(413): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(419): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(437): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(442): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(454): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(458): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(546): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(720): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1212): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1583): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1929): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1968): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158708 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(388): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(392): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(396): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(413): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(419): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(437): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(442): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(454): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(458): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(546): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(720): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1212): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1583): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1929): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1968): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158708 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.306V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(388): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(392): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(396): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(413): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(419): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(437): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(442): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(454): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(458): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(546): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(720): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1212): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1583): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1929): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1968): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158708 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.319V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(388): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(392): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(396): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(413): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(419): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(437): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(442): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(454): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(458): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(546): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(720): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(765): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(779): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(793): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(807): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(821): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1212): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1583): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1929): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1968): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158708 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.319V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(390): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(394): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(398): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(415): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(421): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(439): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(444): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(456): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(460): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(548): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(722): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(767): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(767): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(781): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(781): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(795): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(795): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(809): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(809): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(823): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(823): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1214): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1585): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1931): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1970): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158708 RO-data=117400 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(396): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(400): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(404): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(421): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(427): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(445): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(450): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(462): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(466): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(554): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(728): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(773): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(773): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(787): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(787): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(801): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(801): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(815): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(815): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(829): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(829): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1220): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1591): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1937): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1976): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158752 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.308V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(397): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(401): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(405): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(422): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(428): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(446): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(451): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(463): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(467): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(729): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1221): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1592): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1938): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1977): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158752 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.298V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(397): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(401): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(405): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(422): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(428): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(446): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(451): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(463): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(467): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(729): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1221): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1592): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1938): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1977): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158748 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.306V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(397): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(401): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(405): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(422): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(428): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(446): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(451): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(463): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(467): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(729): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1227): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1598): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1944): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1983): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158808 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.320V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling AD7689.c...
+..\drive\AD7689.c(107): warning: C3017W: AD7689_Data may be used before being set
+..\drive\AD7689.c(184): warning: C3017W: var_chV1 may be used before being set
+..\drive\AD7689.c(184): warning: C3017W: var_chV may be used before being set
+..\drive\AD7689.c(184): warning: C3017W: var_chI may be used before being set
+compiling R_Face.c...
+..\APP\R_Face.c(397): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(401): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(405): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(422): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(428): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(446): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(451): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(463): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(467): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(729): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1227): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1598): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1944): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1983): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158808 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 29 Warning(s).
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(397): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(401): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(405): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(422): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(428): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(446): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(451): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(463): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(467): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(729): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(967): warning:  #181-D: argument is incompatible with corresponding format string conversion
+..\APP\R_Face.c(1235): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1606): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1952): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1991): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158876 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 26 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.308V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(397): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(401): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(405): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(422): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(428): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(446): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(451): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(463): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(467): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(555): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(729): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(774): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(788): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(802): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(816): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(830): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(967): warning:  #181-D: argument is incompatible with corresponding format string conversion
+..\APP\R_Face.c(1235): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1606): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1952): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1991): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158876 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 26 Warning(s).
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(399): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(403): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(407): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(424): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(430): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(448): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(453): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(465): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(469): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(557): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(731): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(832): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(832): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(969): warning:  #181-D: argument is incompatible with corresponding format string conversion
+..\APP\R_Face.c(1237): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1608): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1954): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1993): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158892 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 26 Warning(s).
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(399): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(403): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(407): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(424): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(430): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(448): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(453): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(465): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(469): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(557): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(731): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(832): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(832): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(852): warning:  #181-D: argument is incompatible with corresponding format string conversion
+..\APP\R_Face.c(973): warning:  #181-D: argument is incompatible with corresponding format string conversion
+..\APP\R_Face.c(1241): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1612): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1958): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1997): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158916 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 27 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.308V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(399): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(403): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(407): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(424): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(430): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(448): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(453): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(465): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(469): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(557): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(731): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(832): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(832): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(852): warning:  #181-D: argument is incompatible with corresponding format string conversion
+..\APP\R_Face.c(973): warning:  #181-D: argument is incompatible with corresponding format string conversion
+..\APP\R_Face.c(1241): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1612): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1958): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1997): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158916 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 27 Warning(s).
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(399): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(403): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(407): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(424): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(430): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(448): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(453): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(465): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(469): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(557): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(731): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(832): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(832): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(852): warning:  #181-D: argument is incompatible with corresponding format string conversion
+..\APP\R_Face.c(973): warning:  #181-D: argument is incompatible with corresponding format string conversion
+..\APP\R_Face.c(1241): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1612): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1958): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1997): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158916 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 27 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.314V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling R_Face.c...
+..\APP\R_Face.c(399): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(403): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(407): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(424): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(430): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(448): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(453): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(465): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(469): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(557): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(731): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(776): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(790): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(804): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(818): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(832): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(832): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1241): warning:  #223-D: function "setmode_r" declared implicitly
+..\APP\R_Face.c(1612): warning:  #177-D: variable "hItem" was declared but never referenced
+..\APP\R_Face.c(1958): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\APP\R_Face.c(1997): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+linking...
+Program Size: Code=158940 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 25 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.301V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling adc.c...
+linking...
+Program Size: Code=158940 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 0 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.320V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling adc.c...
+compiling modbus.c...
+..\drive\modbus.c(621): warning:  #175-D: subscript out of range
+..\drive\modbus.c(627): warning:  #175-D: subscript out of range
+..\drive\modbus.c(868): warning:  #175-D: subscript out of range
+linking...
+Program Size: Code=158948 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 3 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.308V
+State of Pins: 
+TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
+Hardware-Breakpoints: 6
+Software-Breakpoints: 8192
+Watchpoints:          4
+JTAG speed: 200 kHz
+ 
+Erase Done.
+Programming Done.
+Verify OK.
+Build target 'JK_BTSET'
+compiling modbus.c...
+..\drive\modbus.c(621): warning:  #175-D: subscript out of range
+..\drive\modbus.c(627): warning:  #175-D: subscript out of range
+..\drive\modbus.c(868): warning:  #175-D: subscript out of range
+linking...
+Program Size: Code=158948 RO-data=117456 RW-data=2280 ZI-data=34256  
+FromELF: creating hex file...
+"..\Output\JK_BTSET.axf" - 0 Error(s), 3 Warning(s).
+Load "..\\Output\\JK_BTSET.AXF" 
+* JLink Info: Device "STM32F407VE" selected (512 KB flash, 128 KB RAM).
+Set JLink Project File to "D:\5530BE\5530B.ENHANCED\Project\JLinkSettings.ini"
+ 
+JLink info:
+------------
+DLL: V4.40c, compiled Jan 24 2012 09:30:33
+Firmware: J-Link V9 compiled Apr 20 2018 16:47:26
+Hardware: V9.40
+S/N : 59401576 
+Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash 
+ 
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ROMTableAddr = 0xE00FF003
+* JLink Info: Found SWD-DP with ID 0x2BA01477
+* JLink Info: TPIU fitted.
+* JLink Info: ETM fitted.
+* JLink Info:   FPUnit: 6 code (BP) slots and 2 literal slots
+* JLink Info: Found Cortex-M4 r0p1, Little endian.
+ 
+Target info:
+------------
+Device: STM32F407VE
+VTarget = 3.304V
 State of Pins: 
 TCK: 0, TDI: 0, TDO: 0, TMS: 1, TRES: 1, TRST: 1
 Hardware-Breakpoints: 6

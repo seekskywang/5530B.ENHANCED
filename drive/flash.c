@@ -267,6 +267,7 @@ void Flash_Write_all (void)
 	EEPROM_WriteByte(0x5C,Polar3);//
 	EEPROM_WriteByte(0x5D,Polar4);
 	EEPROM_WriteByte(0x5E,Polar5);
+    EEPROM_WriteByte(0xBC,Polar6);
 }
 //===========================================================================//
 void EEPROM_READ_Coeff(void)
