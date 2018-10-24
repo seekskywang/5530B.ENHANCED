@@ -80,31 +80,32 @@
 000076  f8dfa100          LDR      r10,|L1.376|
 ;;;82     		DAC8531_Send(Contr_Laod);//加载DAC值
 00007a  f8dfb100          LDR      r11,|L1.380|
-;;;83             Req_R();//读取低阻
+;;;83            
 ;;;84             if(page_sw != face_starter)
 ;;;85             {
 ;;;86                 if(scancount == 9)
 00007e  4f40              LDR      r7,|L1.384|
 ;;;87                 {
-;;;88                     sLCD_WR_REG(0xf1);
-;;;89                     ee_Delay(30);
-;;;90                     read1963 =sLCD_Read_Data();
-;;;91                     scancount = 0;
-;;;92                 }else{
-;;;93                     scancount++;
-;;;94                 }
-;;;95     //                 if(resdone == 1)
-;;;96     //                 {
-;;;97     //                     sLCD_WR_REG(0xf1);
-;;;98     //                     ee_Delay(30);
-;;;99     //                     read1963 =sLCD_Read_Data();
-;;;100    //                 }
-;;;101                 if(read1963 != 0x03)
-;;;102                 {
-;;;103                     resetflag = 1;               
+;;;88                     Req_R();//读取低阻                
+;;;89                     sLCD_WR_REG(0xf1);
+;;;90                     ee_Delay(30);
+;;;91                     read1963 =sLCD_Read_Data();
+;;;92                     scancount = 0;
+;;;93                 }else{
+;;;94                     scancount++;
+;;;95                 }
+;;;96     //                 if(resdone == 1)
+;;;97     //                 {
+;;;98     //                     sLCD_WR_REG(0xf1);
+;;;99     //                     ee_Delay(30);
+;;;100    //                     read1963 =sLCD_Read_Data();
+;;;101    //                 }
+;;;102                 if(read1963 != 0x03)
+;;;103                 {
+;;;104                     resetflag = 1;               
 000080  4e40              LDR      r6,|L1.388|
 000082  f04f4880          MOV      r8,#0x40000000        ;80
-000086  2500              MOVS     r5,#0                 ;91
+000086  2500              MOVS     r5,#0                 ;92
                   |L1.136|
 000088  f8b91000          LDRH     r1,[r9,#0]            ;80  ; Contr_Current
 00008c  4640              MOV      r0,r8                 ;80
@@ -114,110 +115,110 @@
 000098  f7fffffe          BL       TIM_SetCompare2
 00009c  f8bb0000          LDRH     r0,[r11,#0]           ;82  ; Contr_Laod
 0000a0  f7fffffe          BL       DAC8531_Send
-0000a4  f7fffffe          BL       Req_R
-0000a8  4837              LDR      r0,|L1.392|
-0000aa  7800              LDRB     r0,[r0,#0]            ;84  ; page_sw
-0000ac  2806              CMP      r0,#6                 ;84
-0000ae  d018              BEQ      |L1.226|
-0000b0  6878              LDR      r0,[r7,#4]            ;86  ; scancount
-0000b2  2809              CMP      r0,#9                 ;86
-0000b4  d007              BEQ      |L1.198|
-0000b6  1c40              ADDS     r0,r0,#1              ;93
-0000b8  6078              STR      r0,[r7,#4]            ;93  ; scancount
-                  |L1.186|
-0000ba  6838              LDR      r0,[r7,#0]            ;101  ; read1963
-0000bc  2803              CMP      r0,#3                 ;101
-0000be  d00d              BEQ      |L1.220|
-0000c0  2001              MOVS     r0,#1
-0000c2  7030              STRB     r0,[r6,#0]
-0000c4  e00d              B        |L1.226|
-                  |L1.198|
-0000c6  20f1              MOVS     r0,#0xf1              ;88
+0000a4  4838              LDR      r0,|L1.392|
+0000a6  7800              LDRB     r0,[r0,#0]            ;84  ; page_sw
+0000a8  2806              CMP      r0,#6                 ;84
+0000aa  d01a              BEQ      |L1.226|
+0000ac  6878              LDR      r0,[r7,#4]            ;86  ; scancount
+0000ae  2809              CMP      r0,#9                 ;86
+0000b0  d007              BEQ      |L1.194|
+0000b2  1c40              ADDS     r0,r0,#1              ;94
+0000b4  6078              STR      r0,[r7,#4]            ;94  ; scancount
+                  |L1.182|
+0000b6  6838              LDR      r0,[r7,#0]            ;102  ; read1963
+0000b8  2803              CMP      r0,#3                 ;102
+0000ba  d00f              BEQ      |L1.220|
+0000bc  2001              MOVS     r0,#1
+0000be  7030              STRB     r0,[r6,#0]
+0000c0  e00f              B        |L1.226|
+                  |L1.194|
+0000c2  f7fffffe          BL       Req_R
+0000c6  20f1              MOVS     r0,#0xf1              ;89
 0000c8  f7fffffe          BL       sLCD_WR_REG
-0000cc  201e              MOVS     r0,#0x1e              ;89
+0000cc  201e              MOVS     r0,#0x1e              ;90
 0000ce  f7fffffe          BL       ee_Delay
 0000d2  f7fffffe          BL       sLCD_Read_Data
-0000d6  6038              STR      r0,[r7,#0]            ;90  ; read1963
-0000d8  607d              STR      r5,[r7,#4]            ;91  ; scancount
-0000da  e7ee              B        |L1.186|
+0000d6  6038              STR      r0,[r7,#0]            ;91  ; read1963
+0000d8  607d              STR      r5,[r7,#4]            ;92  ; scancount
+0000da  e7ec              B        |L1.182|
                   |L1.220|
-;;;104                 }else{
-;;;105                     resdone = 0;
+;;;105                 }else{
+;;;106                     resdone = 0;
 0000dc  482b              LDR      r0,|L1.396|
 0000de  7005              STRB     r5,[r0,#0]
-;;;106                     resetflag = 0; 
+;;;107                     resetflag = 0; 
 0000e0  7035              STRB     r5,[r6,#0]
                   |L1.226|
-;;;107                 }
-;;;108            }
-;;;109    		if(Flag_DAC_OFF==0)
+;;;108                 }
+;;;109            }
+;;;110    		if(Flag_DAC_OFF==0)
 0000e2  482b              LDR      r0,|L1.400|
 0000e4  6800              LDR      r0,[r0,#0]  ; flagB
 0000e6  0700              LSLS     r0,r0,#28
 0000e8  d401              BMI      |L1.238|
-;;;110    		{
-;;;111    			Transformation_ADC();
+;;;111    		{
+;;;112    			Transformation_ADC();
 0000ea  f7fffffe          BL       Transformation_ADC
                   |L1.238|
-;;;112    		}
-;;;113    		if(Flag_ADC_Full==1)
+;;;113    		}
+;;;114    		if(Flag_ADC_Full==1)
 0000ee  6820              LDR      r0,[r4,#0]  ; flagA
 0000f0  0781              LSLS     r1,r0,#30
 0000f2  d504              BPL      |L1.254|
-;;;114    		{
-;;;115    			Flag_ADC_Full=0;
+;;;115    		{
+;;;116    			Flag_ADC_Full=0;
 0000f4  f0200002          BIC      r0,r0,#2
 0000f8  6020              STR      r0,[r4,#0]  ; flagA
-;;;116    			ADC_CH_Scan();//ADC滤波
+;;;117    			ADC_CH_Scan();//ADC滤波
 0000fa  f7fffffe          BL       ADC_CH_Scan
                   |L1.254|
-;;;117    		}
-;;;118    		AD7689_Scan_CH();//读取AD7689各通道AD值
+;;;118    		}
+;;;119    		AD7689_Scan_CH();//读取AD7689各通道AD值
 0000fe  f7fffffe          BL       AD7689_Scan_CH
-;;;119    		if(UART_Buffer_Rece_flag==1)
+;;;120    		if(UART_Buffer_Rece_flag==1)
 000102  6820              LDR      r0,[r4,#0]  ; flagA
 000104  0681              LSLS     r1,r0,#26
 000106  d504              BPL      |L1.274|
-;;;120    		{
-;;;121    			UART_Buffer_Rece_flag=0;
+;;;121    		{
+;;;122    			UART_Buffer_Rece_flag=0;
 000108  f0200020          BIC      r0,r0,#0x20
 00010c  6020              STR      r0,[r4,#0]  ; flagA
-;;;122    			UART_Action();
+;;;123    			UART_Action();
 00010e  f7fffffe          BL       UART_Action
                   |L1.274|
-;;;123    		}
-;;;124    		if(Flag_Key_Scan==1)
+;;;124    		}
+;;;125    		if(Flag_Key_Scan==1)
 000112  6820              LDR      r0,[r4,#0]  ; flagA
 000114  0701              LSLS     r1,r0,#28
 000116  d50a              BPL      |L1.302|
-;;;125    		{
-;;;126    			Flag_Key_Scan=0;
+;;;126    		{
+;;;127    			Flag_Key_Scan=0;
 000118  f0200008          BIC      r0,r0,#8
 00011c  6020              STR      r0,[r4,#0]  ; flagA
-;;;127    			NewKey=TM1650_Read_KEY();
+;;;128    			NewKey=TM1650_Read_KEY();
 00011e  f7fffffe          BL       TM1650_Read_KEY
 000122  491c              LDR      r1,|L1.404|
 000124  7008              STRB     r0,[r1,#0]
-;;;128    			Flag_Key_Scan = 1;
+;;;129    			Flag_Key_Scan = 1;
 000126  6820              LDR      r0,[r4,#0]  ; flagA
 000128  f0400008          ORR      r0,r0,#8
 00012c  6020              STR      r0,[r4,#0]  ; flagA
                   |L1.302|
-;;;129    		}
-;;;130    		Key_Funtion();//键盘处理
+;;;130    		}
+;;;131    		Key_Funtion();//键盘处理
 00012e  f7fffffe          BL       Key_Funtion
-;;;131    		Temp_Comapre();//风扇控制
+;;;132    		Temp_Comapre();//风扇控制
 000132  f7fffffe          BL       Temp_Comapre
-;;;132    		BEEP_Ring();//蜂鸣器
+;;;133    		BEEP_Ring();//蜂鸣器
 000136  f7fffffe          BL       BEEP_Ring
-;;;133    		GUI_Delay(2);//GUI刷新
+;;;134    		GUI_Delay(2);//GUI刷新
 00013a  2002              MOVS     r0,#2
 00013c  f7fffffe          BL       GUI_Delay
 000140  e7a2              B        |L1.136|
-;;;134    	}
-;;;135      
-;;;136    }
-;;;137    /***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/
+;;;135    	}
+;;;136      
+;;;137    }
+;;;138    /***************************** 安富莱电子 www.armfly.com (END OF FILE) *********************************/
                           ENDP
 
 000142  0000              DCW      0x0000

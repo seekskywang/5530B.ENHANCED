@@ -34927,6 +34927,8 @@ Nextern float clear_pv;
 Nextern float clear_lv;
 Nextern float temp;
 Nextern vu8 set_loop_count;
+Nextern vu16 NTCR;
+Nextern vu8 Runit;
 N
 Nextern vu32 Run_Control[42];	
 N#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -35109,7 +35111,15 @@ N#define step1               0
 N#define step2               1
 N#define step3               2
 N
-N
+N//NTC电阻单位
+N#define m19                 1
+N#define m199                2
+N#define o1                  3
+N#define o10                 4
+N#define o100                5
+N#define o1k                 6
+N#define o10k                7
+N#define o100k               8
 N
 Nextern vu16 Contr_Voltage;//
 Nextern vu16 Contr_Current;//
@@ -35266,8 +35276,8 @@ N	ADC_RegularChannelConfig(ADC1, ADC_Channel_3, 2, ADC_SampleTime_3Cycles);
 X	ADC_RegularChannelConfig(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ((uint8_t)0x03), 2, ((uint8_t)0x00));
 N	ADC_RegularChannelConfig(ADC1, ADC_Channel_6, 3, ADC_SampleTime_3Cycles);
 X	ADC_RegularChannelConfig(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ((uint8_t)0x06), 3, ((uint8_t)0x00));
-N    ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 4, ADC_SampleTime_112Cycles);
-X    ADC_RegularChannelConfig(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ((uint8_t)0x0C), 4, ((uint8_t)0x05));
+N    ADC_RegularChannelConfig(ADC1, ADC_Channel_12, 4, ADC_SampleTime_144Cycles);
+X    ADC_RegularChannelConfig(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ((uint8_t)0x0C), 4, ((uint8_t)0x06));
 N  /* ADC Calibration */
 N  ADC_Cmd(ADC1, ENABLE);//使能ADC
 X  ADC_Cmd(((ADC_TypeDef *) ((((uint32_t)0x40000000) + 0x00010000) + 0x2000)), ENABLE);

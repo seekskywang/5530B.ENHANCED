@@ -34907,6 +34907,8 @@ Nextern float clear_pv;
 Nextern float clear_lv;
 Nextern float temp;
 Nextern vu8 set_loop_count;
+Nextern vu16 NTCR;
+Nextern vu8 Runit;
 N
 Nextern vu32 Run_Control[42];	
 N#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -35089,7 +35091,15 @@ N#define step1               0
 N#define step2               1
 N#define step3               2
 N
-N
+N//NTC电阻单位
+N#define m19                 1
+N#define m199                2
+N#define o1                  3
+N#define o10                 4
+N#define o100                5
+N#define o1k                 6
+N#define o10k                7
+N#define o100k               8
 N
 Nextern vu16 Contr_Voltage;//
 Nextern vu16 Contr_Current;//
@@ -35409,6 +35419,8 @@ Sextern float clear_pv;
 Sextern float clear_lv;
 Sextern float temp;
 Sextern vu8 set_loop_count;
+Sextern vu16 NTCR;
+Sextern vu8 Runit;
 S
 Sextern vu32 Run_Control[42];	
 S#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -35591,7 +35603,15 @@ S#define step1               0
 S#define step2               1
 S#define step3               2
 S
-S
+S//NTC电阻单位
+S#define m19                 1
+S#define m199                2
+S#define o1                  3
+S#define o10                 4
+S#define o100                5
+S#define o1k                 6
+S#define o10k                7
+S#define o100k               8
 S
 Sextern vu16 Contr_Voltage;//
 Sextern vu16 Contr_Current;//
@@ -36356,7 +36376,7 @@ N		}
 N/****************漏电流校准**********************************/
 N		if (UART_Buffer_Rece[1] == 0x22)			  
 N		{ 
-N			Modify_A_READ = LowImon_value - 203;
+N			Modify_A_READ = LowImon_value - 180;
 N			Modify_A_ACT = (UART_Buffer_Rece[3] << 8) + UART_Buffer_Rece[4];
 N		}
 N
@@ -36369,7 +36389,7 @@ N
 N			vu32 var16a;
 N			vu32 var32c;
 N			vu32 var32d;
-N			Modify_B_READ =LowImon_value - 203;//????
+N			Modify_B_READ =LowImon_value - 180;//????
 N			Modify_B_ACT = (UART_Buffer_Rece[3] << 8) + UART_Buffer_Rece[4];//????
 N			var32a = Modify_B_ACT;
 N			var32a = var32a - Modify_A_ACT;
@@ -36722,7 +36742,7 @@ N	}
 N	
 N	var32 = 0;
 N/*******************测量漏电流转换**************************************/
-N	var32 = LowImon_value-203;
+N	var32 = LowImon_value-180;
 N	var32 = var32 * REG_LEAKI/*REG_LEAKI*/;  
 X	var32 = var32 * Correct_Parametet[12] ;  
 W "..\drive\modbus.c" 868 7 subscript out of range
@@ -36742,8 +36762,14 @@ X	else var32 = var32 + Correct_Strong[12] ;
 N	var32 = var32 >> 14;
 N	Leak_I = var32;
 X	Run_Control[41] = var32;
-N	DISS_Leak_Current=Leak_I;
-X	DISS_Leak_Current=Run_Control[41];
+N    if(Leak_I > 200000)
+X    if(Run_Control[41] > 200000)
+N    {
+N        DISS_Leak_Current = 0;
+N    }else{
+N        DISS_Leak_Current=Leak_I;
+X        DISS_Leak_Current=Run_Control[41];
+N    }	
 N	DISS_Leak_Current=DISS_Leak_Current/100;//计算显示电流
 N	var32 = 0;
 N}

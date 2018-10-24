@@ -50,6 +50,8 @@ extern struct bitDefine
   */
 float temp;
 vu8 Rec_buff[9];
+vu16 NTCR;
+vu8 Runit;
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -271,10 +273,41 @@ void USART3_IRQHandler(void)
      }
 }
 
+uint16_t CRC16(uint8_t *puchMsg, uint8_t Len)
+{
+	uint8_t t, m,n,p;
+	uint8_t uchCRCHi=0xFF; /* 高CRC字节初始化*/ 
+	uint8_t uchCRCLo =0xFF; /* 低CRC 字节初始化*/ 
+	for(t=0;t<Len;t++)
+	{	
+		uchCRCLo=uchCRCLo^puchMsg[t];
+		for(n=0;n<8;n++)
+		{
+			m=uchCRCLo&1;p=uchCRCHi&1;uchCRCHi>>=1;
+			uchCRCLo>>=1;
+
+			if(p)
+			{
+				uchCRCLo|=0x80;
+			}
+			if(m)	
+			{
+				uchCRCHi=uchCRCHi^0xa0;
+				uchCRCLo=uchCRCLo^1;
+			}
+		}
+	}
+	return (uchCRCHi<<8|uchCRCLo);
+}
+
 void UART5_IRQHandler(void)
 {
     static vu8 count;
-    u8 res;
+    u8 res,i;
+    static u16 crc;
+    static vu8 check[7];
+    static vu16 cal;
+//    u16 crch;
     if(USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
     {
         res = USART_ReceiveData(UART5);
@@ -282,11 +315,31 @@ void UART5_IRQHandler(void)
         count ++;
         if(count > 8)
         {
+            for(i=0;i<7;i++)
+            {
+                check[i] = Rec_buff[i];
+            }
+            crc = Rec_buff[8]<<8;
+            crc = crc + Rec_buff[7];
+            cal = CRC16(check,7);
+            if(crc == cal)
+            {
+                if(Rec_buff[5] == 0x0C && Rec_buff[6] == 0x45 && crc == 0x9D82)
+                {
+                    NTCR = 0;
+                }else{
+                    NTCR = Rec_buff[5]<<8;
+                    NTCR = NTCR + Rec_buff[6];
+                    Runit = Rec_buff[4]&0x0F;
+                }                               
+            }
             count = 0;
         }
         USART_ClearITPendingBit(UART5, USART_IT_RXNE);
     }
 }
+
+
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */

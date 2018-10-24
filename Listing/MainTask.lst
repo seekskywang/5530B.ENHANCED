@@ -48793,6 +48793,8 @@ Nextern float clear_pv;
 Nextern float clear_lv;
 Nextern float temp;
 Nextern vu8 set_loop_count;
+Nextern vu16 NTCR;
+Nextern vu8 Runit;
 N
 Nextern vu32 Run_Control[42];	
 N#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -48975,7 +48977,15 @@ N#define step1               0
 N#define step2               1
 N#define step3               2
 N
-N
+N//NTC电阻单位
+N#define m19                 1
+N#define m199                2
+N#define o1                  3
+N#define o10                 4
+N#define o100                5
+N#define o1k                 6
+N#define o10k                7
+N#define o100k               8
 N
 Nextern vu16 Contr_Voltage;//
 Nextern vu16 Contr_Current;//
@@ -49278,6 +49288,8 @@ Sextern float clear_pv;
 Sextern float clear_lv;
 Sextern float temp;
 Sextern vu8 set_loop_count;
+Sextern vu16 NTCR;
+Sextern vu8 Runit;
 S
 Sextern vu32 Run_Control[42];	
 S#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -49460,7 +49472,15 @@ S#define step1               0
 S#define step2               1
 S#define step3               2
 S
-S
+S//NTC电阻单位
+S#define m19                 1
+S#define m199                2
+S#define o1                  3
+S#define o10                 4
+S#define o100                5
+S#define o1k                 6
+S#define o10k                7
+S#define o100k               8
 S
 Sextern vu16 Contr_Voltage;//
 Sextern vu16 Contr_Current;//
@@ -49752,6 +49772,8 @@ Sextern float clear_pv;
 Sextern float clear_lv;
 Sextern float temp;
 Sextern vu8 set_loop_count;
+Sextern vu16 NTCR;
+Sextern vu8 Runit;
 S
 Sextern vu32 Run_Control[42];	
 S#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -49934,7 +49956,15 @@ S#define step1               0
 S#define step2               1
 S#define step3               2
 S
-S
+S//NTC电阻单位
+S#define m19                 1
+S#define m199                2
+S#define o1                  3
+S#define o10                 4
+S#define o100                5
+S#define o1k                 6
+S#define o10k                7
+S#define o100k               8
 S
 Sextern vu16 Contr_Voltage;//
 Sextern vu16 Contr_Current;//
@@ -50229,6 +50259,8 @@ Sextern float clear_pv;
 Sextern float clear_lv;
 Sextern float temp;
 Sextern vu8 set_loop_count;
+Sextern vu16 NTCR;
+Sextern vu8 Runit;
 S
 Sextern vu32 Run_Control[42];	
 S#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -50411,7 +50443,15 @@ S#define step1               0
 S#define step2               1
 S#define step3               2
 S
-S
+S//NTC电阻单位
+S#define m19                 1
+S#define m199                2
+S#define o1                  3
+S#define o10                 4
+S#define o100                5
+S#define o1k                 6
+S#define o10k                7
+S#define o100k               8
 S
 Sextern vu16 Contr_Voltage;//
 Sextern vu16 Contr_Current;//
@@ -50706,6 +50746,8 @@ Sextern float clear_pv;
 Sextern float clear_lv;
 Sextern float temp;
 Sextern vu8 set_loop_count;
+Sextern vu16 NTCR;
+Sextern vu8 Runit;
 S
 Sextern vu32 Run_Control[42];	
 S#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -50888,7 +50930,15 @@ S#define step1               0
 S#define step2               1
 S#define step3               2
 S
-S
+S//NTC电阻单位
+S#define m19                 1
+S#define m199                2
+S#define o1                  3
+S#define o10                 4
+S#define o100                5
+S#define o1k                 6
+S#define o10k                7
+S#define o100k               8
 S
 Sextern vu16 Contr_Voltage;//
 Sextern vu16 Contr_Current;//
@@ -51240,12 +51290,13 @@ X		TIM_SetCompare1(((TIM_TypeDef *) (((uint32_t)0x40000000) + 0x0000)),Contr_Cur
 N		TIM_SetCompare2(TIM2,Contr_Voltage);//稳压电源电压DAC
 X		TIM_SetCompare2(((TIM_TypeDef *) (((uint32_t)0x40000000) + 0x0000)),Contr_Voltage);
 N		DAC8531_Send(Contr_Laod);//加载DAC值
-N        Req_R();//读取低阻
+N       
 N        if(page_sw != face_starter)
 X        if(page_sw != 6)
 N        {
 N            if(scancount == 9)
 N            {
+N                Req_R();//读取低阻                
 N                sLCD_WR_REG(0xf1);
 N                ee_Delay(30);
 N                read1963 =sLCD_Read_Data();

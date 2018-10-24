@@ -34906,6 +34906,8 @@ Nextern float clear_pv;
 Nextern float clear_lv;
 Nextern float temp;
 Nextern vu8 set_loop_count;
+Nextern vu16 NTCR;
+Nextern vu8 Runit;
 N
 Nextern vu32 Run_Control[42];	
 N#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -35088,7 +35090,15 @@ N#define step1               0
 N#define step2               1
 N#define step3               2
 N
-N
+N//NTC电阻单位
+N#define m19                 1
+N#define m199                2
+N#define o1                  3
+N#define o10                 4
+N#define o100                5
+N#define o1k                 6
+N#define o10k                7
+N#define o100k               8
 N
 Nextern vu16 Contr_Voltage;//
 Nextern vu16 Contr_Current;//
@@ -35208,8 +35218,8 @@ X	NVIC_PriorityGroupConfig(((uint32_t)0x700));
 N    
 N    /* Enable the USARTy Interrupt */
 N	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;	 
-N	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-N	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+N	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+N	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
 N	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 N	NVIC_Init(&NVIC_InitStructure);
 N}
@@ -35223,8 +35233,8 @@ X	NVIC_PriorityGroupConfig(((uint32_t)0x700));
 N    
 N    /* Enable the USARTy Interrupt */
 N	NVIC_InitStructure.NVIC_IRQChannel = UART5_IRQn;	 
-N	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-N	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+N	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+N	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 N	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 N	NVIC_Init(&NVIC_InitStructure);
 N}
@@ -35238,7 +35248,7 @@ X	NVIC_PriorityGroupConfig(((uint32_t)0x700));
 N	
 N	/* Enable the USARTy Interrupt */
 N	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;	 
-N	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+N	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
 N	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 N	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 N	NVIC_Init(&NVIC_InitStructure);
@@ -35478,32 +35488,7 @@ X			(flagA . bit4)=0;
 N		}
 N}
 N
-Nuint16_t CRC16(uint8_t *puchMsg, uint8_t Len)
-N{
-N	uint8_t t, m,n,p;
-N	uint8_t uchCRCHi=0xFF; /* 高CRC字节初始化*/ 
-N	uint8_t uchCRCLo =0xFF; /* 低CRC 字节初始化*/ 
-N	for(t=0;t<Len;t++)
-N	{	
-N		uchCRCLo=uchCRCLo^puchMsg[t];
-N		for(n=0;n<8;n++)
-N		{
-N			m=uchCRCLo&1;p=uchCRCHi&1;uchCRCHi>>=1;
-N			uchCRCLo>>=1;
 N
-N			if(p)
-N			{
-N				uchCRCLo|=0x80;
-N			}
-N			if(m)	
-N			{
-N				uchCRCHi=uchCRCHi^0xa0;
-N				uchCRCLo=uchCRCLo^1;
-N			}
-N		}
-N	}
-N	return (uchCRCHi<<8|uchCRCLo);
-N}
 N
 Nvoid Req_R(void)
 N{
@@ -35516,5 +35501,5 @@ X        USART_SendData(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x5000)),se
 N        while (USART_GetFlagStatus(UART5,USART_FLAG_TXE) == RESET);
 X        while (USART_GetFlagStatus(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x5000)),((uint16_t)0x0080)) == RESET);
 N    }    
-W "..\drive\usart.c" 293 2 last line of file ends without a newline
+W "..\drive\usart.c" 268 2 last line of file ends without a newline
 N}

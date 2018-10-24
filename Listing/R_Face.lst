@@ -48745,6 +48745,8 @@ Nextern float clear_pv;
 Nextern float clear_lv;
 Nextern float temp;
 Nextern vu8 set_loop_count;
+Nextern vu16 NTCR;
+Nextern vu8 Runit;
 N
 Nextern vu32 Run_Control[42];	
 N#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -48927,7 +48929,15 @@ N#define step1               0
 N#define step2               1
 N#define step3               2
 N
-N
+N//NTC���赥λ
+N#define m19                 1
+N#define m199                2
+N#define o1                  3
+N#define o10                 4
+N#define o100                5
+N#define o1k                 6
+N#define o10k                7
+N#define o100k               8
 N
 Nextern vu16 Contr_Voltage;//
 Nextern vu16 Contr_Current;//
@@ -49201,6 +49211,8 @@ Sextern float clear_pv;
 Sextern float clear_lv;
 Sextern float temp;
 Sextern vu8 set_loop_count;
+Sextern vu16 NTCR;
+Sextern vu8 Runit;
 S
 Sextern vu32 Run_Control[42];	
 S#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -49383,7 +49395,15 @@ S#define step1               0
 S#define step2               1
 S#define step3               2
 S
-S
+S//NTC���赥λ
+S#define m19                 1
+S#define m199                2
+S#define o1                  3
+S#define o10                 4
+S#define o100                5
+S#define o1k                 6
+S#define o10k                7
+S#define o100k               8
 S
 Sextern vu16 Contr_Voltage;//
 Sextern vu16 Contr_Current;//
@@ -51643,6 +51663,8 @@ Sextern float clear_pv;
 Sextern float clear_lv;
 Sextern float temp;
 Sextern vu8 set_loop_count;
+Sextern vu16 NTCR;
+Sextern vu8 Runit;
 S
 Sextern vu32 Run_Control[42];	
 S#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -51825,7 +51847,15 @@ S#define step1               0
 S#define step2               1
 S#define step3               2
 S
-S
+S//NTC���赥λ
+S#define m19                 1
+S#define m199                2
+S#define o1                  3
+S#define o10                 4
+S#define o100                5
+S#define o1k                 6
+S#define o10k                7
+S#define o100k               8
 S
 Sextern vu16 Contr_Voltage;//
 Sextern vu16 Contr_Current;//
@@ -52576,6 +52606,7 @@ N#define ID_TEXT_130     (GUI_ID_USER + 0x010E)
 N#define ID_TEXT_132     (GUI_ID_USER + 0x0121)
 N#define ID_TEXT_133     (GUI_ID_USER + 0x0122)
 N#define ID_TEXT_134     (GUI_ID_USER + 0x0123)
+N#define ID_TEXT_135     (GUI_ID_USER + 0x0124)
 N#define ID_BUTTON_12    (GUI_ID_USER + 0x18)
 N#define ID_BUTTON_13    (GUI_ID_USER + 0x19)
 N#define ID_BUTTON_14    (GUI_ID_USER + 0x1A)
@@ -52659,10 +52690,12 @@ N  { TEXT_CreateIndirect, "Text", ID_TEXT_128, 68, 254, 20, 20, 20, 0x0, 0 },
 X  { TEXT_CreateIndirect, "Text", (0x800 + 0x010D), 68, 254, 20, 20, 20, 0x0, 0 },
 N  { TEXT_CreateIndirect, "Text", ID_TEXT_132, 400, 50, 40, 20, 20, 0x0, 0 },
 X  { TEXT_CreateIndirect, "Text", (0x800 + 0x0121), 400, 50, 40, 20, 20, 0x0, 0 },
-N  { TEXT_CreateIndirect, "Text", ID_TEXT_133, 50, 205, 80, 20, 0, 0x0, 0 },
-X  { TEXT_CreateIndirect, "Text", (0x800 + 0x0122), 50, 205, 80, 20, 0, 0x0, 0 },
-N  { TEXT_CreateIndirect, "Text", ID_TEXT_134, 160, 205, 80, 20, 0, 0x0, 0 },
-X  { TEXT_CreateIndirect, "Text", (0x800 + 0x0123), 160, 205, 80, 20, 0, 0x0, 0 },
+N  { TEXT_CreateIndirect, "Text", ID_TEXT_133, 50, 202, 80, 20, 0, 0x0, 0 },
+X  { TEXT_CreateIndirect, "Text", (0x800 + 0x0122), 50, 202, 80, 20, 0, 0x0, 0 },
+N  { TEXT_CreateIndirect, "Text", ID_TEXT_134, 160, 202, 80, 20, 0, 0x0, 0 },
+X  { TEXT_CreateIndirect, "Text", (0x800 + 0x0123), 160, 202, 80, 20, 0, 0x0, 0 },
+N  { TEXT_CreateIndirect, "Text", ID_TEXT_135, 105, 203, 80, 20, 0, 0x0, 0 },
+X  { TEXT_CreateIndirect, "Text", (0x800 + 0x0124), 105, 203, 80, 20, 0, 0x0, 0 },
 N  { BUTTON_CreateIndirect, "Button", ID_BUTTON_13, 83, 226, 77, 45, 0, 0x0, 0 },
 X  { BUTTON_CreateIndirect, "Button", (0x800 + 0x19), 83, 226, 77, 45, 0, 0x0, 0 },
 N  { BUTTON_CreateIndirect, "Button", ID_BUTTON_14, 163, 226, 77, 45, 0, 0x0, 0 },
@@ -52744,8 +52777,9 @@ X    GUI_SetColor(0x00D3D3D3);
 N    GUI_SetFont(&GUI_Font24_1);
 N    GUI_DispStringAt("NTC-R:",50, 180);
 N    GUI_DispStringAt("LEAK-I:",170, 180);
-N
-N    GUI_DispStringAt("uA",200, 235);
+N    GUI_DispStringAt("uA",240, 203);
+N    GUI_SetFont(&GUI_FontHZ16);
+N    GUI_DispStringAt("Ω",119, 210);
 N//    GUI_DispDecAt(R_VLUE,50,140,4);//显示内阻值
 N//      GUI_GotoXY(220,4);
 N//      GUI_DispDec(short_time,6);
@@ -52924,17 +52958,17 @@ N                if(gate_v == 0)
 N                {
 N                    if(GUI_GetTime()/500 - test_ftime == 1)
 N                    {
-W "..\APP\R_Face.c" 399 25 function "setmode_r" declared implicitly
+W "..\APP\R_Face.c" 402 25 function "setmode_r" declared implicitly
 N                        setmode_r();
 N//                         GPIO_ResetBits(GPIOB,GPIO_Pin_13);
 N//                         Mode_SW_CONT(0x01);
 N                    }
-W "..\APP\R_Face.c" 403 51 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 406 51 single-precision operand implicitly converted to double-precision
 N                    if(/*mode_sw == mode_pow && */DISS_Voltage < 0.3  && GUI_GetTime()/500 - test_ftime > 1 /*&& R_VLUE < 50*/)
 N                    {
 N//                         GPIO_ResetBits(GPIOB,GPIO_Pin_13);
 N//                         Mode_SW_CONT(0x01);
-W "..\APP\R_Face.c" 407 25 function "setmode_r" declared implicitly
+W "..\APP\R_Face.c" 410 25 function "setmode_r" declared implicitly
 N                        setmode_r();
 N                        finish = 0;
 N                        con_flag = 0;
@@ -52953,14 +52987,14 @@ N                    if(GUI_GetTime()/500 - test_ftime == 2)
 N                    {
 N//                         GPIO_ResetBits(GPIOB,GPIO_Pin_13);
 N//                         Mode_SW_CONT(0x01);
-W "..\APP\R_Face.c" 424 25 function "setmode_r" declared implicitly
+W "..\APP\R_Face.c" 427 25 function "setmode_r" declared implicitly
 N                        setmode_r();
 N                    }
 N                    if(/* mode_sw == mode_pow && */(r_test == 0 || DISS_Voltage < gate_v) && GUI_GetTime()/500 - test_ftime > 1/*&& R_VLUE < 50*/)
 N                    { 
 N//                         GPIO_ResetBits(GPIOB,GPIO_Pin_13);
 N//                         Mode_SW_CONT(0x01);
-W "..\APP\R_Face.c" 430 25 function "setmode_r" declared implicitly
+W "..\APP\R_Face.c" 433 25 function "setmode_r" declared implicitly
 N                        setmode_r();
 N                        finish = 0;
 N                        con_flag = 0;
@@ -52982,14 +53016,14 @@ N                        if(DISS_Voltage > 1 && R_VLUE > 50 && con_flag == 0 && 
 X                        if(DISS_Voltage > 1 && Run_Control[13] > 50 && con_flag == 0 && finish == 0)
 N                        {
 N                            con_flag = 1;
-W "..\APP\R_Face.c" 448 37 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 451 37 single-precision operand implicitly converted to double-precision
 N                            time1 = (float)GUI_GetTime()/500.0;
 N                        }
 N                        
 N                        if(con_flag == 1 && oct_sw == oct_off && finish == 0)
 X                        if(con_flag == 1 && oct_sw == 0 && finish == 0)
 N                        {
-W "..\APP\R_Face.c" 453 33 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 456 33 single-precision operand implicitly converted to double-precision
 N                             if((float)(GUI_GetTime()/500.0 - time1) > 1.5)
 N                            {
 N                                r = R_VLUE;
@@ -53005,13 +53039,13 @@ N                        if(DISS_Voltage > gate_v && R_VLUE > 50 && con_flag == 
 X                        if(DISS_Voltage > gate_v && Run_Control[13] > 50 && con_flag == 0 && finish == 0 && r_test == 1)
 N                        {
 N                            con_flag = 1;
-W "..\APP\R_Face.c" 465 37 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 468 37 single-precision operand implicitly converted to double-precision
 N                            time1 = (float)GUI_GetTime()/500.0;
 N                        }                       
 N                        if(con_flag == 1 && oct_sw == oct_off && finish == 0)
 X                        if(con_flag == 1 && oct_sw == 0 && finish == 0)
 N                        {
-W "..\APP\R_Face.c" 469 33 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 472 33 single-precision operand implicitly converted to double-precision
 N                             if((float)(GUI_GetTime()/500.0 - time1) > 1.5)
 N                             {
 N                                r = R_VLUE;
@@ -53120,7 +53154,7 @@ N                            sprintf(buf,"%4d",r);
 N                            TEXT_SetText(hItem,buf);
 N                        }else if(r_stable == 0)
 N                        {
-W "..\APP\R_Face.c" 557 32 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 560 32 single-precision operand implicitly converted to double-precision
 N                            if(DISS_Voltage < 0.3)
 N                            {
 N                                if(para_set1 == set_1_on)
@@ -53336,7 +53370,7 @@ N                        sprintf(buf,"%4d",r);
 N                        TEXT_SetText(hItem,buf);
 N                    }else if(r_stable == 0)
 N                    {
-W "..\APP\R_Face.c" 731 28 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 734 28 single-precision operand implicitly converted to double-precision
 N                        if(DISS_Voltage < 0.3)
 N                            {
 N                                if(para_set1 == set_1_on)
@@ -53392,8 +53426,8 @@ N            {
 N                case Lion:
 X                case 1:
 N                {
-W "..\APP\R_Face.c" 776 40 single-precision operand implicitly converted to double-precision
-W "..\APP\R_Face.c" 776 63 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 779 40 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 779 63 single-precision operand implicitly converted to double-precision
 N                    if(R_VLUE != 0  && DISS_Voltage >= 3.4 && DISS_Voltage <= 4.2)
 X                    if(Run_Control[13] != 0  && DISS_Voltage >= 3.4 && DISS_Voltage <= 4.2)
 N                    {
@@ -53414,8 +53448,8 @@ N                }
 N                case NiMH:
 X                case 2:
 N                {
-W "..\APP\R_Face.c" 790 40 single-precision operand implicitly converted to double-precision
-W "..\APP\R_Face.c" 790 63 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 793 40 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 793 63 single-precision operand implicitly converted to double-precision
 N                    if(R_VLUE != 0  && DISS_Voltage >= 0.9 && DISS_Voltage <= 1.4)
 X                    if(Run_Control[13] != 0  && DISS_Voltage >= 0.9 && DISS_Voltage <= 1.4)
 N                    {
@@ -53436,8 +53470,8 @@ N                }
 N                case NiCd:
 X                case 3:
 N                {
-W "..\APP\R_Face.c" 804 39 single-precision operand implicitly converted to double-precision
-W "..\APP\R_Face.c" 804 62 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 807 39 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 807 62 single-precision operand implicitly converted to double-precision
 N                    if(R_VLUE != 0 && DISS_Voltage >= 0.9 && DISS_Voltage <= 1.4)
 X                    if(Run_Control[13] != 0 && DISS_Voltage >= 0.9 && DISS_Voltage <= 1.4)
 N                    {
@@ -53458,8 +53492,8 @@ N                }
 N                case SLA:
 X                case 4:
 N                {
-W "..\APP\R_Face.c" 818 40 single-precision operand implicitly converted to double-precision
-W "..\APP\R_Face.c" 818 63 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 821 40 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 821 63 single-precision operand implicitly converted to double-precision
 N                    if(R_VLUE != 0  && DISS_Voltage >= 1.8 && DISS_Voltage <= 2.4)
 X                    if(Run_Control[13] != 0  && DISS_Voltage >= 1.8 && DISS_Voltage <= 2.4)
 N                    {
@@ -53480,8 +53514,8 @@ N                }
 N                case LiMH:
 X                case 5:
 N                {
-W "..\APP\R_Face.c" 832 40 single-precision operand implicitly converted to double-precision
-W "..\APP\R_Face.c" 832 63 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 835 40 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 835 63 single-precision operand implicitly converted to double-precision
 N                    if(R_VLUE != 0  && DISS_Voltage >= 2.8 && DISS_Voltage <= 3.3)
 X                    if(Run_Control[13] != 0  && DISS_Voltage >= 2.8 && DISS_Voltage <= 3.3)
 N                    {
@@ -53507,10 +53541,118 @@ X        hItem = WM_GetDialogItem(pMsg->hWin, (0x800 + 0x0109));
 N        sprintf(buf,"%.1f",temp);
 N        TEXT_SetText(hItem,buf);
 N        
+N        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_133);
+X        hItem = WM_GetDialogItem(pMsg->hWin,(0x800 + 0x0122));
+N        switch(Runit)
+N        {
+N            case m19:
+X            case 1:
+N            {
+N                DISS_R = NTCR/100.0;
+N                sprintf(buf,"%.2f",DISS_R);
+N            }break;
+N            case m199:
+X            case 2:
+N            {
+N                DISS_R = NTCR/10.0;
+N                sprintf(buf,"%.1f",DISS_R);
+N            }break;
+N            case o1:
+X            case 3:
+N            {
+N                DISS_R = NTCR/1000.0;
+N                sprintf(buf,"%.3f",DISS_R);
+N            }break;
+N            case o10:
+X            case 4:
+N            {
+N                DISS_R = NTCR/100.0;
+N                sprintf(buf,"%.2f",DISS_R);
+N            }break;
+N            case o100:
+X            case 5:
+N            {
+N                DISS_R = NTCR/10.0;
+N                sprintf(buf,"%.1f",DISS_R);
+N            }break;
+N            case o1k:
+X            case 6:
+N            {
+N                DISS_R = NTCR/1000.0;
+N                sprintf(buf,"%.3f",DISS_R);
+N            }break;
+N            case o10k:
+X            case 7:
+N            {
+N                DISS_R = NTCR/100.0;
+N                sprintf(buf,"%.2f",DISS_R);
+N            }break;
+N            case o100k:
+X            case 8:
+N            {
+N                DISS_R = NTCR/10.0;
+N                sprintf(buf,"%.1f",DISS_R);
+N            }break;
+N        }        
+N        TEXT_SetText(hItem,buf);
+N        
+N        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_135);
+X        hItem = WM_GetDialogItem(pMsg->hWin,(0x800 + 0x0124));
+N        switch(Runit)
+N        {
+N            case m19:
+X            case 1:
+N            {
+N                TEXT_SetText(hItem,"m");
+N            }break;
+N            case m199:
+X            case 2:
+N            {
+N                TEXT_SetText(hItem,"m");
+N            }break;
+N            case o1:
+X            case 3:
+N            {
+N                TEXT_SetText(hItem,"");
+N            }break;
+N            case o10:
+X            case 4:
+N            {
+N                TEXT_SetText(hItem,"");
+N            }break;
+N            case o100:
+X            case 5:
+N            {
+N                TEXT_SetText(hItem,"");
+N            }break;
+N            case o1k:
+X            case 6:
+N            {
+N               TEXT_SetText(hItem,"k");
+N            }break;
+N            case o10k:
+X            case 7:
+N            {
+N               TEXT_SetText(hItem,"k");
+N            }break;
+N            case o100k:
+X            case 8:
+N            {
+N                TEXT_SetText(hItem,"k");
+N            }break;
+N        }        
+N        
+N        
 N        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_134);
 X        hItem = WM_GetDialogItem(pMsg->hWin,(0x800 + 0x0123));
-N        sprintf(buf,"%.2f",DISS_Leak_Current);   
-N        TEXT_SetText(hItem,buf);
+N        if(DISS_Leak_Current <= 1100)
+N        {
+N            sprintf(buf,"%.2f",DISS_Leak_Current);
+N            TEXT_SetText(hItem,buf);
+N        }else{
+N            TEXT_SetText(hItem,"over");
+N        }
+N        
 N//         
 N//        WM_InvalidateWindow(hWinR);
 N		WM_RestartTimer(pMsg->Data.v, 50);//复位定时器数值越大刷新时间越短
@@ -53652,7 +53794,7 @@ X        hItem = WM_GetDialogItem(pMsg->hWin, (0x800 + 0x0122));
 N        TEXT_SetTextColor(hItem, GUI_GREEN);//设置字体颜色
 X        TEXT_SetTextColor(hItem, 0x0000FF00);
 N        TEXT_SetFont(hItem,&GUI_Font24_1);//设定文本字体       
-N        sprintf(buf,"%.1f",temp);
+N        sprintf(buf,"%.2f",0.00);
 N        TEXT_SetText(hItem,buf);
 N        
 N        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_134);
@@ -53663,6 +53805,14 @@ X        TEXT_SetTextColor(hItem, 0x0000FF00);
 N        TEXT_SetFont(hItem,&GUI_Font24_1);//设定文本字体
 N        GUI_UC_SetEncodeUTF8();        
 N        TEXT_SetText(hItem,buf);
+N        
+N        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_135);
+X        hItem = WM_GetDialogItem(pMsg->hWin,(0x800 + 0x0124));
+N        TEXT_SetTextColor(hItem, GUI_LIGHTGRAY);//设置字体颜色
+X        TEXT_SetTextColor(hItem, 0x00D3D3D3);
+N        TEXT_SetFont(hItem,&GUI_Font24_1);//设定文本字体
+N        GUI_UC_SetEncodeUTF8();        
+N        TEXT_SetText(hItem,"Ω");
 N        
 N        if(manual == 0)
 N                {
@@ -54009,7 +54159,7 @@ X  page_sw = 3;
 N  track = face_r;
 X  track = 3;
 N    con_flag = 0;
-W "..\APP\R_Face.c" 1241 5 function "setmode_r" declared implicitly
+W "..\APP\R_Face.c" 1340 5 function "setmode_r" declared implicitly
 N    setmode_r();
 N//    GPIO_SetBits(GPIOA,GPIO_Pin_15);//电子负载OFF
 N//    GPIO_SetBits(GPIOB,GPIO_Pin_13);
@@ -54544,7 +54694,7 @@ N                oc_mode = 0;
 N            }
 N            Write_Limits();
 N            break;
-W "..\APP\R_Face.c" 1612 21 variable "hItem" was declared but never referenced
+W "..\APP\R_Face.c" 1711 21 variable "hItem" was declared but never referenced
 N        }
 N        
 N    }
@@ -54919,7 +55069,7 @@ N    char sbs_c[6];
 N    float change_sbs_c;   
 N    crec2 = crec1;
 N    crec1 = DISS_Current;         
-W "..\APP\R_Face.c" 1958 61 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 2057 61 single-precision operand implicitly converted to double-precision
 N    if((crec1 < crec2 || v - /*DISS_Voltage*/DISS_Voltage > v*0.9) && para_set2 == set_2_on)
 X    if((crec1 < crec2 || v -  DISS_Voltage > v*0.9) && para_set2 == 0xff)
 N    {
@@ -54968,7 +55118,7 @@ N    char sbs_c[6];
 N    float change_sbs_c;
 N    static vu16 csum;
 N             
-W "..\APP\R_Face.c" 1997 43 single-precision operand implicitly converted to double-precision
+W "..\APP\R_Face.c" 2096 43 single-precision operand implicitly converted to double-precision
 N    if(v - /*DISS_Voltage*/DISS_Voltage > v*0.9 && para_set2 == set_2_on)
 X    if(v -  DISS_Voltage > v*0.9 && para_set2 == 0xff)
 N    {

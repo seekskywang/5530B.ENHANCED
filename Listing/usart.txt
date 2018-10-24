@@ -2,118 +2,51 @@
 ; commandline ArmCC [--list --split_sections --debug -c --asm --interleave -o..\Output\usart.o --asm_dir=..\Listing\ --list_dir=..\Listing\ --depend=..\Output\usart.d --cpu=Cortex-M4.fp --apcs=interwork -O1 --diag_suppress=870 -I..\APP -I..\drive -I..\Include -I..\Libraries\CMSIS\inc -I..\Libraries\CMSIS\src -I..\Libraries\FWlib\inc -I..\Libraries\FWlib\src -I..\Listing -I..\Output -I..\Project -I..\STemWinLibrary522\Config -I..\STemWinLibrary522\emWinTask -I..\STemWinLibrary522\GUILib -I..\STemWinLibrary522\inc -I..\User -I..\USB\STM32_USB_HOST_Library\Class\HID\inc -I..\USB\STM32_USB_HOST_Library\Class\MSC\src -I..\USB\STM32_USB_HOST_Library\Core\src -I..\USB\USB_APP -I..\USB\STM32_USB_HOST_Library\Class\HID\src -I..\USB\STM32_USB_HOST_Library\Class\MSC\inc -I..\USB\STM32_USB_HOST_Library\Core\inc -I..\USB\STM32_USB_OTG_Driver\inc -I..\FATFS\exfuns -I..\FATFS\src\option -I..\FATFS\src -I..\MALLOC -ID:\Keil\ARM\RV31\Inc -ID:\Keil\ARM\CMSIS\Include -ID:\Keil\ARM\Inc\ST\STM32F4xx -DUSE_STDPERIPH_DRIVER -DSTM32F40XX -DUSE_USB_OTG_FS -DUSE_EMBEDDED_PHY -DUSE_USB_OTG_HS -DSTM32F40XX --omf_browse=..\Output\usart.crf ..\drive\usart.c]
                           THUMB
 
-                          AREA ||i.CRC16||, CODE, READONLY, ALIGN=1
-
-                  CRC16 PROC
-;;;256    
-;;;257    uint16_t CRC16(uint8_t *puchMsg, uint8_t Len)
-000000  b570              PUSH     {r4-r6,lr}
-;;;258    {
-;;;259    	uint8_t t, m,n,p;
-;;;260    	uint8_t uchCRCHi=0xFF; /* 高CRC字节初始化*/ 
-000002  23ff              MOVS     r3,#0xff
-;;;261    	uint8_t uchCRCLo =0xFF; /* 低CRC 字节初始化*/ 
-000004  22ff              MOVS     r2,#0xff
-;;;262    	for(t=0;t<Len;t++)
-000006  2500              MOVS     r5,#0
-000008  e018              B        |L1.60|
-                  |L1.10|
-;;;263    	{	
-;;;264    		uchCRCLo=uchCRCLo^puchMsg[t];
-00000a  5d44              LDRB     r4,[r0,r5]
-00000c  4062              EORS     r2,r2,r4
-;;;265    		for(n=0;n<8;n++)
-00000e  2400              MOVS     r4,#0
-                  |L1.16|
-;;;266    		{
-;;;267    			m=uchCRCLo&1;p=uchCRCHi&1;uchCRCHi>>=1;
-000010  f0020601          AND      r6,r2,#1
-000014  f0030c01          AND      r12,r3,#1
-000018  085b              LSRS     r3,r3,#1
-;;;268    			uchCRCLo>>=1;
-00001a  0852              LSRS     r2,r2,#1
-;;;269    
-;;;270    			if(p)
-00001c  f1bc0f00          CMP      r12,#0
-000020  d001              BEQ      |L1.38|
-;;;271    			{
-;;;272    				uchCRCLo|=0x80;
-000022  f0420280          ORR      r2,r2,#0x80
-                  |L1.38|
-;;;273    			}
-;;;274    			if(m)	
-000026  b11e              CBZ      r6,|L1.48|
-;;;275    			{
-;;;276    				uchCRCHi=uchCRCHi^0xa0;
-000028  f08303a0          EOR      r3,r3,#0xa0
-;;;277    				uchCRCLo=uchCRCLo^1;
-00002c  f0820201          EOR      r2,r2,#1
-                  |L1.48|
-000030  1c64              ADDS     r4,r4,#1              ;265
-000032  b2e4              UXTB     r4,r4                 ;265
-000034  2c08              CMP      r4,#8                 ;265
-000036  d3eb              BCC      |L1.16|
-000038  1c6d              ADDS     r5,r5,#1              ;262
-00003a  b2ed              UXTB     r5,r5                 ;262
-                  |L1.60|
-00003c  428d              CMP      r5,r1                 ;262
-00003e  d3e4              BCC      |L1.10|
-;;;278    			}
-;;;279    		}
-;;;280    	}
-;;;281    	return (uchCRCHi<<8|uchCRCLo);
-000040  ea422003          ORR      r0,r2,r3,LSL #8
-;;;282    }
-000044  bd70              POP      {r4-r6,pc}
-;;;283    
-                          ENDP
-
-
                           AREA ||i.Req_R||, CODE, READONLY, ALIGN=2
 
                   Req_R PROC
-;;;283    
-;;;284    void Req_R(void)
+;;;258    
+;;;259    void Req_R(void)
 000000  b57c              PUSH     {r2-r6,lr}
-;;;285    {
-;;;286        u8 i;
-;;;287        vu8 send[6] = {0x03,0x04,0x01,0x33,0x00,0x24};
-000002  a00b              ADR      r0,|L2.48|
+;;;260    {
+;;;261        u8 i;
+;;;262        vu8 send[6] = {0x03,0x04,0x01,0x33,0x00,0x24};
+000002  a00b              ADR      r0,|L1.48|
 000004  e9d01000          LDRD     r1,r0,[r0,#0]
 000008  9100              STR      r1,[sp,#0]
 00000a  9001              STR      r0,[sp,#4]
-;;;288        for(i=0;i<6;i++)
+;;;263        for(i=0;i<6;i++)
 00000c  2400              MOVS     r4,#0
-;;;289        {
-;;;290            USART_SendData(UART5,send[i]);
-00000e  4e0a              LDR      r6,|L2.56|
-000010  466d              MOV      r5,sp                 ;287
-                  |L2.18|
+;;;264        {
+;;;265            USART_SendData(UART5,send[i]);
+00000e  4e0a              LDR      r6,|L1.56|
+000010  466d              MOV      r5,sp                 ;262
+                  |L1.18|
 000012  5d29              LDRB     r1,[r5,r4]
 000014  4630              MOV      r0,r6
 000016  f7fffffe          BL       USART_SendData
-                  |L2.26|
-;;;291            while (USART_GetFlagStatus(UART5,USART_FLAG_TXE) == RESET);
+                  |L1.26|
+;;;266            while (USART_GetFlagStatus(UART5,USART_FLAG_TXE) == RESET);
 00001a  2180              MOVS     r1,#0x80
 00001c  4630              MOV      r0,r6
 00001e  f7fffffe          BL       USART_GetFlagStatus
 000022  2800              CMP      r0,#0
-000024  d0f9              BEQ      |L2.26|
-000026  1c64              ADDS     r4,r4,#1              ;288
-000028  b2e4              UXTB     r4,r4                 ;288
-00002a  2c06              CMP      r4,#6                 ;288
-00002c  d3f1              BCC      |L2.18|
-;;;292        }    
-;;;293    }
+000024  d0f9              BEQ      |L1.26|
+000026  1c64              ADDS     r4,r4,#1              ;263
+000028  b2e4              UXTB     r4,r4                 ;263
+00002a  2c06              CMP      r4,#6                 ;263
+00002c  d3f1              BCC      |L1.18|
+;;;267        }    
+;;;268    }
 00002e  bd7c              POP      {r2-r6,pc}
                           ENDP
 
-                  |L2.48|
+                  |L1.48|
 000030  03040133          DCB      3,4,1,"3",0
 000034  00      
 000035  2400              DCB      "$$",0
 000037  00                DCB      0
-                  |L2.56|
+                  |L1.56|
                           DCD      0x40005000
 
                           AREA ||i.UART1_Send||, CODE, READONLY, ALIGN=2
@@ -125,38 +58,38 @@
 ;;;219    {
 ;;;220    	static vu8 UART_Buffer_Send_pointer=0;
 ;;;221    		if (UART_Buffer_Send_pointer < Transmit_BUFFERsize)
-000002  4c11              LDR      r4,|L3.72|
+000002  4c11              LDR      r4,|L2.72|
 000004  7820              LDRB     r0,[r4,#0]  ; UART_Buffer_Send_pointer
 000006  78a1              LDRB     r1,[r4,#2]  ; Transmit_BUFFERsize
 000008  4288              CMP      r0,r1
-00000a  d215              BCS      |L3.56|
+00000a  d215              BCS      |L2.56|
 ;;;222             {
 ;;;223    					 if(UART_Buffer_Send[0]==ADDR)
-00000c  480f              LDR      r0,|L3.76|
+00000c  480f              LDR      r0,|L2.76|
 00000e  7801              LDRB     r1,[r0,#0]  ; UART_Buffer_Send
-000010  4a0f              LDR      r2,|L3.80|
+000010  4a0f              LDR      r2,|L2.80|
 000012  7812              LDRB     r2,[r2,#0]  ; ADDR
 000014  4291              CMP      r1,r2
-000016  d10e              BNE      |L3.54|
+000016  d10e              BNE      |L2.54|
 ;;;224    					 {
 ;;;225    						USART_SendData(USART1,UART_Buffer_Send[UART_Buffer_Send_pointer]);
 000018  7821              LDRB     r1,[r4,#0]  ; UART_Buffer_Send_pointer
 00001a  5c41              LDRB     r1,[r0,r1]
-00001c  4d0d              LDR      r5,|L3.84|
+00001c  4d0d              LDR      r5,|L2.84|
 00001e  4628              MOV      r0,r5
 000020  f7fffffe          BL       USART_SendData
-                  |L3.36|
+                  |L2.36|
 ;;;226    						while (USART_GetFlagStatus(USART1,USART_FLAG_TXE) == RESET);//??????
 000024  2180              MOVS     r1,#0x80
 000026  4628              MOV      r0,r5
 000028  f7fffffe          BL       USART_GetFlagStatus
 00002c  2800              CMP      r0,#0
-00002e  d0f9              BEQ      |L3.36|
+00002e  d0f9              BEQ      |L2.36|
 ;;;227    						UART_Buffer_Send_pointer++;
 000030  7820              LDRB     r0,[r4,#0]  ; UART_Buffer_Send_pointer
 000032  1c40              ADDS     r0,r0,#1
 000034  7020              STRB     r0,[r4,#0]
-                  |L3.54|
+                  |L2.54|
 ;;;228    					}
 ;;;229             }
 ;;;230    		else 
@@ -166,10 +99,10 @@
 ;;;234    		}
 ;;;235    }
 000036  bd70              POP      {r4-r6,pc}
-                  |L3.56|
+                  |L2.56|
 000038  2000              MOVS     r0,#0                 ;232
 00003a  7020              STRB     r0,[r4,#0]            ;232
-00003c  4806              LDR      r0,|L3.88|
+00003c  4806              LDR      r0,|L2.88|
 00003e  6801              LDR      r1,[r0,#0]            ;233  ; flagA
 000040  f0210110          BIC      r1,r1,#0x10           ;233
 000044  6001              STR      r1,[r0,#0]            ;233  ; flagA
@@ -177,15 +110,15 @@
 ;;;236    
                           ENDP
 
-                  |L3.72|
-                          DCD      ||area_number.17||
-                  |L3.76|
-                          DCD      ||area_number.13||
-                  |L3.80|
+                  |L2.72|
+                          DCD      ||area_number.16||
+                  |L2.76|
+                          DCD      ||area_number.12||
+                  |L2.80|
                           DCD      ADDR
-                  |L3.84|
+                  |L2.84|
                           DCD      0x40011000
-                  |L3.88|
+                  |L2.88|
                           DCD      flagA
 
                           AREA ||i.UART3_Send||, CODE, READONLY, ALIGN=2
@@ -197,38 +130,38 @@
 ;;;239     {
 ;;;240    	static vu8 UART_Buffer_Send_pointer=0;
 ;;;241    		if (UART_Buffer_Send_pointer < Transmit_BUFFERsize)
-000002  4c11              LDR      r4,|L4.72|
+000002  4c11              LDR      r4,|L3.72|
 000004  7860              LDRB     r0,[r4,#1]  ; UART_Buffer_Send_pointer
 000006  78a1              LDRB     r1,[r4,#2]  ; Transmit_BUFFERsize
 000008  4288              CMP      r0,r1
-00000a  d215              BCS      |L4.56|
+00000a  d215              BCS      |L3.56|
 ;;;242             {
 ;;;243    					 if(UART_Buffer_Send[0]==ADDR)
-00000c  480f              LDR      r0,|L4.76|
+00000c  480f              LDR      r0,|L3.76|
 00000e  7801              LDRB     r1,[r0,#0]  ; UART_Buffer_Send
-000010  4a0f              LDR      r2,|L4.80|
+000010  4a0f              LDR      r2,|L3.80|
 000012  7812              LDRB     r2,[r2,#0]  ; ADDR
 000014  4291              CMP      r1,r2
-000016  d10e              BNE      |L4.54|
+000016  d10e              BNE      |L3.54|
 ;;;244    					 {
 ;;;245    						USART_SendData(USART3,UART_Buffer_Send[UART_Buffer_Send_pointer]);
 000018  7861              LDRB     r1,[r4,#1]  ; UART_Buffer_Send_pointer
 00001a  5c41              LDRB     r1,[r0,r1]
-00001c  4d0d              LDR      r5,|L4.84|
+00001c  4d0d              LDR      r5,|L3.84|
 00001e  4628              MOV      r0,r5
 000020  f7fffffe          BL       USART_SendData
-                  |L4.36|
+                  |L3.36|
 ;;;246    						while (USART_GetFlagStatus(USART3,USART_FLAG_TXE) == RESET);//??????
 000024  2180              MOVS     r1,#0x80
 000026  4628              MOV      r0,r5
 000028  f7fffffe          BL       USART_GetFlagStatus
 00002c  2800              CMP      r0,#0
-00002e  d0f9              BEQ      |L4.36|
+00002e  d0f9              BEQ      |L3.36|
 ;;;247    						UART_Buffer_Send_pointer++;
 000030  7860              LDRB     r0,[r4,#1]  ; UART_Buffer_Send_pointer
 000032  1c40              ADDS     r0,r0,#1
 000034  7060              STRB     r0,[r4,#1]
-                  |L4.54|
+                  |L3.54|
 ;;;248    					}
 ;;;249             }
 ;;;250    		else
@@ -238,10 +171,10 @@
 ;;;254    		}
 ;;;255    }
 000036  bd70              POP      {r4-r6,pc}
-                  |L4.56|
+                  |L3.56|
 000038  2000              MOVS     r0,#0                 ;252
 00003a  7060              STRB     r0,[r4,#1]            ;252
-00003c  4806              LDR      r0,|L4.88|
+00003c  4806              LDR      r0,|L3.88|
 00003e  6801              LDR      r1,[r0,#0]            ;253  ; flagA
 000040  f0210110          BIC      r1,r1,#0x10           ;253
 000044  6001              STR      r1,[r0,#0]            ;253  ; flagA
@@ -249,15 +182,15 @@
 ;;;256    
                           ENDP
 
-                  |L4.72|
-                          DCD      ||area_number.17||
-                  |L4.76|
-                          DCD      ||area_number.13||
-                  |L4.80|
+                  |L3.72|
+                          DCD      ||area_number.16||
+                  |L3.76|
+                          DCD      ||area_number.12||
+                  |L3.80|
                           DCD      ADDR
-                  |L4.84|
+                  |L3.84|
                           DCD      0x40004800
-                  |L4.88|
+                  |L3.88|
                           DCD      flagA
 
                           AREA ||i.USART1_NVIC_Config||, CODE, READONLY, ALIGN=1
@@ -277,19 +210,18 @@
 ;;;73     	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;	 
 00000a  2025              MOVS     r0,#0x25
 00000c  f88d0000          STRB     r0,[sp,#0]
-;;;74     	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-000010  2000              MOVS     r0,#0
+;;;74     	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+000010  2001              MOVS     r0,#1
 000012  f88d0001          STRB     r0,[sp,#1]
 ;;;75     	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
-000016  2001              MOVS     r0,#1
-000018  f88d0002          STRB     r0,[sp,#2]
+000016  f88d0002          STRB     r0,[sp,#2]
 ;;;76     	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-00001c  f88d0003          STRB     r0,[sp,#3]
+00001a  f88d0003          STRB     r0,[sp,#3]
 ;;;77     	NVIC_Init(&NVIC_InitStructure);
-000020  4668              MOV      r0,sp
-000022  f7fffffe          BL       NVIC_Init
+00001e  4668              MOV      r0,sp
+000020  f7fffffe          BL       NVIC_Init
 ;;;78     }
-000026  bd08              POP      {r3,pc}
+000024  bd08              POP      {r3,pc}
 ;;;79     
                           ENDP
 
@@ -313,7 +245,7 @@
 ;;;125    //    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE); //?? GPIOA ??
 ;;;126        
 ;;;127    	GPIO_PinAFConfig(GPIOB,GPIO_PinSource10,GPIO_AF_USART3);
-00000c  4d21              LDR      r5,|L6.148|
+00000c  4d21              LDR      r5,|L5.148|
 00000e  2207              MOVS     r2,#7
 000010  210a              MOVS     r1,#0xa
 000012  4628              MOV      r0,r5
@@ -372,7 +304,7 @@
 000060  200c              MOVS     r0,#0xc
 000062  f8ad000e          STRH     r0,[sp,#0xe]
 ;;;154    	USART_Init(USART3, &USART_InitStructure);
-000066  4c0c              LDR      r4,|L6.152|
+000066  4c0c              LDR      r4,|L5.152|
 000068  a901              ADD      r1,sp,#4
 00006a  4620              MOV      r0,r4
 00006c  f7fffffe          BL       USART_Init
@@ -404,9 +336,9 @@
 ;;;167    
                           ENDP
 
-                  |L6.148|
+                  |L5.148|
                           DCD      0x40020400
-                  |L6.152|
+                  |L5.152|
                           DCD      0x40004800
 
                           AREA ||i.USART3_NVIC_Config||, CODE, READONLY, ALIGN=1
@@ -426,18 +358,19 @@
 ;;;45     	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;	 
 00000a  2027              MOVS     r0,#0x27
 00000c  f88d0000          STRB     r0,[sp,#0]
-;;;46     	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-000010  2001              MOVS     r0,#1
+;;;46     	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+000010  2002              MOVS     r0,#2
 000012  f88d0001          STRB     r0,[sp,#1]
-;;;47     	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+;;;47     	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
 000016  f88d0002          STRB     r0,[sp,#2]
 ;;;48     	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-00001a  f88d0003          STRB     r0,[sp,#3]
+00001a  2001              MOVS     r0,#1
+00001c  f88d0003          STRB     r0,[sp,#3]
 ;;;49     	NVIC_Init(&NVIC_InitStructure);
-00001e  4668              MOV      r0,sp
-000020  f7fffffe          BL       NVIC_Init
+000020  4668              MOV      r0,sp
+000022  f7fffffe          BL       NVIC_Init
 ;;;50     }
-000024  bd08              POP      {r3,pc}
+000026  bd08              POP      {r3,pc}
 ;;;51     
                           ENDP
 
@@ -461,13 +394,13 @@
 ;;;175    //    RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE); //?? GPIOA ??
 ;;;176        
 ;;;177    	GPIO_PinAFConfig(GPIOD,GPIO_PinSource2,GPIO_AF_UART5);
-00000c  4d24              LDR      r5,|L8.160|
+00000c  4d24              LDR      r5,|L7.160|
 00000e  2208              MOVS     r2,#8
 000010  2102              MOVS     r1,#2
 000012  4628              MOV      r0,r5
 000014  f7fffffe          BL       GPIO_PinAFConfig
 ;;;178    	GPIO_PinAFConfig(GPIOC,GPIO_PinSource12,GPIO_AF_UART5);
-000018  4e22              LDR      r6,|L8.164|
+000018  4e22              LDR      r6,|L7.164|
 00001a  2208              MOVS     r2,#8
 00001c  210c              MOVS     r1,#0xc
 00001e  4630              MOV      r0,r6
@@ -524,7 +457,7 @@
 00006a  200c              MOVS     r0,#0xc
 00006c  f8ad000a          STRH     r0,[sp,#0xa]
 ;;;204    	USART_Init(UART5, &USART_InitStructure);
-000070  4c0d              LDR      r4,|L8.168|
+000070  4c0d              LDR      r4,|L7.168|
 000072  4669              MOV      r1,sp
 000074  4620              MOV      r0,r4
 000076  f7fffffe          BL       USART_Init
@@ -557,11 +490,11 @@
                           ENDP
 
 00009e  0000              DCW      0x0000
-                  |L8.160|
+                  |L7.160|
                           DCD      0x40020c00
-                  |L8.164|
+                  |L7.164|
                           DCD      0x40020800
-                  |L8.168|
+                  |L7.168|
                           DCD      0x40005000
 
                           AREA ||i.USART5_NVIC_Config||, CODE, READONLY, ALIGN=1
@@ -581,18 +514,19 @@
 ;;;59     	NVIC_InitStructure.NVIC_IRQChannel = UART5_IRQn;	 
 00000a  2035              MOVS     r0,#0x35
 00000c  f88d0000          STRB     r0,[sp,#0]
-;;;60     	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-000010  2001              MOVS     r0,#1
+;;;60     	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+000010  2000              MOVS     r0,#0
 000012  f88d0001          STRB     r0,[sp,#1]
-;;;61     	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+;;;61     	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 000016  f88d0002          STRB     r0,[sp,#2]
 ;;;62     	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-00001a  f88d0003          STRB     r0,[sp,#3]
+00001a  2001              MOVS     r0,#1
+00001c  f88d0003          STRB     r0,[sp,#3]
 ;;;63     	NVIC_Init(&NVIC_InitStructure);
-00001e  4668              MOV      r0,sp
-000020  f7fffffe          BL       NVIC_Init
+000020  4668              MOV      r0,sp
+000022  f7fffffe          BL       NVIC_Init
 ;;;64     }
-000024  bd08              POP      {r3,pc}
+000026  bd08              POP      {r3,pc}
 ;;;65     
                           ENDP
 
@@ -614,7 +548,7 @@
 000006  2010              MOVS     r0,#0x10
 000008  f7fffffe          BL       RCC_APB2PeriphClockCmd
 ;;;87     	GPIO_PinAFConfig(GPIOA,GPIO_PinSource9,GPIO_AF_USART1);
-00000c  4e22              LDR      r6,|L10.152|
+00000c  4e22              LDR      r6,|L9.152|
 00000e  2207              MOVS     r2,#7
 000010  2109              MOVS     r1,#9
 000012  4630              MOV      r0,r6
@@ -668,7 +602,7 @@
 000064  200c              MOVS     r0,#0xc
 000066  f8ad000a          STRH     r0,[sp,#0xa]
 ;;;108    	USART_Init(USART1, &USART_InitStructure);
-00006a  4c0c              LDR      r4,|L10.156|
+00006a  4c0c              LDR      r4,|L9.156|
 00006c  4669              MOV      r1,sp
 00006e  4620              MOV      r0,r4
 000070  f7fffffe          BL       USART_Init
@@ -696,9 +630,9 @@
 ;;;117    
                           ENDP
 
-                  |L10.152|
+                  |L9.152|
                           DCD      0x40020000
-                  |L10.156|
+                  |L9.156|
                           DCD      0x40011000
 
                           AREA ||.bss||, DATA, NOINIT, ALIGN=0
@@ -706,9 +640,9 @@
                   UART_Buffer_Rece
                           %        16
 
-                          AREA ||area_number.13||, DATA, NOINIT, ALIGN=0
+                          AREA ||area_number.12||, DATA, NOINIT, ALIGN=0
 
-                          EXPORTAS ||area_number.13||, ||.bss||
+                          EXPORTAS ||area_number.12||, ||.bss||
                   UART_Buffer_Send
                           %        20
 
@@ -717,31 +651,31 @@
                   USART_RX_STA
 000000  0000              DCW      0x0000
 
-                          AREA ||area_number.16||, DATA, ALIGN=2
+                          AREA ||area_number.15||, DATA, ALIGN=2
 
-                          EXPORTAS ||area_number.16||, ||.data||
+                          EXPORTAS ||area_number.15||, ||.data||
                   USART_RX_CNT
                           DCD      0x00000000
 
-                          AREA ||area_number.17||, DATA, ALIGN=0
+                          AREA ||area_number.16||, DATA, ALIGN=0
 
-                          EXPORTAS ||area_number.17||, ||.data||
+                          EXPORTAS ||area_number.16||, ||.data||
                   UART_Buffer_Send_pointer
 000000  00                DCB      0x00
-                  |symbol_number.37|
+                  |symbol_number.35|
 000001  00                DCB      0x00
                   Transmit_BUFFERsize
 000002  00                DCB      0x00
 
-                          AREA ||area_number.18||, DATA, ALIGN=0
+                          AREA ||area_number.17||, DATA, ALIGN=0
 
-                          EXPORTAS ||area_number.18||, ||.data||
+                          EXPORTAS ||area_number.17||, ||.data||
                   UART_Buffer_Size
 000000  00                DCB      0x00
 
-                          AREA ||area_number.19||, DATA, ALIGN=0
+                          AREA ||area_number.18||, DATA, ALIGN=0
 
-                          EXPORTAS ||area_number.19||, ||.data||
+                          EXPORTAS ||area_number.18||, ||.data||
                   t_USART
 000000  00                DCB      0x00
 

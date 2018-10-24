@@ -3073,9 +3073,9 @@
 00000c  d00b              BEQ      |L8.38|
 ;;;153            GUI_SetFont(&GUI_Font24_1);
 ;;;154            GUI_DispStringAt("JK5530B", 140, 50);
-;;;155            GUI_DispStringAt("Ver:1.5", 140, 75);
+;;;155            GUI_DispStringAt("Ver:1.6", 140, 75);
 ;;;156           
-;;;157            GUI_DispStringAt("Ver:1.2", 140, 100);
+;;;157            GUI_DispStringAt("Ver:1.3", 140, 100);
 ;;;158            GUI_DispStringAt("-", 191, 125);
 ;;;159            GUI_DispStringAt("-", 227, 125);
 ;;;160            GUI_DispStringAt("A", 164, 150);
@@ -3679,11 +3679,11 @@
 000484  4a4b3535          DCB      "JK5530B",0
 000488  33304200
                   |L8.1164|
-00048c  5665723a          DCB      "Ver:1.5",0
-000490  312e3500
+00048c  5665723a          DCB      "Ver:1.6",0
+000490  312e3600
                   |L8.1172|
-000494  5665723a          DCB      "Ver:1.2",0
-000498  312e3200
+000494  5665723a          DCB      "Ver:1.3",0
+000498  312e3300
                   |L8.1180|
 00049c  2d00              DCB      "-",0
 00049e  00                DCB      0

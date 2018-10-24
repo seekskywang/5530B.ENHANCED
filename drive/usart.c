@@ -43,8 +43,8 @@ static void USART3_NVIC_Config(void)//????????
     
     /* Enable the USARTy Interrupt */
 	NVIC_InitStructure.NVIC_IRQChannel = USART3_IRQn;	 
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 }
@@ -57,8 +57,8 @@ static void USART5_NVIC_Config(void)//????????
     
     /* Enable the USARTy Interrupt */
 	NVIC_InitStructure.NVIC_IRQChannel = UART5_IRQn;	 
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 }
@@ -71,7 +71,7 @@ static void USART1_NVIC_Config(void)//????????
 	
 	/* Enable the USARTy Interrupt */
 	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;	 
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
@@ -254,32 +254,7 @@ void UART3_Send(void)
 		}
 }
 
-uint16_t CRC16(uint8_t *puchMsg, uint8_t Len)
-{
-	uint8_t t, m,n,p;
-	uint8_t uchCRCHi=0xFF; /* 高CRC字节初始化*/ 
-	uint8_t uchCRCLo =0xFF; /* 低CRC 字节初始化*/ 
-	for(t=0;t<Len;t++)
-	{	
-		uchCRCLo=uchCRCLo^puchMsg[t];
-		for(n=0;n<8;n++)
-		{
-			m=uchCRCLo&1;p=uchCRCHi&1;uchCRCHi>>=1;
-			uchCRCLo>>=1;
 
-			if(p)
-			{
-				uchCRCLo|=0x80;
-			}
-			if(m)	
-			{
-				uchCRCHi=uchCRCHi^0xa0;
-				uchCRCLo=uchCRCLo^1;
-			}
-		}
-	}
-	return (uchCRCHi<<8|uchCRCLo);
-}
 
 void Req_R(void)
 {

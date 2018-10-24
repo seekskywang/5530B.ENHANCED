@@ -588,7 +588,7 @@ void UART_Action(void)
 /****************漏电流校准**********************************/
 		if (UART_Buffer_Rece[1] == 0x22)			  
 		{ 
-			Modify_A_READ = LowImon_value - 203;
+			Modify_A_READ = LowImon_value - 180;
 			Modify_A_ACT = (UART_Buffer_Rece[3] << 8) + UART_Buffer_Rece[4];
 		}
 
@@ -601,7 +601,7 @@ void UART_Action(void)
 			vu32 var16a;
 			vu32 var32c;
 			vu32 var32d;
-			Modify_B_READ =LowImon_value - 203;//????
+			Modify_B_READ =LowImon_value - 180;//????
 			Modify_B_ACT = (UART_Buffer_Rece[3] << 8) + UART_Buffer_Rece[4];//????
 			var32a = Modify_B_ACT;
 			var32a = var32a - Modify_A_ACT;
@@ -863,7 +863,7 @@ void Transformation_ADC(void)
 	
 	var32 = 0;
 /*******************测量漏电流转换**************************************/
-	var32 = LowImon_value-203;
+	var32 = LowImon_value-180;
 	var32 = var32 * REG_LEAKI/*REG_LEAKI*/;  
 	if ((Polar6 & 0x01) == 0x01)		  
 	{
@@ -876,7 +876,12 @@ void Transformation_ADC(void)
 	else var32 = var32 + REG_LEAKI_Offset/*REG_LEAKI_Offset*/;
 	var32 = var32 >> 14;
 	Leak_I = var32;
-	DISS_Leak_Current=Leak_I;
+    if(Leak_I > 200000)
+    {
+        DISS_Leak_Current = 0;
+    }else{
+        DISS_Leak_Current=Leak_I;
+    }	
 	DISS_Leak_Current=DISS_Leak_Current/100;//计算显示电流
 	var32 = 0;
 }

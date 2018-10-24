@@ -204,6 +204,8 @@ extern float clear_pv;
 extern float clear_lv;
 extern float temp;
 extern vu8 set_loop_count;
+extern vu16 NTCR;
+extern vu8 Runit;
 
 extern vu32 Run_Control[42];	
 #define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -386,7 +388,15 @@ extern vu16 coff[6];
 #define step2               1
 #define step3               2
 
-
+//NTCµç×èµ¥Î»
+#define m19                 1
+#define m199                2
+#define o1                  3
+#define o10                 4
+#define o100                5
+#define o1k                 6
+#define o10k                7
+#define o100k               8
 
 extern vu16 Contr_Voltage;//
 extern vu16 Contr_Current;//

@@ -5,67 +5,67 @@
                           AREA ||i.Hardware_CRC||, CODE, READONLY, ALIGN=1
 
                   Hardware_CRC PROC
-;;;890    //-----------------------------CRC检测--------------------------------------------//
-;;;891    vu16 Hardware_CRC(vu8 *p_buffer,vu8 count)    //CRC16
+;;;895    //-----------------------------CRC检测--------------------------------------------//
+;;;896    vu16 Hardware_CRC(vu8 *p_buffer,vu8 count)    //CRC16
 000000  b530              PUSH     {r4,r5,lr}
-;;;892    {
+;;;897    {
 000002  4603              MOV      r3,r0
-;;;893    	vu16 CRC_Result=0xffff;
+;;;898    	vu16 CRC_Result=0xffff;
 000004  f64f70ff          MOV      r0,#0xffff
-;;;894    	vu8 i;
-;;;895    	if(count==0)
+;;;899    	vu8 i;
+;;;900    	if(count==0)
 000008  b901              CBNZ     r1,|L1.12|
-;;;896    	{
-;;;897    		count=1;
+;;;901    	{
+;;;902    		count=1;
 00000a  2101              MOVS     r1,#1
                   |L1.12|
-;;;898    	}
-;;;899    	while(count--)
-;;;900    	{
-;;;901    		CRC_Result^=*p_buffer;
-;;;902    		for(i=0;i<8;i++)
-;;;903    		{
-;;;904    			if(CRC_Result&1)
-;;;905    			{
-;;;906    				CRC_Result>>=1;
-;;;907    				CRC_Result^=0xA001;
-00000c  f24a0401          MOV      r4,#0xa001
-;;;908    			}
-;;;909    			else 
+;;;903    	}
+;;;904    	while(count--)
+;;;905    	{
+;;;906    		CRC_Result^=*p_buffer;
+;;;907    		for(i=0;i<8;i++)
+;;;908    		{
+;;;909    			if(CRC_Result&1)
 ;;;910    			{
 ;;;911    				CRC_Result>>=1;
-;;;912    			}
-;;;913    		}
-;;;914    		p_buffer++;
+;;;912    				CRC_Result^=0xA001;
+00000c  f24a0401          MOV      r4,#0xa001
+;;;913    			}
+;;;914    			else 
+;;;915    			{
+;;;916    				CRC_Result>>=1;
+;;;917    			}
+;;;918    		}
+;;;919    		p_buffer++;
 000010  e00e              B        |L1.48|
                   |L1.18|
-000012  781a              LDRB     r2,[r3,#0]            ;901
-000014  4050              EORS     r0,r0,r2              ;901
-000016  2200              MOVS     r2,#0                 ;902
+000012  781a              LDRB     r2,[r3,#0]            ;906
+000014  4050              EORS     r0,r0,r2              ;906
+000016  2200              MOVS     r2,#0                 ;907
 000018  e007              B        |L1.42|
                   |L1.26|
-00001a  07c5              LSLS     r5,r0,#31             ;904
+00001a  07c5              LSLS     r5,r0,#31             ;909
 00001c  d002              BEQ      |L1.36|
-00001e  0840              LSRS     r0,r0,#1              ;906
-000020  4060              EORS     r0,r0,r4              ;907
+00001e  0840              LSRS     r0,r0,#1              ;911
+000020  4060              EORS     r0,r0,r4              ;912
 000022  e000              B        |L1.38|
                   |L1.36|
-000024  0840              LSRS     r0,r0,#1              ;911
+000024  0840              LSRS     r0,r0,#1              ;916
                   |L1.38|
-000026  1c52              ADDS     r2,r2,#1              ;902
-000028  b2d2              UXTB     r2,r2                 ;902
+000026  1c52              ADDS     r2,r2,#1              ;907
+000028  b2d2              UXTB     r2,r2                 ;907
                   |L1.42|
-00002a  2a08              CMP      r2,#8                 ;902
+00002a  2a08              CMP      r2,#8                 ;907
 00002c  d3f5              BCC      |L1.26|
 00002e  1c5b              ADDS     r3,r3,#1
                   |L1.48|
-000030  000a              MOVS     r2,r1                 ;899
-000032  f1a10101          SUB      r1,r1,#1              ;899
-000036  b2c9              UXTB     r1,r1                 ;899
+000030  000a              MOVS     r2,r1                 ;904
+000032  f1a10101          SUB      r1,r1,#1              ;904
+000036  b2c9              UXTB     r1,r1                 ;904
 000038  d1eb              BNE      |L1.18|
-;;;915    	}
-;;;916    	return CRC_Result;
-;;;917    }
+;;;920    	}
+;;;921    	return CRC_Result;
+;;;922    }
 00003a  bd30              POP      {r4,r5,pc}
                           ENDP
 
@@ -81,14 +81,14 @@
 ;;;655    	vu32 var32a;
 ;;;656    /*****************************内阻测量电压转换*******************************************/
 ;;;657    	var32 = Vmon1_value;
-000002  48b3              LDR      r0,|L2.720|
+000002  48bb              LDR      r0,|L2.752|
 000004  6800              LDR      r0,[r0,#0]  ; Vmon1_value
 ;;;658    	var32 = var32 * REG_CorrectionV;  
-000006  4cb3              LDR      r4,|L2.724|
+000006  4cbb              LDR      r4,|L2.756|
 000008  6821              LDR      r1,[r4,#0]  ; Correct_Parametet
 00000a  4341              MULS     r1,r0,r1
 ;;;659    	if ((Polar & 0x01) == 0x01)		  
-00000c  4bb2              LDR      r3,|L2.728|
+00000c  4bba              LDR      r3,|L2.760|
 00000e  7818              LDRB     r0,[r3,#0]  ; correct_por
 000010  07c2              LSLS     r2,r0,#31
 ;;;660    	{
@@ -122,22 +122,22 @@
 000032  2100              MOVS     r1,#0
                   |L2.52|
 ;;;670    	Voltage = var32;
-000034  4aa7              LDR      r2,|L2.724|
+000034  4aaf              LDR      r2,|L2.756|
 000036  3268              ADDS     r2,r2,#0x68
 000038  6291              STR      r1,[r2,#0x28]  ; Run_Control
 ;;;671    	DISS_Voltage=Voltage;
 00003a  6a91              LDR      r1,[r2,#0x28]  ; Run_Control
 00003c  ee001a10          VMOV     s0,r1
-000040  49a6              LDR      r1,|L2.732|
+000040  49ae              LDR      r1,|L2.764|
 000042  eef80a40          VCVT.F32.U32 s1,s0
 ;;;672    	DISS_Voltage=DISS_Voltage/1000;//计算显示电压
-000046  ed9f0aa6          VLDR     s0,|L2.736|
+000046  ed9f0aae          VLDR     s0,|L2.768|
 00004a  ee801a80          VDIV.F32 s2,s1,s0
 00004e  ed811a00          VSTR     s2,[r1,#0]
 ;;;673    	var32 = 0;
 ;;;674    	/*******************负载测量电流转换**************************************/
 ;;;675    	var32 = Imon1_value;
-000052  49a4              LDR      r1,|L2.740|
+000052  49ac              LDR      r1,|L2.772|
 000054  680d              LDR      r5,[r1,#0]  ; Imon1_value
 ;;;676    	var32 = var32 * REG_Load_A;  
 000056  6861              LDR      r1,[r4,#4]  ; Correct_Parametet
@@ -174,7 +174,7 @@
 ;;;688    	DISS_Current=Laod_Current;
 000078  6b11              LDR      r1,[r2,#0x30]  ; Run_Control
 00007a  ee001a90          VMOV     s1,r1
-00007e  499a              LDR      r1,|L2.744|
+00007e  49a2              LDR      r1,|L2.776|
 000080  eef80a60          VCVT.F32.U32 s1,s1
 ;;;689    	DISS_Current=DISS_Current/1000;//计算显示电流
 000084  ee801a80          VDIV.F32 s2,s1,s0
@@ -182,7 +182,7 @@
 ;;;690    	var32 = 0;	
 ;;;691    	/*************************负载电压和电流控制转换**************************************/
 ;;;692    	if(flag_Load_CC==1)
-00008c  4997              LDR      r1,|L2.748|
+00008c  499f              LDR      r1,|L2.780|
 ;;;693    	{
 ;;;694    		var32 = SET_Current_Laod;
 ;;;695    		var32=var32<<12;   
@@ -197,11 +197,11 @@
 ;;;704    		if(Flag_DAC_OFF==0)
 ;;;705    		{
 ;;;706    			Contr_Laod = var32;
-00008e  4f99              LDR      r7,|L2.756|
+00008e  4fa1              LDR      r7,|L2.788|
 000090  f04f0500          MOV      r5,#0                 ;663
 000094  6809              LDR      r1,[r1,#0]            ;692  ; flagD
 000096  ea5f6c01          LSLS     r12,r1,#24            ;692
-00009a  4995              LDR      r1,|L2.752|
+00009a  499d              LDR      r1,|L2.784|
 00009c  680e              LDR      r6,[r1,#0]            ;692
 00009e  d520              BPL      |L2.226|
 0000a0  6911              LDR      r1,[r2,#0x10]         ;694  ; Run_Control
@@ -294,10 +294,10 @@
 ;;;735    	}
 ;;;736    /*****************************内阻值转换*******************************************/
 ;;;737    	var32 = Rmon_value;
-000122  4975              LDR      r1,|L2.760|
+000122  497d              LDR      r1,|L2.792|
 000124  880e              LDRH     r6,[r1,#0]  ; Rmon_value
 ;;;738        if(r_raly == 1)
-000126  4975              LDR      r1,|L2.764|
+000126  497d              LDR      r1,|L2.796|
 000128  7809              LDRB     r1,[r1,#0]  ; r_raly
 00012a  2901              CMP      r1,#1
 00012c  d009              BEQ      |L2.322|
@@ -383,7 +383,7 @@
 ;;;775        }  	
 ;;;776    	/*****************************稳压电源测量电压转换*******************************************/
 ;;;777    	var32 = Vmon_value;
-000174  4962              LDR      r1,|L2.768|
+000174  496a              LDR      r1,|L2.800|
 000176  880e              LDRH     r6,[r1,#0]  ; Vmon_value
 ;;;778    	var32 = var32 * REG_POWERV;  
 000178  6a21              LDR      r1,[r4,#0x20]  ; Correct_Parametet
@@ -425,19 +425,19 @@
 ;;;791    	DISS_POW_Voltage=POW_Voltage;
 0001a0  6a51              LDR      r1,[r2,#0x24]  ; Run_Control
 0001a2  ee001a90          VMOV     s1,r1
-0001a6  4957              LDR      r1,|L2.772|
+0001a6  495f              LDR      r1,|L2.804|
 0001a8  eef80a60          VCVT.F32.U32 s1,s1
 ;;;792    	DISS_POW_Voltage=DISS_POW_Voltage/100;//计算显示电压
-0001ac  ed9f1a56          VLDR     s2,|L2.776|
+0001ac  ed9f1a5e          VLDR     s2,|L2.808|
 0001b0  eec01a81          VDIV.F32 s3,s1,s2
 0001b4  edc11a00          VSTR     s3,[r1,#0]
 ;;;793    	var32 = 0;
 ;;;794    /*****************************稳压电源测量电流转换*******************************************/
 ;;;795    	var32 = Imon_value;
-0001b8  4954              LDR      r1,|L2.780|
+0001b8  495c              LDR      r1,|L2.812|
 0001ba  880e              LDRH     r6,[r1,#0]  ; Imon_value
 ;;;796    	if(flag_CC_MODE==1)
-0001bc  4954              LDR      r1,|L2.784|
+0001bc  495c              LDR      r1,|L2.816|
 ;;;797    	{
 ;;;798    		var32 = var32 * REG_POWERA;	   
 ;;;799    		if ((Polar4 & 0x01) == 0x01)			   
@@ -452,7 +452,7 @@
 ;;;808    		var32 = var32 >> 14;
 ;;;809    		Current = var32;;
 ;;;810    		DISS_POW_Current=Current;
-0001be  4f55              LDR      r7,|L2.788|
+0001be  4f5d              LDR      r7,|L2.820|
 0001c0  6809              LDR      r1,[r1,#0]            ;796  ; flagE
 0001c2  0609              LSLS     r1,r1,#24             ;796
 0001c4  d51a              BPL      |L2.508|
@@ -561,7 +561,7 @@
 ;;;840    	var32=var32>>1;
 000254  0849              LSRS     r1,r1,#1
 ;;;841    	Contr_Voltage = var32;
-000256  4e30              LDR      r6,|L2.792|
+000256  4e38              LDR      r6,|L2.824|
 000258  8031              STRH     r1,[r6,#0]
 ;;;842    	if(SET_Voltage==0)
 00025a  6851              LDR      r1,[r2,#4]  ; Run_Control
@@ -605,7 +605,7 @@
 ;;;857    	var32=var32>>1;
 000284  0849              LSRS     r1,r1,#1
 ;;;858    	Contr_Current = var32;
-000286  4e25              LDR      r6,|L2.796|
+000286  4e2d              LDR      r6,|L2.828|
 000288  8031              STRH     r1,[r6,#0]
 ;;;859    	if(SET_Current==0)
 00028a  6891              LDR      r1,[r2,#8]  ; Run_Control
@@ -618,10 +618,10 @@
 ;;;863    	
 ;;;864    	var32 = 0;
 ;;;865    /*******************测量漏电流转换**************************************/
-;;;866    	var32 = LowImon_value-203;
-000290  4923              LDR      r1,|L2.800|
+;;;866    	var32 = LowImon_value-180;
+000290  492b              LDR      r1,|L2.832|
 000292  880d              LDRH     r5,[r1,#0]  ; LowImon_value
-000294  3dcb              SUBS     r5,r5,#0xcb
+000294  3db4              SUBS     r5,r5,#0xb4
 ;;;867    	var32 = var32 * REG_LEAKI/*REG_LEAKI*/;  
 000296  6b21              LDR      r1,[r4,#0x30]  ; Correct_Parametet
 000298  4369              MULS     r1,r5,r1
@@ -653,65 +653,86 @@
 ;;;877    	var32 = var32 >> 14;
 0002b4  0b80              LSRS     r0,r0,#14
 ;;;878    	Leak_I = var32;
-0002b6  f8420fa4          STR      r0,[r2,#0xa4]!  ; Run_Control
-;;;879    	DISS_Leak_Current=Leak_I;
-0002ba  6810              LDR      r0,[r2,#0]  ; Run_Control
-0002bc  ee000a10          VMOV     s0,r0
-0002c0  4818              LDR      r0,|L2.804|
-0002c2  eeb80a40          VCVT.F32.U32 s0,s0
-;;;880    	DISS_Leak_Current=DISS_Leak_Current/100;//计算显示电流
-0002c6  eec00a01          VDIV.F32 s1,s0,s2
-0002ca  edc00a00          VSTR     s1,[r0,#0]
-;;;881    	var32 = 0;
-;;;882    }
-0002ce  bdf0              POP      {r4-r7,pc}
-;;;883    /********************************************************************************
+0002b6  f8c200a4          STR      r0,[r2,#0xa4]  ; Run_Control
+;;;879        if(Leak_I > 200000)
+0002ba  f8d210a4          LDR      r1,[r2,#0xa4]  ; Run_Control
+0002be  4b21              LDR      r3,|L2.836|
+;;;880        {
+;;;881            DISS_Leak_Current = 0;
+0002c0  4821              LDR      r0,|L2.840|
+0002c2  4299              CMP      r1,r3                 ;879
+0002c4  d904              BLS      |L2.720|
+0002c6  ed9f0a21          VLDR     s0,|L2.844|
+0002ca  ed800a00          VSTR     s0,[r0,#0]
+0002ce  e007              B        |L2.736|
+                  |L2.720|
+;;;882        }else{
+;;;883            DISS_Leak_Current=Leak_I;
+0002d0  f8d210a4          LDR      r1,[r2,#0xa4]  ; Run_Control
+0002d4  ee001a10          VMOV     s0,r1
+0002d8  eeb80a40          VCVT.F32.U32 s0,s0
+0002dc  ed800a00          VSTR     s0,[r0,#0]
+                  |L2.736|
+;;;884        }	
+;;;885    	DISS_Leak_Current=DISS_Leak_Current/100;//计算显示电流
+0002e0  ed900a00          VLDR     s0,[r0,#0]
+0002e4  eec00a01          VDIV.F32 s1,s0,s2
+0002e8  edc00a00          VSTR     s1,[r0,#0]
+;;;886    	var32 = 0;
+;;;887    }
+0002ec  bdf0              POP      {r4-r7,pc}
+;;;888    /********************************************************************************
                           ENDP
 
-                  |L2.720|
-                          DCD      Vmon1_value
-                  |L2.724|
-                          DCD      ||.bss||
-                  |L2.728|
-                          DCD      ||area_number.8||+0x1c
-                  |L2.732|
-                          DCD      DISS_Voltage
-                  |L2.736|
-0002e0  447a0000          DCFS     0x447a0000 ; 1000
-                  |L2.740|
-                          DCD      Imon1_value
-                  |L2.744|
-                          DCD      DISS_Current
-                  |L2.748|
-                          DCD      flagD
+0002ee  0000              DCW      0x0000
                   |L2.752|
-                          DCD      flagB
+                          DCD      Vmon1_value
                   |L2.756|
-                          DCD      Contr_Laod
+                          DCD      ||.bss||
                   |L2.760|
-                          DCD      Rmon_value
+                          DCD      ||area_number.8||+0x1c
                   |L2.764|
-                          DCD      r_raly
+                          DCD      DISS_Voltage
                   |L2.768|
-                          DCD      Vmon_value
+000300  447a0000          DCFS     0x447a0000 ; 1000
                   |L2.772|
-                          DCD      DISS_POW_Voltage
+                          DCD      Imon1_value
                   |L2.776|
-000308  42c80000          DCFS     0x42c80000 ; 100
+                          DCD      DISS_Current
                   |L2.780|
-                          DCD      Imon_value
+                          DCD      flagD
                   |L2.784|
-                          DCD      flagE
+                          DCD      flagB
                   |L2.788|
-                          DCD      DISS_POW_Current
+                          DCD      Contr_Laod
                   |L2.792|
-                          DCD      Contr_Voltage
+                          DCD      Rmon_value
                   |L2.796|
-                          DCD      Contr_Current
+                          DCD      r_raly
                   |L2.800|
-                          DCD      LowImon_value
+                          DCD      Vmon_value
                   |L2.804|
+                          DCD      DISS_POW_Voltage
+                  |L2.808|
+000328  42c80000          DCFS     0x42c80000 ; 100
+                  |L2.812|
+                          DCD      Imon_value
+                  |L2.816|
+                          DCD      flagE
+                  |L2.820|
+                          DCD      DISS_POW_Current
+                  |L2.824|
+                          DCD      Contr_Voltage
+                  |L2.828|
+                          DCD      Contr_Current
+                  |L2.832|
+                          DCD      LowImon_value
+                  |L2.836|
+                          DCD      0x00030d40
+                  |L2.840|
                           DCD      DISS_Leak_Current
+                  |L2.844|
+00034c  00000000          DCFS     0x00000000 ; 0
 
                           AREA ||i.UART_Action||, CODE, READONLY, ALIGN=2
 
@@ -2118,12 +2139,12 @@
 ;;;589    		if (UART_Buffer_Rece[1] == 0x22)			  
 0007ce  f8990001          LDRB     r0,[r9,#1]  ; UART_Buffer_Rece
 ;;;590    		{ 
-;;;591    			Modify_A_READ = LowImon_value - 203;
+;;;591    			Modify_A_READ = LowImon_value - 180;
 0007d2  4937              LDR      r1,|L3.2224|
 0007d4  2822              CMP      r0,#0x22              ;589
 0007d6  d109              BNE      |L3.2028|
 0007d8  8808              LDRH     r0,[r1,#0]  ; LowImon_value
-0007da  38cb              SUBS     r0,r0,#0xcb
+0007da  38b4              SUBS     r0,r0,#0xb4
 0007dc  6070              STR      r0,[r6,#4]  ; Modify_A_READ
 ;;;592    			Modify_A_ACT = (UART_Buffer_Rece[3] << 8) + UART_Buffer_Rece[4];
 0007de  f8990004          LDRB     r0,[r9,#4]  ; UART_Buffer_Rece
@@ -2145,9 +2166,9 @@
 ;;;601    			vu32 var16a;
 ;;;602    			vu32 var32c;
 ;;;603    			vu32 var32d;
-;;;604    			Modify_B_READ =LowImon_value - 203;//????
+;;;604    			Modify_B_READ =LowImon_value - 180;//????
 0007f4  8808              LDRH     r0,[r1,#0]  ; LowImon_value
-0007f6  38cb              SUBS     r0,r0,#0xcb
+0007f6  38b4              SUBS     r0,r0,#0xb4
 0007f8  6130              STR      r0,[r6,#0x10]  ; Modify_B_READ
 ;;;605    			Modify_B_ACT = (UART_Buffer_Rece[3] << 8) + UART_Buffer_Rece[4];//????
 0007fa  f8990004          LDRB     r0,[r9,#4]  ; UART_Buffer_Rece

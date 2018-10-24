@@ -126,6 +126,7 @@ extern struct bitDefine
 #define ID_TEXT_132     (GUI_ID_USER + 0x0121)
 #define ID_TEXT_133     (GUI_ID_USER + 0x0122)
 #define ID_TEXT_134     (GUI_ID_USER + 0x0123)
+#define ID_TEXT_135     (GUI_ID_USER + 0x0124)
 #define ID_BUTTON_12    (GUI_ID_USER + 0x18)
 #define ID_BUTTON_13    (GUI_ID_USER + 0x19)
 #define ID_BUTTON_14    (GUI_ID_USER + 0x1A)
@@ -182,8 +183,9 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { TEXT_CreateIndirect, "Text", ID_TEXT_127, 54, 255, 20, 20, 20, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_128, 68, 254, 20, 20, 20, 0x0, 0 },
   { TEXT_CreateIndirect, "Text", ID_TEXT_132, 400, 50, 40, 20, 20, 0x0, 0 },
-  { TEXT_CreateIndirect, "Text", ID_TEXT_133, 50, 205, 80, 20, 0, 0x0, 0 },
-  { TEXT_CreateIndirect, "Text", ID_TEXT_134, 160, 205, 80, 20, 0, 0x0, 0 },
+  { TEXT_CreateIndirect, "Text", ID_TEXT_133, 50, 202, 80, 20, 0, 0x0, 0 },
+  { TEXT_CreateIndirect, "Text", ID_TEXT_134, 160, 202, 80, 20, 0, 0x0, 0 },
+  { TEXT_CreateIndirect, "Text", ID_TEXT_135, 105, 203, 80, 20, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "Button", ID_BUTTON_13, 83, 226, 77, 45, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "Button", ID_BUTTON_14, 163, 226, 77, 45, 0, 0x0, 0 },
   { BUTTON_CreateIndirect, "Button", ID_BUTTON_15, 243, 226, 77, 45, 0, 0x0, 0 },
@@ -249,8 +251,9 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     GUI_SetFont(&GUI_Font24_1);
     GUI_DispStringAt("NTC-R:",50, 180);
     GUI_DispStringAt("LEAK-I:",170, 180);
-
-    GUI_DispStringAt("uA",200, 235);
+    GUI_DispStringAt("uA",240, 203);
+    GUI_SetFont(&GUI_FontHZ16);
+    GUI_DispStringAt("Ω",119, 210);
 //    GUI_DispDecAt(R_VLUE,50,140,4);//显示内阻值
 //      GUI_GotoXY(220,4);
 //      GUI_DispDec(short_time,6);
@@ -848,9 +851,99 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
         sprintf(buf,"%.1f",temp);
         TEXT_SetText(hItem,buf);
         
-        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_134);
-        sprintf(buf,"%.2f",DISS_Leak_Current);   
+        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_133);
+        switch(Runit)
+        {
+            case m19:
+            {
+                DISS_R = NTCR/100.0;
+                sprintf(buf,"%.2f",DISS_R);
+            }break;
+            case m199:
+            {
+                DISS_R = NTCR/10.0;
+                sprintf(buf,"%.1f",DISS_R);
+            }break;
+            case o1:
+            {
+                DISS_R = NTCR/1000.0;
+                sprintf(buf,"%.3f",DISS_R);
+            }break;
+            case o10:
+            {
+                DISS_R = NTCR/100.0;
+                sprintf(buf,"%.2f",DISS_R);
+            }break;
+            case o100:
+            {
+                DISS_R = NTCR/10.0;
+                sprintf(buf,"%.1f",DISS_R);
+            }break;
+            case o1k:
+            {
+                DISS_R = NTCR/1000.0;
+                sprintf(buf,"%.3f",DISS_R);
+            }break;
+            case o10k:
+            {
+                DISS_R = NTCR/100.0;
+                sprintf(buf,"%.2f",DISS_R);
+            }break;
+            case o100k:
+            {
+                DISS_R = NTCR/10.0;
+                sprintf(buf,"%.1f",DISS_R);
+            }break;
+        }        
         TEXT_SetText(hItem,buf);
+        
+        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_135);
+        switch(Runit)
+        {
+            case m19:
+            {
+                TEXT_SetText(hItem,"m");
+            }break;
+            case m199:
+            {
+                TEXT_SetText(hItem,"m");
+            }break;
+            case o1:
+            {
+                TEXT_SetText(hItem,"");
+            }break;
+            case o10:
+            {
+                TEXT_SetText(hItem,"");
+            }break;
+            case o100:
+            {
+                TEXT_SetText(hItem,"");
+            }break;
+            case o1k:
+            {
+               TEXT_SetText(hItem,"k");
+            }break;
+            case o10k:
+            {
+               TEXT_SetText(hItem,"k");
+            }break;
+            case o100k:
+            {
+                TEXT_SetText(hItem,"k");
+            }break;
+        }        
+        
+        
+        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_134);
+        if(DISS_Leak_Current <= 1100)
+        {
+            sprintf(buf,"%.2f",DISS_Leak_Current);
+            TEXT_SetText(hItem,buf);
+        }else{
+            TEXT_SetText(hItem,"over");
+        }
+        
 //         
 //        WM_InvalidateWindow(hWinR);
 		WM_RestartTimer(pMsg->Data.v, 50);//复位定时器数值越大刷新时间越短
@@ -966,7 +1059,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
         hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_133);
         TEXT_SetTextColor(hItem, GUI_GREEN);//设置字体颜色
         TEXT_SetFont(hItem,&GUI_Font24_1);//设定文本字体       
-        sprintf(buf,"%.1f",temp);
+        sprintf(buf,"%.2f",0.00);
         TEXT_SetText(hItem,buf);
         
         hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_134);
@@ -975,6 +1068,12 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
         TEXT_SetFont(hItem,&GUI_Font24_1);//设定文本字体
         GUI_UC_SetEncodeUTF8();        
         TEXT_SetText(hItem,buf);
+        
+        hItem = WM_GetDialogItem(pMsg->hWin,ID_TEXT_135);
+        TEXT_SetTextColor(hItem, GUI_LIGHTGRAY);//设置字体颜色
+        TEXT_SetFont(hItem,&GUI_Font24_1);//设定文本字体
+        GUI_UC_SetEncodeUTF8();        
+        TEXT_SetText(hItem,"Ω");
         
         if(manual == 0)
                 {

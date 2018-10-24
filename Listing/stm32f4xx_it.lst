@@ -34997,6 +34997,8 @@ Nextern float clear_pv;
 Nextern float clear_lv;
 Nextern float temp;
 Nextern vu8 set_loop_count;
+Nextern vu16 NTCR;
+Nextern vu8 Runit;
 N
 Nextern vu32 Run_Control[42];	
 N#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -35179,7 +35181,15 @@ N#define step1               0
 N#define step2               1
 N#define step3               2
 N
-N
+N//NTC电阻单位
+N#define m19                 1
+N#define m199                2
+N#define o1                  3
+N#define o10                 4
+N#define o100                5
+N#define o1k                 6
+N#define o10k                7
+N#define o100k               8
 N
 Nextern vu16 Contr_Voltage;//
 Nextern vu16 Contr_Current;//
@@ -35454,6 +35464,8 @@ Sextern float clear_pv;
 Sextern float clear_lv;
 Sextern float temp;
 Sextern vu8 set_loop_count;
+Sextern vu16 NTCR;
+Sextern vu8 Runit;
 S
 Sextern vu32 Run_Control[42];	
 S#define onoff_ch                    Run_Control[0]  //ON/OFF
@@ -35636,7 +35648,15 @@ S#define step1               0
 S#define step2               1
 S#define step3               2
 S
-S
+S//NTC电阻单位
+S#define m19                 1
+S#define m199                2
+S#define o1                  3
+S#define o10                 4
+S#define o100                5
+S#define o1k                 6
+S#define o10k                7
+S#define o100k               8
 S
 Sextern vu16 Contr_Voltage;//
 Sextern vu16 Contr_Current;//
@@ -35717,6 +35737,8 @@ N  * @{
 N  */
 Nfloat temp;
 Nvu8 Rec_buff[9];
+Nvu16 NTCR;
+Nvu8 Runit;
 N/* Private typedef -----------------------------------------------------------*/
 N/* Private define ------------------------------------------------------------*/
 N/* Private macro -------------------------------------------------------------*/
@@ -35943,7 +35965,7 @@ N            if(i < 10)
 N            {
 N             sum += (UART_Buffer_Rece[2] * 256 + UART_Buffer_Rece[3])/10.0;
 N            }else{
-W "..\User\stm32f4xx_it.c" 263 24 single-precision operand implicitly converted to double-precision
+W "..\User\stm32f4xx_it.c" 265 24 single-precision operand implicitly converted to double-precision
 N                temp = sum/10.0;
 N                sum = 0;
 N                i = 0;
@@ -35956,10 +35978,41 @@ X        USART_ClearITPendingBit(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x
 N     }
 N}
 N
+Nuint16_t CRC16(uint8_t *puchMsg, uint8_t Len)
+N{
+N	uint8_t t, m,n,p;
+N	uint8_t uchCRCHi=0xFF; /* 高CRC字节初始化*/ 
+N	uint8_t uchCRCLo =0xFF; /* 低CRC 字节初始化*/ 
+N	for(t=0;t<Len;t++)
+N	{	
+N		uchCRCLo=uchCRCLo^puchMsg[t];
+N		for(n=0;n<8;n++)
+N		{
+N			m=uchCRCLo&1;p=uchCRCHi&1;uchCRCHi>>=1;
+N			uchCRCLo>>=1;
+N
+N			if(p)
+N			{
+N				uchCRCLo|=0x80;
+N			}
+N			if(m)	
+N			{
+N				uchCRCHi=uchCRCHi^0xa0;
+N				uchCRCLo=uchCRCLo^1;
+N			}
+N		}
+N	}
+N	return (uchCRCHi<<8|uchCRCLo);
+N}
+N
 Nvoid UART5_IRQHandler(void)
 N{
 N    static vu8 count;
-N    u8 res;
+N    u8 res,i;
+N    static u16 crc;
+N    static vu8 check[7];
+N    static vu16 cal;
+N//    u16 crch;
 N    if(USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
 X    if(USART_GetITStatus(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x5000)), ((uint16_t)0x0525)) != RESET)
 N    {
@@ -35969,12 +36022,33 @@ N        Rec_buff[count] = res;
 N        count ++;
 N        if(count > 8)
 N        {
+N            for(i=0;i<7;i++)
+N            {
+N                check[i] = Rec_buff[i];
+N            }
+N            crc = Rec_buff[8]<<8;
+N            crc = crc + Rec_buff[7];
+W "..\User\stm32f4xx_it.c" 324 25 argument of type "vu8 *" is incompatible with parameter of type "uint8_t *"
+N            cal = CRC16(check,7);
+N            if(crc == cal)
+N            {
+N                if(Rec_buff[5] == 0x0C && Rec_buff[6] == 0x45 && crc == 0x9D82)
+N                {
+N                    NTCR = 0;
+N                }else{
+N                    NTCR = Rec_buff[5]<<8;
+N                    NTCR = NTCR + Rec_buff[6];
+N                    Runit = Rec_buff[4]&0x0F;
+N                }                               
+N            }
 N            count = 0;
 N        }
 N        USART_ClearITPendingBit(UART5, USART_IT_RXNE);
 X        USART_ClearITPendingBit(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x5000)), ((uint16_t)0x0525));
 N    }
 N}
+N
+N
 N/******************************************************************************/
 N/*                 STM32F4xx Peripherals Interrupt Handlers                   */
 N/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
