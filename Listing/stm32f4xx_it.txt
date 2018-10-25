@@ -328,120 +328,126 @@
 ;;;307        static u16 crc;
 ;;;308        static vu8 check[7];
 ;;;309        static vu16 cal;
-;;;310    //    u16 crch;
-;;;311        if(USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
-000004  4e27              LDR      r6,|L12.164|
+;;;310        static u16 limit;
+;;;311    //    u16 crch;
+;;;312        if(USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
+000004  4e29              LDR      r6,|L12.172|
 000006  f2405725          MOV      r7,#0x525
 00000a  4639              MOV      r1,r7
 00000c  4630              MOV      r0,r6
 00000e  f7fffffe          BL       USART_GetITStatus
 000012  2800              CMP      r0,#0
-000014  d043              BEQ      |L12.158|
-;;;312        {
-;;;313            res = USART_ReceiveData(UART5);
+000014  d048              BEQ      |L12.168|
+;;;313        {
+;;;314            res = USART_ReceiveData(UART5);
 000016  4630              MOV      r0,r6
 000018  f7fffffe          BL       USART_ReceiveData
-;;;314            Rec_buff[count] = res;
-00001c  4d23              LDR      r5,|L12.172|
-00001e  4c22              LDR      r4,|L12.168|
+;;;315            Rec_buff[count] = res;
+00001c  4d25              LDR      r5,|L12.180|
+00001e  4c24              LDR      r4,|L12.176|
 000020  78a9              LDRB     r1,[r5,#2]  ; count
 000022  5460              STRB     r0,[r4,r1]
-;;;315            count ++;
+;;;316            count ++;
 000024  78a8              LDRB     r0,[r5,#2]  ; count
 000026  1c40              ADDS     r0,r0,#1
 000028  70a8              STRB     r0,[r5,#2]
-;;;316            if(count > 8)
+;;;317            if(count > 8)
 00002a  78a8              LDRB     r0,[r5,#2]  ; count
 00002c  2808              CMP      r0,#8
-00002e  d930              BLS      |L12.146|
-;;;317            {
-;;;318                for(i=0;i<7;i++)
+00002e  d935              BLS      |L12.156|
+;;;318            {
+;;;319                for(i=0;i<7;i++)
 000030  2200              MOVS     r2,#0
-;;;319                {
-;;;320                    check[i] = Rec_buff[i];
+;;;320                {
+;;;321                    check[i] = Rec_buff[i];
 000032  f1050314          ADD      r3,r5,#0x14
                   |L12.54|
 000036  5ca0              LDRB     r0,[r4,r2]
 000038  5498              STRB     r0,[r3,r2]
-00003a  1c52              ADDS     r2,r2,#1              ;318
-00003c  b2d2              UXTB     r2,r2                 ;318
-00003e  2a07              CMP      r2,#7                 ;318
+00003a  1c52              ADDS     r2,r2,#1              ;319
+00003c  b2d2              UXTB     r2,r2                 ;319
+00003e  2a07              CMP      r2,#7                 ;319
 000040  d3f9              BCC      |L12.54|
-;;;321                }
-;;;322                crc = Rec_buff[8]<<8;
+;;;322                }
+;;;323                crc = Rec_buff[8]<<8;
 000042  7a20              LDRB     r0,[r4,#8]  ; Rec_buff
 000044  0200              LSLS     r0,r0,#8
-;;;323                crc = crc + Rec_buff[7];
+;;;324                crc = crc + Rec_buff[7];
 000046  79e1              LDRB     r1,[r4,#7]  ; Rec_buff
 000048  4408              ADD      r0,r0,r1
 00004a  80a8              STRH     r0,[r5,#4]
-;;;324                cal = CRC16(check,7);
-00004c  4817              LDR      r0,|L12.172|
+;;;325                cal = CRC16(check,7);
+00004c  4819              LDR      r0,|L12.180|
 00004e  2107              MOVS     r1,#7
 000050  3014              ADDS     r0,r0,#0x14
 000052  f7fffffe          BL       CRC16
 000056  80e8              STRH     r0,[r5,#6]
-;;;325                if(crc == cal)
+;;;326                if(crc == cal)
 000058  88a8              LDRH     r0,[r5,#4]  ; crc
 00005a  88ea              LDRH     r2,[r5,#6]  ; cal
-00005c  2100              MOVS     r1,#0                 ;318
+00005c  2100              MOVS     r1,#0                 ;319
 00005e  4290              CMP      r0,r2
-000060  d116              BNE      |L12.144|
-;;;326                {
-;;;327                    if(Rec_buff[5] == 0x0C && Rec_buff[6] == 0x45 && crc == 0x9D82)
-000062  7962              LDRB     r2,[r4,#5]  ; Rec_buff
-000064  2a0c              CMP      r2,#0xc
-000066  d108              BNE      |L12.122|
-000068  79a2              LDRB     r2,[r4,#6]  ; Rec_buff
-00006a  2a45              CMP      r2,#0x45
-00006c  d105              BNE      |L12.122|
-00006e  f5a0421d          SUB      r2,r0,#0x9d00
-000072  3a82              SUBS     r2,r2,#0x82
-000074  d101              BNE      |L12.122|
-;;;328                    {
-;;;329                        NTCR = 0;
-000076  8129              STRH     r1,[r5,#8]
-000078  e00a              B        |L12.144|
-                  |L12.122|
-;;;330                    }else{
-;;;331                        NTCR = Rec_buff[5]<<8;
-00007a  7960              LDRB     r0,[r4,#5]  ; Rec_buff
-00007c  0200              LSLS     r0,r0,#8
-00007e  8128              STRH     r0,[r5,#8]
-;;;332                        NTCR = NTCR + Rec_buff[6];
-000080  79a0              LDRB     r0,[r4,#6]  ; Rec_buff
-000082  892a              LDRH     r2,[r5,#8]  ; NTCR
-000084  4410              ADD      r0,r0,r2
-000086  8128              STRH     r0,[r5,#8]
-;;;333                        Runit = Rec_buff[4]&0x0F;
-000088  7920              LDRB     r0,[r4,#4]  ; Rec_buff
-00008a  f000000f          AND      r0,r0,#0xf
-00008e  70e8              STRB     r0,[r5,#3]
-                  |L12.144|
-;;;334                    }                               
-;;;335                }
-;;;336                count = 0;
-000090  70a9              STRB     r1,[r5,#2]
-                  |L12.146|
-;;;337            }
-;;;338            USART_ClearITPendingBit(UART5, USART_IT_RXNE);
-000092  4639              MOV      r1,r7
-000094  4630              MOV      r0,r6
-000096  e8bd41f0          POP      {r4-r8,lr}
-00009a  f7ffbffe          B.W      USART_ClearITPendingBit
-                  |L12.158|
-;;;339        }
-;;;340    }
-00009e  e8bd81f0          POP      {r4-r8,pc}
-;;;341    
+000060  d11b              BNE      |L12.154|
+;;;327                {
+;;;328                    limit = Rec_buff[5]<<8;
+000062  7960              LDRB     r0,[r4,#5]  ; Rec_buff
+000064  0200              LSLS     r0,r0,#8
+;;;329                    limit = limit + Rec_buff[6];
+000066  79a2              LDRB     r2,[r4,#6]  ; Rec_buff
+000068  4410              ADD      r0,r0,r2
+00006a  b280              UXTH     r0,r0
+00006c  8128              STRH     r0,[r5,#8]
+;;;330                    if(((Rec_buff[4]&0x0F) == 8) && limit > 1500)
+00006e  7922              LDRB     r2,[r4,#4]  ; Rec_buff
+000070  f002020f          AND      r2,r2,#0xf
+000074  2a08              CMP      r2,#8
+000076  d105              BNE      |L12.132|
+000078  f24052dc          MOV      r2,#0x5dc
+00007c  4290              CMP      r0,r2
+00007e  d901              BLS      |L12.132|
+;;;331                    {
+;;;332                        NTCR = 0;
+000080  8169              STRH     r1,[r5,#0xa]
+000082  e00a              B        |L12.154|
+                  |L12.132|
+;;;333                    }else{
+;;;334                        NTCR = Rec_buff[5]<<8;
+000084  7960              LDRB     r0,[r4,#5]  ; Rec_buff
+000086  0200              LSLS     r0,r0,#8
+000088  8168              STRH     r0,[r5,#0xa]
+;;;335                        NTCR = NTCR + Rec_buff[6];
+00008a  79a0              LDRB     r0,[r4,#6]  ; Rec_buff
+00008c  896a              LDRH     r2,[r5,#0xa]  ; NTCR
+00008e  4410              ADD      r0,r0,r2
+000090  8168              STRH     r0,[r5,#0xa]
+;;;336                        Runit = Rec_buff[4]&0x0F;
+000092  7920              LDRB     r0,[r4,#4]  ; Rec_buff
+000094  f000000f          AND      r0,r0,#0xf
+000098  70e8              STRB     r0,[r5,#3]
+                  |L12.154|
+;;;337                    }                               
+;;;338                }
+;;;339                count = 0;
+00009a  70a9              STRB     r1,[r5,#2]
+                  |L12.156|
+;;;340            }
+;;;341            USART_ClearITPendingBit(UART5, USART_IT_RXNE);
+00009c  4639              MOV      r1,r7
+00009e  4630              MOV      r0,r6
+0000a0  e8bd41f0          POP      {r4-r8,lr}
+0000a4  f7ffbffe          B.W      USART_ClearITPendingBit
+                  |L12.168|
+;;;342        }
+;;;343    }
+0000a8  e8bd81f0          POP      {r4-r8,pc}
+;;;344    
                           ENDP
 
-0000a2  0000              DCW      0x0000
-                  |L12.164|
-                          DCD      0x40005000
-                  |L12.168|
-                          DCD      ||.bss||
                   |L12.172|
+                          DCD      0x40005000
+                  |L12.176|
+                          DCD      ||.bss||
+                  |L12.180|
                           DCD      ||.data||
 
                           AREA ||i.USART1_IRQHandler||, CODE, READONLY, ALIGN=2
@@ -746,8 +752,10 @@
 000004  0000              DCB      0x00,0x00
                   ||cal||
 000006  0000              DCB      0x00,0x00
+                  limit
+000008  0000              DCB      0x00,0x00
                   NTCR
-000008  00000000          DCB      0x00,0x00,0x00,0x00
+00000a  0000              DCB      0x00,0x00
                   ||sum||
                           DCD      0x00000000
                   temp

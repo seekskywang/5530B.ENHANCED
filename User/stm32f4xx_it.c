@@ -307,6 +307,7 @@ void UART5_IRQHandler(void)
     static u16 crc;
     static vu8 check[7];
     static vu16 cal;
+    static u16 limit;
 //    u16 crch;
     if(USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
     {
@@ -324,7 +325,9 @@ void UART5_IRQHandler(void)
             cal = CRC16(check,7);
             if(crc == cal)
             {
-                if(Rec_buff[5] == 0x0C && Rec_buff[6] == 0x45 && crc == 0x9D82)
+                limit = Rec_buff[5]<<8;
+                limit = limit + Rec_buff[6];
+                if(((Rec_buff[4]&0x0F) == 8) && limit > 1500)
                 {
                     NTCR = 0;
                 }else{

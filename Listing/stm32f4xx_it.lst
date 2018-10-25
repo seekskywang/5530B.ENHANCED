@@ -36012,6 +36012,7 @@ N    u8 res,i;
 N    static u16 crc;
 N    static vu8 check[7];
 N    static vu16 cal;
+N    static u16 limit;
 N//    u16 crch;
 N    if(USART_GetITStatus(UART5, USART_IT_RXNE) != RESET)
 X    if(USART_GetITStatus(((USART_TypeDef *) (((uint32_t)0x40000000) + 0x5000)), ((uint16_t)0x0525)) != RESET)
@@ -36028,11 +36029,13 @@ N                check[i] = Rec_buff[i];
 N            }
 N            crc = Rec_buff[8]<<8;
 N            crc = crc + Rec_buff[7];
-W "..\User\stm32f4xx_it.c" 324 25 argument of type "vu8 *" is incompatible with parameter of type "uint8_t *"
+W "..\User\stm32f4xx_it.c" 325 25 argument of type "vu8 *" is incompatible with parameter of type "uint8_t *"
 N            cal = CRC16(check,7);
 N            if(crc == cal)
 N            {
-N                if(Rec_buff[5] == 0x0C && Rec_buff[6] == 0x45 && crc == 0x9D82)
+N                limit = Rec_buff[5]<<8;
+N                limit = limit + Rec_buff[6];
+N                if(((Rec_buff[4]&0x0F) == 8) && limit > 1500)
 N                {
 N                    NTCR = 0;
 N                }else{
